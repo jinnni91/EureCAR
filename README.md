@@ -1,4 +1,11 @@
-# semi_project
+1, Team - > switch -> new branch
+
+2, 커밋 메세지 작성
+
+3, 푸쉬한후 풀리퀘스트요청
+
+4, 머지는 repository 주인만 가능
 
 
-본인 Branch로 업로드 해주시고 merge 원하시면 pull request 하시고 팀원들 전체 컨펌후에 병합 하겠습니다.
+커밋 메세지 컨벤션 정하기
+병합 주기 정해서 병합
