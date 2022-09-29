@@ -7,8 +7,8 @@ spring:
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     url: jdbc:log4jdbc:oracle:thin:@localhost:1521:xe
-    username : C##GREEDY
-    password : GREEDY
+    username : C##EURECAR
+    password : EURECAR
     hikari:
       auto-commit: false
 
