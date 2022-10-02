@@ -22,15 +22,35 @@ public class MemberController {
 	@GetMapping("/login")
 	public String loginForm(Model model) {
 		
-		return "login/login";
+		return "member/login";
 
 	}
 
 	@GetMapping("/regist")
 	public String regist(Model model) {
 		
-		return "login/regist";
+		return "member/regist";
 
+	}
+		
+	@GetMapping("/searchId")
+	public String searchId(Model model) {
+		
+		return "member/searchId";
+
+	}
+	
+	@GetMapping("/searchPassword")
+	public String searchPassword(Model model) {
+		
+		return "member/searchPassword";
+
+	}
+	
+	@PostMapping("/changePassword")
+	public String changePassword(Model model) {
+		
+		return "member/changePassword";
 	}
 	
 }
