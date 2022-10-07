@@ -24,9 +24,27 @@ input[type=submit]{
     color: black;
 }
 
+
 .regist:hover {
 	width:250px;
 }
+.pwcheck {
+	width: 250px;
+	height: 30px;
+}
+
+
+.pwcheck:focus {
+    background: #80ffff;
+    color: black;
+}
+
+.pwcheck:hover {
+	width:250px;
+}
+
+
+
 .authentication {
 	width: 130px;
 	height: 20px;

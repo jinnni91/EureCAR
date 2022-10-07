@@ -1,14 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-	<h1 align="center">유레카 유레카 </h1>
-	
-	
+    <div class="header">
+    
+        <h1 align="center">유레카 유레카 신나는 노래</h1>
+        
+        <div class="login-area" align="right">
+        
+            <th:block sec:authorize="isAnonymous()">
+                <div class="btns">
+                    <input type="button" value="로그인" id="login">
+                </div>
+            </th:block>
 
-</body>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="login-info">
+                    <h3><span sec:authentication="principal.name"></span>님의 방문을 환영합니다.</h3>
+                    <div class="btns">
+                        <input type="button" class="btn btn-yg" value="정보수정" id="updateMember">
+                        <input type="button" class="btn btn-or" value="로그아웃" id="logout">
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+
+    <div class="menu-area">
+        <div class="nav-area">
+            <ul style="display:flex; list-style-type:none; justify-content:center;">
+                <li style="padding-right:20px;"><a th:href="@{/}">홈으로</a></li>
+                <li style="padding-right:20px;"><a th:href="@{/board/list}">게시판</a></li>
+                <li style="padding-right:20px;"><a th:href="@{/thumbnail/list}">사진게시판</a></li>
+            </ul>
+        </div>
+    </div>
+
 </html>
+
