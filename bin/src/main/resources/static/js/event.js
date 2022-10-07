@@ -20,8 +20,23 @@ window.onload = function() {
             location.href = "/member/logout";
         }
     }
+    
+      if(document.getElementById("updateMember")) {
+        const $update = document.getElementById("updateMember");
+        $update.onclick = function() {
+            location.href = "/mypage/update";
+        }
+    }
+    
+    if(document.getElementById("deleteMember")) {
+        const $update = document.getElementById("deleteMember");
+        $update.onclick = function() {
+            location.href = "/mypage/delete";
+        }
+    }
 }
 
+/* 아이디 중복 체크 */ 
 function id_overlap_check() {
 	  const $duplication = document.getElementById("duplicationCheck");
 
