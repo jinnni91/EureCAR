@@ -7,10 +7,23 @@ window.onload = function() {
             location.href = "/member/regist";
         }
     }
+    if(document.getElementById("login")) {
+        const $login = document.getElementById("login");
+        $login.onclick = function() {
+            location.href = "/member/login";
+        }
+    }
 
-    if(document.getElementById("duplicationCheck")) {
+    if(document.getElementById("logout")) {
+        const $logout = document.getElementById("logout");
+        $logout.onclick = function() {
+            location.href = "/member/logout";
+        }
+    }
+}
 
-        const $duplication = document.getElementById("duplicationCheck");
+function id_overlap_check() {
+	  const $duplication = document.getElementById("duplicationCheck");
 
         $duplication.onclick = function() {
             let memberId = document.getElementById("memberId").value.trim();
@@ -27,49 +40,5 @@ window.onload = function() {
                 .catch((error) => error.text().then((res) => alert(res)));
 
         }
-    }
-
-    if(document.getElementById("login")) {
-        const $login = document.getElementById("login");
-        $login.onclick = function() {
-            location.href = "/member/login";
-        }
-    }
-
-    if(document.getElementById("logout")) {
-        const $logout = document.getElementById("logout");
-        $logout.onclick = function() {
-            location.href = "/member/logout";
-        }
-    }
-
-    if(document.getElementById("updateMember")) {
-        const $update = document.getElementById("updateMember");
-        $update.onclick = function() {
-            location.href = "/member/update";
-        }
-    }
-    
-    if(document.getElementById("deleteMember")) {
-        const $update = document.getElementById("deleteMember");
-        $update.onclick = function() {
-            location.href = "/member/delete";
-        }
-    }
-
-	/* ------------------------------------------------------------- */
-
-    if(document.getElementById("writeBoard")) {
-        const $writeBoard = document.getElementById("writeBoard");
-        $writeBoard.onclick = function() {
-            location.href = "/board/regist";
-        }
-    }
-
-    if(document.getElementById("writeThumbnail")) {
-        const $writeThumbnail = document.getElementById("writeThumbnail");
-        $writeThumbnail.onclick = function() {
-            location.href = "/thumbnail/regist";
-        }
-    }
+	
 }

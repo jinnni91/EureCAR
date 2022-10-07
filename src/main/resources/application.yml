@@ -1,29 +1,46 @@
-# server port config
 server:
   port: 8001
-  
-# oracle driver config
+
 spring:
   datasource:
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:oracle:thin:@localhost:1521:xe
-    username : C##EURECAR
-    password : EURECAR
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: C##EURECAR
+    password: EURECAR
     hikari:
       auto-commit: false
-
-# jpa config
   jpa:
     generate-ddl: false
     show-sql: true
     database: oracle
     properties:
       hibernate:
-        '[format_sql]': true
-  
-  
-  
-  
-  
-  
-  
+        '[format_sql]': true     
+  thymeleaf:
+    cache: false # 기본 값 true / 개발 중 변경 사항 즉시 확인하기 위해 캐시 false
+    
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+      # 업로드 된 파일의 임시 저장 공간
+      
+      location: C:\Users\hi\git\semi_project
+
+image:
+  image-dir: src/main/resources
+     
+logging:
+  level:
+    root: info
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
