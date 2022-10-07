@@ -18,9 +18,8 @@ import com.greedy.semi.free.repository.FreeRepository;
 @Transactional
 public class FreeService {
 	public static final int TEXT_PAGE_SIZE = 10;
-	public static final int TEXT_FREE_TYPE = 1;
 	public static final String SORT_BY = "freeNo";
-	public static final String ACTIVE_STATUS = "Y";
+	public static final String ACTIVE_DELETE = "N";
 	
 	private final FreeRepository freeRepository;
 	private final ModelMapper modelMapper;
@@ -36,9 +35,9 @@ public class FreeService {
 		Page<Free> list = null;
 		
 		if(searchValue != null && !searchValue.isEmpty()) {
-			list = freeRepository.findBySearchValue(TEXT_FREE_TYPE, ACTIVE_STATUS, searchValue, pageable);
+			list = freeRepository.findBySearchValue(ACTIVE_DELETE, searchValue, pageable);
 		} else {
-			list = freeRepository.findByFreeTypeAndFreeStatus(TEXT_FREE_TYPE, ACTIVE_STATUS, pageable);
+			list = freeRepository.findByFreeDelete(ACTIVE_DELETE, pageable);
 		}
 		
 		return list.map(free -> modelMapper.map(free, FreeDTO.class));
@@ -47,6 +46,21 @@ public class FreeService {
 	public void registFree(FreeDTO free) {
 		
 		freeRepository.save(modelMapper.map(free, Free.class));
+		
+	}
+
+	public FreeDTO selectFreeDetail(Long freeNo) {
+		
+		Free free = freeRepository.findByFreeNoAndFreeDelete(freeNo, ACTIVE_DELETE);
+		free.setFreeCount(free.getFreeCount() + 1);
+		
+		return modelMapper.map(free, FreeDTO.class);
+	}
+
+	public void makeFree(FreeDTO free) {
+
+		freeRepository.save(modelMapper.map(free, Free.class));
+		
 		
 	}
 }

@@ -1,6 +1,8 @@
 package com.greedy.semi.free.dto;
 
-import java.sql.Date;
+import java.util.Date;
+
+import com.greedy.semi.member.dto.MemberDTO;
 
 import lombok.Data;
 
@@ -13,7 +15,7 @@ public class FreeDTO {
 	private String freeDelete;
 	private Date freeDate;
 	private Date freeUpdate;
+	private MemberDTO memberId;
 	private int freeCount;
-	private Integer freeType;
-	private String boardStatus;
+
 }
