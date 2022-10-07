@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+	
+#free {
+	background-color:#77CFD1;
+	font-size : 25px;
+	/* margin : 200px auto 0 auto; */
+	margin : auto;
+	padding : 5px 0 10px 15px;
+	width : 60%;
+}
+
+#free2 {
+	font-size : 25px;
+	margin : auto;
+	padding : 5px 0 10px 15px;
+	width : 60%;
+}
+
+#search{
+	top : 80%;
+	left : 40%;
+	position:absolute;
+}
+
+
+#freemake {
+	text-align: center;
+}
+
+#emdfhra {
+	text-align: center;
+	padding : 50px;
+	
+}
+
+#gdsImg {
+	margin-left : 23%;
+}
+
+.emdfhr {
+	width : 70px;
+	line-height : 30px;
+	margin-right : 20px;
+	background-color: #77CFD1;
+	color : white;
+	font-size : 20px;
+	border-radius: 5px;
+}
+
+.cnlth {
+	width : 70px;
+	line-height : 30px;
+	font-size : 20px;
+	border-radius: 5px;
+}
+
+.title {
+	width : 1000px;
+	margin : 200px auto 0 auto;
+	padding : 5px 0 10px 15px;
+}
+
+.content {
+	width : 1000px;
+	margin : 50px;
+	padding : 5px 0 400px 15px;
+}
+
+.make-btn {
+	width : 65px;
+	line-height : 25px;
+	top : 70%;
+	right : 20%;
+	position:absolute;
+}
+
+#paging{
+	margin-top : 100px;
+}
+
+#search-txt{
+
+	width : 350px;
+	line-height : 30px;
+}
+
+.search-btn{
+	width : 60px;
+	line-height : 30px;
+}

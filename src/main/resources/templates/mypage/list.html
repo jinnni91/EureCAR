@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/mypage.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+<title>유레카 !</title>
+</head>
+<body>
+
+	<div th:replace="common/header.html"></div>
+
+	<div>
+		<ul class="sideul">
+			<button class="hereiam" onclick="location.href='/mypage/list'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
+			<button class="sidebutton" onclick="location.href='/mypage/wishlist'" style="cursor: pointer;">찜 리스트</button><br><br><br>
+			<button class="sidebutton" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
+		</ul>
+	<div>
+	 <div class="notice">
+            <div>
+            <h3 class="mypagebar">작성한 게시글</h3>
+            <hr class="mypagehr" color=#77CFD1;>
+                <table class="carTable" align="center">
+             
+                    <tr class="notice-bar">
+                        <td class="notice">번호</td>
+                        <td class="notice">제목</td>
+                        <td class="notice">회원 ID</td>
+                        <td class="notice">조회 수</td>
+                        <td class="notice">등록일</td>   
+                    </tr>
+                    
+                    <tr class="notice-tr"
+                    	th:each="board : ${ boardList }"
+					    th:onclick="|location.href='/board/detail?boardNo=${board.boardNo}'|"
+					    style="cursor:pointer;">
+						<td th:text="${ board.boardNo }"></td>
+						<td th:text="${ board.category.categoryName }"></td>
+						<td th:text="${ board.boardTitle }"></td>
+						<td th:text="${ board.writer.nickname }"></td>
+						<td th:text="${ board.boardCount }"></td>
+						<td th:text="${ board.createdDate }"></td>
+                    </tr>
+                    
+                </table>
+            </div>     
+           </div>   
+
+            <div class="pageNumber">
+           <!-- <p><a href="#">◀◀</a></p>
+                <p><a href="#">◀</a></p>
+                <p><a href="#">1</a></p>
+                <p><a href="#">2</a></p>
+                <p><a href="#">3</a></p>
+                <p><a href="#">4</a></p>
+                <p><a href="#">5</a></p>
+                <p><a href="#">▶</a></p>
+                <p><a href="#">▶▶</a></p> -->
+                
+                <th:block th:if="${ searchValue != null }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/list?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">◀◀</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/list?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ boardList.first }">◀</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/board/list?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/list?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ boardList.last }">▶</button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/board/list?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">▶▶</button>
+
+			</th:block>
+            </div>
+           	</div>
+      </div>
+      
+      <div th:replace="common/footer.html"></div>
+
+</body>
+</html>

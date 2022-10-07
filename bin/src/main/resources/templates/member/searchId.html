@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/loginPage.css}">
+<script type="text/javascript" th:src="@{/js/searchIdAndPwd.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+</head>
+<body>
+                   
+            
+	<br>
+	<h2>아이디 찾기</h2>	
+	<div class="searchId_container">
+		<form action="/member/searchId" method="post">
+			<table>
+			<tr>
+				<th style="width : 200px">이름</th>				
+				<td height="100px"><input type="text" class="search_name" id="name"
+							name="name" placeholder="이름을 입력하세요." required>
+				</td>
+			</tr>
+			<tr>
+				<th style="width : 200px">이메일</th>
+				<td><input type="email" class="search_email"
+				id="email" name="email" placeholder="이메일을 입력하세요." required></td>
+			</tr>
+			</table>
+			<br><br>
+         <button type="button" class="btn bg-scon btn-user btn-block" onclick="findId();">아이디 찾기</button>
+		
+		</form>
+		<br>
+	</div>
+
+</body>
+</html>
