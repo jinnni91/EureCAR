@@ -41,7 +41,7 @@ public class Free {
 
 	@Column(name = "FREE_DELETE")
 	private String freeDelete;
-	
+
 	@Column(name = "FREE_DATE")
 	private Date freeDate;
 	

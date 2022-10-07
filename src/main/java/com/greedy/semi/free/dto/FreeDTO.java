@@ -1,6 +1,6 @@
 package com.greedy.semi.free.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import com.greedy.semi.member.dto.MemberDTO;
 

@@ -15,22 +15,22 @@
 	<div class="table-area" style="text-align: center;">
 	<table id="free">
 	<tr>
-		<th style="width: 30px">번호</th>
-		<th style="width: 300px">제목</th>
+		<th style="width: 50px">번호</th>
+		<th style="width: 450px">제목</th>
 		<th style="width: 100px">아이디</th>
 		<th style="width: 100px">조회수</th>
-		<th style="width: 50px">등록일</th>
+		<th style="width: 100px">등록일</th>
 	</tr>
 	</table>
 	<table id="free2">
 	<tr th:each="free : ${ list }"
 		th:onclick="|location.href='/free/detail?freeNo=${free.freeNo}'|"
 		style="cursor:pointer;">
-		<td style="width: 30px" th:text="${ free.freeNo }"></td>
-		<td style="width: 300px" th:text="${ free.freeTitle }"></td>
+		<td style="width: 50px" th:text="${ free.freeNo }"></td>
+		<td style="width: 450px" th:text="${ free.freeTitle }"></td>
 		<td style="width: 100px" th:text="${ free.memberId.memberId }"></td>
 		<td style="width: 100px" th:text="${ free.freeCount }"></td>
-		<td style="width: 50px" th:text="${ free.freeDate }"></td>
+		<td style="width: 100px" th:text="${ free.freeDate }"></td>
 	</tr>
 	</table>
 	</div>
@@ -115,7 +115,7 @@
 			</form>
 
 			<th:block sec:authorize="isAuthenticated()">
-				<button class="make-btn" id="writeBoard">글쓰기</button>
+				<button class="make-btn" id="writeBoard" onclick="location.href='/free/make'">글쓰기</button>
 			</th:block>
 		</div>
 		
