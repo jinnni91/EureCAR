@@ -4,9 +4,17 @@
 #free {
 	background-color:#77CFD1;
 	font-size : 25px;
-	margin : 200px auto 0 auto;
+	/* margin : 200px auto 0 auto; */
+	margin : auto;
 	padding : 5px 0 10px 15px;
-	width : 62%;
+	width : 60%;
+}
+
+#free2 {
+	font-size : 25px;
+	margin : auto;
+	padding : 5px 0 10px 15px;
+	width : 60%;
 }
 
 #search{
@@ -18,7 +26,6 @@
 
 #freemake {
 	text-align: center;
-
 }
 
 #emdfhra {
@@ -68,7 +75,12 @@
 	position:absolute;
 }
 
-.search-txt{
+#paging{
+	margin-top : 100px;
+}
+
+#search-txt{
+
 	width : 350px;
 	line-height : 30px;
 }
@@ -76,24 +88,4 @@
 .search-btn{
 	width : 60px;
 	line-height : 30px;
-}
-
-.qjsgh{
-	
-}
-
-.wpahr{
-	margin : 300px;
-}
-
-.dkdlel{
-	margin : 0px;
-}
-
-.whghltn{
-	margin : 100px;
-}
-
-.emdfhrdlf{
-	margin : 0px;
 }
