@@ -8,6 +8,18 @@
 </head>
 <body>
 	<div th:replace="common/header.html"></div>
+		<table id="detail">
+	<tr>
+		<th class="xkdlxmf" th:text="${ free.freeTitle }"></th>
+		<th class="zkdnsxm" th:text="|조회수 ${ free.freeCount } / ${ free.freeDate }|"></th>
+		
+	</tr>
+	</table>
+
+	    <p id=content th:text="${ free.freeContent }"></p>
+
+	    
+		
 	
 </body>
 </html>

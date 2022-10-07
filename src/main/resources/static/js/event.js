@@ -41,4 +41,14 @@ function id_overlap_check() {
 
         }
 	
+	
+	/* ------------------------------------------------------------- */
+
+    if(document.getElementById("writeBoard")) {
+        const $writeBoard = document.getElementById("writeBoard");
+        $writeBoard.onclick = function() {
+            location.href = "/free/make";
+        }
+    }
+
 }
