@@ -43,6 +43,22 @@ input[type=submit]{
 	width:250px;
 }
 
+.memberId{
+	width: 250px;
+	height: 30px;
+}
+
+
+.memberId:focus {
+    background: #80ffff;
+    color: black;
+}
+
+.memberId:hover {
+	width:250px;
+}
+
+
 
 
 .authentication {
