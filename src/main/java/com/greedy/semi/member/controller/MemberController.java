@@ -2,6 +2,7 @@ package com.greedy.semi.member.controller;
 
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
@@ -73,13 +74,16 @@ public class MemberController {
     	
     	log.info("[MemberController] checkDuplication ========================== ");
     	
-    	String result = "사용 가능한 아이디입니다.";
+    	String result = "사용 가능한 아이디 입니다.";
+
     	log.info("[MemberController] Request Check ID : {}", member.getMemberId());
+    	
     	
     	if(memberService.selectMemberById(member.getMemberId())) {
     		log.info("[MemberController] Already Exist");
     		result = "중복 된 아이디가 존재합니다.";
     	}
+		
     	
     	log.info("[MemberController] checkDuplication ========================== ");
     	
@@ -175,34 +179,6 @@ public class MemberController {
         return newAuth;
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 
 }

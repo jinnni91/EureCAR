@@ -1,4 +1,36 @@
 window.onload = function() {
+	
+	/* 아이디 유효성 검사 */
+	$('.memberId').keyup(function(){
+    	let memberId = $("#memberId").val();
+
+      	 var numId = memberId.search(/[0-9]/g);
+		 var engId = memberId.search(/[a-z]/ig);
+		 var speId = memberId.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		 $("#duplicationCheck").hide();
+		 if(memberId.length < 1 || memberId.length > 13){
+		  $("#CheckId").html("13자리 이내로 입력해주세요.");
+		  $("#CheckId").attr('color','black');
+		  $("#send").attr("disabled", true); //설정
+		  return false;
+		 }else if(memberId.search(/\s/) != -1){
+		  $("#CheckId").html("아이디는 공백 없이 입력해주세요.");
+		  $("#CheckId").attr('color','black');
+		  $("#send").attr("disabled", true); //설정
+		  return false;
+		 }else if(numId < 0 || engId  < 0 || speId > 0 ){
+			$("#CheckId").html("영문,숫자를 혼합하여 입력해주세요.");
+			$("#CheckId").attr('color','black');
+			 $("#send").attr("disabled", true); //설정
+		  return false;
+		 }else {
+			$("#CheckId").html("");
+			 $("#send").attr("disabled", false); //설정
+			 $("#duplicationCheck").show();
+		    return true;
+		 }
+		})
+		
 	/* 비밀번호 재확인 기능 및 유효성 검사 및 false 일시 가입 금지*/
 	$('.pwcheck').keyup(function(){
     	let pass1 = $("#memberPwd").val();
@@ -40,14 +72,30 @@ window.onload = function() {
 		    return true;
 		    
 		 }
-		 
-		
-		 
 		}) 
-	
-	
-	
-	
-	
-	
+		
+		
+		
+	/* 아이디 중복 체크 */ 
+	if(document.getElementById("duplicationCheck")) {
+				
+			const $duplication = document.getElementById("duplicationCheck");
+			
+        $duplication.onclick = function() {
+            let memberId = document.getElementById("memberId").value.trim();
+		
+            fetch("/member/idDupCheck", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify({memberId: memberId})
+            })
+                .then(result => result.text())
+                .then(result => alert(result))
+                .catch((error) => error.text().then((res) => alert(res)));
+        }
+		}
     }
+    
+    
