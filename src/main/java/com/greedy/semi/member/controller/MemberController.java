@@ -90,6 +90,11 @@ public class MemberController {
     	return ResponseEntity.ok(result);
     }
     
+    
+    
+    
+    
+    
     /* 회원 가입 */
     @PostMapping("/regist")
     public String registMember(@ModelAttribute MemberDTO member,

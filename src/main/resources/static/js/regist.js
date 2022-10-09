@@ -1,4 +1,5 @@
 window.onload = function() {
+	    checkEvent();
 	
 	/* 아이디 유효성 검사 */
 	$('.memberId').keyup(function(){
@@ -10,23 +11,23 @@ window.onload = function() {
 		 $("#duplicationCheck").hide();
 		 if(memberId.length < 1 || memberId.length > 13){
 		  $("#CheckId").html("13자리 이내로 입력해주세요.");
-		  $("#CheckId").attr('color','black');
+		  $("#CheckId").attr('color','red');
 		  $("#send").attr("disabled", true); //설정
 		  return false;
 		 }else if(memberId.search(/\s/) != -1){
 		  $("#CheckId").html("아이디는 공백 없이 입력해주세요.");
-		  $("#CheckId").attr('color','black');
+		  $("#CheckId").attr('color','red');
 		  $("#send").attr("disabled", true); //설정
 		  return false;
 		 }else if(numId < 0 || engId  < 0 || speId > 0 ){
 			$("#CheckId").html("영문,숫자를 혼합하여 입력해주세요.");
-			$("#CheckId").attr('color','black');
+			$("#CheckId").attr('color','red');
 			 $("#send").attr("disabled", true); //설정
 		  return false;
 		 }else {
 			$("#CheckId").html("");
-			 $("#send").attr("disabled", false); //설정
-			 $("#duplicationCheck").show();
+			$("#CheckId").attr('color','black');
+			$("#duplicationCheck").show();
 		    return true;
 		 }
 		})
@@ -52,19 +53,22 @@ window.onload = function() {
 		
 		 if(pass1.length < 8 || pass1.length > 20){
 		  $("#passwordCheck").html("8자리 ~ 20자리 이내로 입력해주세요.");
+		  $("#passwordCheck").attr('color','red');
 		  return false;
 		 }else if(pass1.search(/\s/) != -1){
 		  $("#passwordCheck").html("비밀번호는 공백 없이 입력해주세요.");
+		  $("#passwordCheck").attr('color','red');
 		  return false;
 		 }else if(num < 0 || eng < 0 || spe < 0 ){
 			$("#passwordCheck").html("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+			$("#passwordCheck").attr('color','red');
 		  return false;
 		 }else {
 			$("#passwordCheck").html("적정한 비밀번호");
 			$("#passwordCheck").attr('color','green');
 			 if(pass1 == pass2)
 			 {
-				 $("#send").attr("disabled", false); //설정
+				 $("#send").attr("disabled", true); //설정
 			 }
 			 else{
 				  $("#send").attr("disabled", true); //설정
@@ -72,7 +76,10 @@ window.onload = function() {
 		    return true;
 		    
 		 }
-		}) 
+		 
+		 
+		}
+		) 
 		
 		
 		
@@ -96,6 +103,26 @@ window.onload = function() {
                 .catch((error) => error.text().then((res) => alert(res)));
         }
 		}
-    }
+		
+ }
+    
+    
+ /* 약관 동의 시 회원가입 가능 */
+    function checkEvent() {
+		
+	
+	 $("#agree").change(function(){ 
+	        if($("#agree").is(":checked")&&$("#checkPw").attr('color')=='green' && $("#CheckId").attr('color')=='black'
+	        && emconfirmchk==true)
+	        {
+	        	$("#send").attr("disabled", false);	     
+	        }
+	        else{
+	        	$("#send").attr("disabled", true);
+	        }
+	    });
+}
+
+    
     
     
