@@ -1,6 +1,8 @@
 package com.greedy.semi.member.service;
 
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -59,6 +61,22 @@ public class MemberService {
 	            return null;
 	       return member.getMemberId();
 	    }
+
+	public MemberDTO findByMemberIdAndNameAndPhone(String memberId, String name, String phone) {
+		
+		
+		Member member = memberRepository.findByMemberIdAndNameAndPhone(memberId, name, phone);
+		return modelMapper.map(member, MemberDTO.class);
+		
+
+	}
+
+	public void changeTempPw(String tempPw, String memberId) {
+		
+		Member changedMember=memberRepository.findByMemberId(memberId);
+		changedMember.setMemberPwd(tempPw);
+
+	}
 
 	}
 	
