@@ -124,12 +124,7 @@ public class MemberController {
     	return "redirect:/";
     }
     
-    private java.util.Date Date(String birthday) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@GetMapping("/searchId")
+    @GetMapping("/searchId")
 	public String searchId() {
 		return "/member/searchId";
 	}
@@ -159,23 +154,12 @@ public class MemberController {
 		log.info(resultId);
 		return resultId;
 	}
-    
-    
-	@GetMapping("/searchPassword")
-	public String searchPassword(Model model) {
-		
-		return "member/searchPassword";
-
-	}
 	
-	
-	@PostMapping("/changePassword")
-	public String changePassword(Model model) {
-		
-		return "member/changePassword";
-	}
-	
-	
+	   @GetMapping("/payment")
+		public String payment() {
+			return "/member/payment";
+		}
+	   
     protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
     	
     	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);

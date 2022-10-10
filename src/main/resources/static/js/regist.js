@@ -82,7 +82,6 @@ window.onload = function() {
 		) 
 		
 		
-		
 	/* 아이디 중복 체크 */ 
 	if(document.getElementById("duplicationCheck")) {
 				
