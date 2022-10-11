@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" th:href="@{/css/common.css}">
+	<link rel="stylesheet" th:href="@{/css/main.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/event.js}"></script>
     
@@ -10,18 +10,39 @@
 	    const message = '[[${message}]]';
 	    message && alert(message);
 	</script>
-<title>Insert title here</title>
+<title>EureCar</title>
 </head>
 <body>
 
-
-	
-	<button onclick="location.href='/member/login'">로그인</button>
-	<button onclick="location.href='/member/regist'">회원가입</button>
-	<button onclick="location.href='/free/list'">자유게시판</button>
-
 	<div th:replace="common/header.html"></div>
-
+	
+	<!-- 배너 -->
+	<div class="banner"><img src="images/mainban.png"></div>
+	
+	<!-- 검색 창 -->
+	<div class="search-bar" align="center">
+		
+		<form id="searchForm" th:action="@{/}" method="get"
+			style="display: inlin-block">
+			<th:block th:if="${ searchValue != null }">
+				<input type="search" id="searchList" name="searchList"
+					th:value="${ searchValue }">
+			</th:block>
+			<th:block th:if="${ searchValue == null }">
+				
+			
+			</th:block>	
+			
+		
+		</form>
+	
+	</div>
+	
+	<!-- 소개 이미지 -->
+	<div class="illust"><img src="images/mainil.png"></div>
+	
+	<div th:replace="common/footer.html"></div>
+	
 	
 </body>
 </html>
