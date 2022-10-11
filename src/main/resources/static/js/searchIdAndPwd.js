@@ -1,18 +1,3 @@
-/* alert창 디자인 */
-function toast(icon, title) {
-	const Toast = Swal.mixin({
-		toast: true,
-    position: 'center-center',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-	})
-
-	Toast.fire({
-		icon: icon,
-		title: title
-	})
-}
 // 아이디 찾기 js
 function findId() {
 
@@ -20,7 +5,7 @@ function findId() {
 	let email = document.getElementById('email').value;
 
 	if (name == '' || email == '') {
-		toast('warning', '가입된 정보를 입력하세요!');
+		alert('이름과 이메일을 입력해주세요.');
 		return false;
 	}
 
@@ -34,26 +19,52 @@ function findId() {
 		},
 		success: function(data) {
 			if (data != "") {
-				Swal.fire({
-					title: "아이디 찾기 완료",
-					text: "가입된 아이디는 " + data + " 입니다.",
-					/*icon: 'success',*/
-					imageUrl: '../images/로고(글자포함)ver1.png',
- 				 	imageWidth: 400,
-  					imageHeight: 200,
-  					imageAlt: 'Custom image',
-				}).then(() => {
-					location.href = '/member/login';
-				})
-
+				alert("가입된 아이디는 " + data + " 입니다.")
+				location.href = '/member/login';
+				
 			} else {
-				toast('warning', '가입하신 이름과 이메일을 다시 입력해주세요');
+				alert('일치하는 정보가 없습니다.');
 			}
-
 		}, error: function() {
-			toast('error', 'error! 다시 시도해주세요!');
+			alert('다시 시도해주세요.');
 		}
 
 	}); 
 }
+
+// 비밀번호 찾기 js
+function findPwd() {
+	
+		let memberId = document.getElementById('memberId').value;
+		let name = document.getElementById('name').value;
+		let phone = document.getElementById('phone').value;
+
+			
+		if (name == '' || name == '' || phone == '') {
+			alert('빈칸을 입력해주세요.');
+			return false;
+		}
+
+			$.ajax({
+				type : "POST",
+				url : "/member/findMemberPwd",
+				data : {
+					"memberId" :memberId,
+					"name" : name,
+					"phone" : phone
+				},
+				success : function(data){
+					if(data == '변경완료'){
+						console.log("data :"+data)
+						alert("회원님의 임시 비밀번호를 가입된 이메일로 발송하였습니다. ")
+						location.href = "/member/login";
+					}
+					else if(data == '변경실패') {
+						alert("일치하는 정보가 없습니다. ")
+					}
+				}, error: function() {
+			alert("일치하는 정보가 없습니다.");
+		}
+		});
+		}
 

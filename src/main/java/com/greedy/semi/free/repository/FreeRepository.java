@@ -11,18 +11,17 @@ import com.greedy.semi.free.entity.Free;
 public interface FreeRepository extends JpaRepository<Free, Long> {
 
 
-	Page<Free> findByFreeTypeAndFreeStatus(int freeType, String freeStatus, Pageable pageable);
+	Page<Free> findByFreeDelete(String freeDelete, Pageable pageable);
 	
 
 	@Query("SELECT b " +
 	         "FROM Free b " +
-			"WHERE b.freeType = :freeType " +
-	          "AND b.freeStatus = :freeStatus " +
+			"WHERE b.freeDelete = :freeDelete " +
 			  "AND (b.freeTitle LIKE '%' || :searchValue || '%' " +
 			   "OR b.freeContent LIKE '%' || :searchValue || '%')")
-	Page<Free> findBySearchValue(@Param("freeType") int freeType, @Param("freeStatus") String freeStatus, @Param("searchValue") String searchValue, Pageable pageable);
+	Page<Free> findBySearchValue(@Param("freeDelete") String freeDelete, @Param("searchValue") String searchValue, Pageable pageable);
 
-	Free findByFreeNoAndFreeTypeAndFreeStatus(Long freeNo, int freeType, String freeStatus);
+	Free findByFreeNoAndFreeDelete(Long freeNo, String freeDelete);
 
 	
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/css/mypage.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+<title>유레카 !</title>
+</head>
+<body>
+
+	<div th:replace="common/header.html"></div>
+
+	<div>
+		<div>
+			<ul class="sideul" align="left">
+				<button class="sidebutton" onclick="location.href='/mypage/list'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
+				<button class="sidebutton" onclick="location.href='/mypage/wishlist'" style="cursor: pointer;">찜 리스트</button><br><br><br>
+				<button class="sidebutton" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
+			</ul>
+		</div>
+		<div>
+		 	<h3 class="mypagebar" align="center">회원 정보 변경</h3>
+            <hr class="mypagehr" color=#77CFD1;>
+			<div align="center">
+			<form th:action="@{/mypage/update}" method="POST">
+                <h4>아이디 : resunz4</h4>
+				<h4>비밀번호 : **********</h4>
+				<h4>이름 : 박태익</h4>
+				<h4>생년월일 : 1997년 9월 17일</h4>
+				<h4>이메일 : <input type="email" name="email" style="width:100px;" th:value="${ #authentication.principal.email }"> @ 
+				           <select name="email" style="cursor: pointer;">
+				           	<option value="선택" selected="selected">선택</option>
+				           	<option value="naver.com">naver.com</option>
+				           	<option value="google.com">google.com</option>
+				           	<option value="nate.com">nate.com</option>
+				           	<option value="daum.net">daum.net</option>
+				           	<option value="hanmail.net">hanmail.net</option>
+				           </select></h4>
+	  			<h4>휴대전화 : <input type="tel" name="phone" maxlength="20" style="width:80px;" th:value="${ #authentication.principal.phone }"></h4>
+				<h4>우편번호 : <input type="text" name="zipCode" style="width:48px;">
+				             <!-- th:value="${ #strings.listSplit(#authentication.principal.address,'$').size() > 0 ? #strings.listSplit(#authentication.principal.address,'$')[0] : '' }" readonly -->
+				        
+				<button onclick="location.href='/mypage/mail'" style="cursor: pointer;">찾기</button></h4>
+				<h4>주소 : 서울시 성북구 화랑로 18길 54 401호</h4>
+				</form>    
+				<br>
+                <br>
+            </form> 
+		</div>
+	</div>
+	
+	<div align="right">
+            <button class="updatemember" onclick="location.href='/mypage/mypage'" style="cursor: pointer;">확인</button>    
+    </div>
+    
+    <div th:replace="common/footer.html"></div>
+
+</body>
+</html>

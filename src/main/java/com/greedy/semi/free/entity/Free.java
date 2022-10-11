@@ -7,11 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
-import org.springframework.stereotype.Component;
+
+import com.greedy.semi.member.entity.Member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,19 +41,18 @@ public class Free {
 
 	@Column(name = "FREE_DELETE")
 	private String freeDelete;
-	
+
 	@Column(name = "FREE_DATE")
 	private Date freeDate;
 	
 	@Column(name = "FREE_UPDATE")
 	private Date freeUpdate;	
 	
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_ID")
+	private Member memberId;
+	
 	@Column(name = "FREE_COUNT")
 	private int freeCount;
-	
-	@Column(name = "FREE_TYPE")
-	private Integer freeType;
-	
-	@Column(name = "FREE_STATUS")
-	private String freeStatus;
+
 }

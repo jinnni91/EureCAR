@@ -11,10 +11,10 @@ import com.greedy.semi.trade.entity.Trade;
 
 public interface TradeRepository extends JpaRepository<Trade, Long> {
 	
-	@EntityGraph(attributePaths = {"tradeAttachList"})
+	@EntityGraph(attributePaths = {"attachFileList"})
 	Page<Trade> findBySellDelete(String sellDelete, Pageable pageable);
 	
-	@EntityGraph(attributePaths = {"tradeAttachList"})
+	@EntityGraph(attributePaths = {"attachFileList"})
 	@Query("SELECT t " + 
 			 "FROM Trade t " +
 			"WHERE t.sellDelete = :sellDelete " +

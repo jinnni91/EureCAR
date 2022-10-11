@@ -1,5 +1,6 @@
 package com.greedy.semi.member.service;
 
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -34,6 +35,24 @@ public class MemberService {
 		memberRepository.save(modelMapper.map(member, Member.class));
 	}
 
+	public void updateMember(MemberDTO updateMember) {
+		
+		Member savedMember = memberRepository.findByMemberId(updateMember.getMemberId());
+		savedMember.setName(updateMember.getName());
+		savedMember.setPhone(updateMember.getPhone());
+		savedMember.setEmail(updateMember.getEmail());
+		savedMember.setAddress(updateMember.getAddress());
+	}
+
+	/* removeMember 메소드 구현
+	   탈퇴 시 즉시 테이블에서 행을 제거하는 것이 아니라 member_status 값을 Y에서 N으로 변경하는 로직이다. */
+	public void removeMember(MemberDTO member) {
+		
+		Member savedMember = memberRepository.findByMemberId(member.getMemberId());
+		savedMember.setMemberStatus("N");
+
+	}
+	
 	public String findIdByNameAndEmail(String name, String email) {
 		
 		Member member = memberRepository.findIdByNameAndEmail(name, email);
@@ -42,6 +61,22 @@ public class MemberService {
 	            return null;
 	       return member.getMemberId();
 	    }
+
+	public MemberDTO findByMemberIdAndNameAndPhone(String memberId, String name, String phone) {
+		
+		
+		Member member = memberRepository.findByMemberIdAndNameAndPhone(memberId, name, phone);
+		return modelMapper.map(member, MemberDTO.class);
+		
+
+	}
+
+	public void changeTempPw(String tempPw, String memberId) {
+		
+		Member changedMember=memberRepository.findByMemberId(memberId);
+		changedMember.setMemberPwd(tempPw);
+
+	}
 
 	}
 	

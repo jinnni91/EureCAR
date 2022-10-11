@@ -16,7 +16,7 @@
                 <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
             </div>
         </div>
-        <div class="category-area">
+        <div class="category-area" style="margin-bottom: 100px;">
             <div class="container1">
                 <div class="container1-item"><h5>차종</h5></div>
                 <div class="container1-item"><select name="model.modelCode">
@@ -113,6 +113,59 @@
                 </select></div>
             </div>
         </div>
+        
+        <div class="thumbnail-area" id="thumbnailArea" style="width: 1200px; margin: auto; display: flex; justify-content: center; flex-wrap: wrap;">
+	            <th:block th:each="trade : ${ tradeList }">
+	            	<div class="trade-list" align="left" style="margin:30px; cursor:pointer;"
+	            		 th:onclick="|location.href='/trade/detail?sellNo=${trade.sellNo}'|">
+	            		 <div>
+		            		 	<th:block th:each="attachment : ${ trade.attachFileList }">
+		            		 		
+		            		 		<img th:if="${ attachment.fileType == 'TITLE' }"
+		            		 		     th:src="${ attachment.thumPath }" width="320px" height="200px">
+		            		 		     
+		            		 	 </th:block>	
+		            	 </div>
+	            		 <div class="trade-thum" style="width: 250px; margin: auto;">
+							<div class="trade-title"><span th:text="${ trade.sellCarName }"></span><br></div>
+		            		<div class="trade-des">
+		            		 	<span th:text="${ trade.sellCarYear + '년식' }"></span><br>
+		            		 	<span th:text="${ #numbers.formatInteger(trade.sellMileage, 0, 'COMMA') + 'km　|　 ' }"></span>
+		            		 	<span th:text="${ trade.region.regionName }"></span>　　
+		            		 	조회수 <span th:text="${ trade.sellCount }"></span><br>
+		            		</div>
+							<div class="trade-price">	
+								<span th:text="${ #numbers.formatInteger(trade.sellPrice, 0, 'COMMA') + '만원' }"></span>
+							</div>
+						 </div>
+							
+	            	</div>
+	            </th:block>
+	        </div>
+	        <div id="paging" align="center" style="margin-top: 100px;">
+				<button
+					th:onclick="'location.href=\'/tradel/list?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+	
+				<button
+					th:onclick="'location.href=\'/trade/list?page=' + @{${paging.currentPage - 1}} + '\''"
+					th:disabled="${ tradeList.first }">&lt;</button>
+	
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/trade/list?page=' + @{${page}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+	
+				<button
+					th:onclick="'location.href=\'/trade/list?page=' + @{${paging.currentPage + 1}} + '\''"
+					th:disabled="${ tradeList.last }">></button>
+	
+				<button
+					th:onclick="'location.href=\'/trade/list?page=' + @{${paging.endPage}} + '\''">>></button>
+				</th:block>
+			</div>
         
     </div>
 

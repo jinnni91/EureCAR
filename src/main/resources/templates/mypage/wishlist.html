@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/css/mypage.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+<title>유레카 !</title>
+</head>
+<body>
+
+	<div th:replace="common/header.html"></div>
+
+	<div>
+		<ul class="sideul" align="left">
+			<button class="sidebutton" onclick="location.href='/mypage/list'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
+			<button class="hereiam" onclick="location.href='/mypage/wishlist'" style="cursor: pointer;">찜 리스트</button><br><br><br>
+			<button class="sidebutton" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
+		</ul>
+	</div>
+	<div>
+	<h3 align="center">좋아요</h3>
+    <hr class="mypagehr" color=#01DFA5;>
+	<div class="carBody">
+            <ul class="fixedclear">
+                <li>
+                    <div class="car" style="margin: 20px; cursor:pointer;"
+                         th:onclick="|location.href='/wishlist/detail?boardNo=${wishlist.boardNo}'|">
+                    <div>
+						<th:block th:each="attachment : ${ wishlist.attachmentList }">
+							
+							<img th:if="${ attachment.fileType == 'TITLE' }" 
+							     th:src="${ attachment.wishlistPath }" width="300px" height="300px">
+						</th:block>
+					</div>
+                    <p>
+						No. <label th:text="${ wishlist.boardNo }"></label> 
+						<span th:text="${ wishlist.boardTitle }"></span><br> 
+						조회수 : <span th:text="${ wishlist.boardCount }"></span>
+					</p>
+                     <th:block th:if="${ searchValue != null }">
+					<!-- 맨 앞으로 이동 -->
+					<button
+						th:onclick="'location.href=\'/board/list?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">◀◀</button>
+	
+					<!-- 이전 페이지로 이동 -->
+					<button
+						th:onclick="'location.href=\'/board/list?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:disabled="${ boardList.first }">◀</button>
+	
+					<!-- 숫자 버튼 -->
+					<th:block
+						th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+						<button
+							th:onclick="'location.href=\'/board/list?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+							th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+						</button>
+					</th:block>
+	
+					<!-- 다음 페이지로 이동 -->
+					<button
+						th:onclick="'location.href=\'/board/list?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:disabled="${ boardList.last }">▶</button>
+	
+					<!-- 맨 끝으로 이동 -->
+					<button
+						th:onclick="'location.href=\'/board/list?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">▶▶</button>
+
+			</th:block>
+                    </div>
+            </ul>
+        </div>
+        </div>
+        
+      <!-- <div th:replace="common/footer.html"></div> -->
+
+</body>
+</html>
