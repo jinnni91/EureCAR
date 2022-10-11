@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+  <table>
+                <tr>
+                    <th class="width-40">
+                        상품명
+                    </th>
+                    <th>
+                        상품기간
+                    </th>
+                    <th>
+                        가격
+                    </th>
+                 </tr>
+                 <tr>
+                    <td>
+                    <input type="text" class="memberEmail" id="memberEmail"
+							name="memberEmail" placeholder="이메일">
+                    </td>
+                    <td>
+                    	<input type="text" class="totalPrice" id="totalPrice"
+							name="totalPrice" placeholder="가격">
+                    </td>
+                    <td>
+                         <input type="text" class="memberName" id="memberName"
+							name="memberName" placeholder="이름">
+                    </td>
+                    <td>
+                        <button type="button" id="payment">결제</button>
+                    </td>
+                </tr>
+			</table>
+
+
+<script>
+
+/** 결제 **/
+// 결제 금액, 구매자의 이름, 이메일
+$(document).ready(function(){
+var $payment = $("#payment");
+
+const priceAmount = $("#totalPrice");
+const buyerMemberEmail = $("#memberEmail");
+const buyerMemberName = $("#memberName");
+// const form = document.getElementById("payment");
+
+console.log(priceAmount);
+console.log(buyerMemberName);
+console.log(buyerMemberEmail);
+const IMP = window.IMP;
+IMP.init('imp83723126');
+
+
+$payment.click(function() {
+
+
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay({ // param
+        pg: "kakaopay.TC0ONETIME",
+        pay_method: "card",
+        merchant_uid: 'cart_' + new Date().getTime(),
+        name: "Helpring 강의",
+        amount: priceAmount.val(),
+        buyer_email: buyerMemberEmail.val(),
+        buyer_name: buyerMemberName.val(),
+
+    }, function (rsp) { // callback
+
+        /** 결제 검증 **/
+        $.ajax({
+            type: 'POST',
+            url: '/verifyIamport/'+rsp.imp_uid,
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            }
+        }).done(function(result){
+
+            // rsp.paid_amount와 result.response.amount(서버 검증) 비교 후 로직 실행
+            if(rsp.paid_amount === result.response.amount){
+                alert("결제가 완료되었습니다.");
+                $.ajax({
+                    type:'POST',
+                    url:'/member/login',
+                    beforeSend: function(xhr){
+                        xhr.setRequestHeader(header, token);
+                    }
+                }).done(function() {
+                    window.location.reload();
+                }).fail(function(error){
+                        alert(JSON.stringify(error));
+                })
+            } else{
+                alert("결제에 실패했습니다."+"에러코드 : "+rsp.error_code+"에러 메시지 : "+rsp.error_message);
+
+            }
+        })
+    })
+})
+})
+
+</script>
+</body>
+
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/trade/tradeDetail.css}">
+<title>차량 상세페이지</title>
+</head>
+<body>
+
+	    <div class="outer outer-trade-list" style="margin: 100px 350px;">
+	    	<div class="body">
+		    	<div class="car-top-wrap">
+		            <div class="car-view">
+						<th:block th:if="${ trade.attachFileList[1].thumPath != null }">
+							<img width="500" height="350"
+							th:src="${ trade.attachFileList[1].filePath + trade.attachFileList[1].fileSaveName }"/>
+						</th:block>
+		            </div>
+		            <div class="car-buy-info">
+		                <div class="buy-detail">
+		                    <h2 th:text="${ trade.sellCarName }"></h2>
+		                    <dl>
+		                        <dt>찜하기 <i class="fas fa-heart"></i></dt>
+		                        <dt>판매가격 <span id="car-price" th:text="${ #numbers.formatInteger(trade.sellPrice, 0, 'COMMA') + '만원' }"></span></dt>
+		                    </dl>
+		                    <hr>
+		                    <dl>
+		                            <dt th:text="${ (trade.sellCarYear) + '년식' }"></dt>
+		                            <dt th:text="${ #numbers.formatInteger(trade.sellMileage, 0, 'COMMA') + 'km' }"></dt>
+		                            <dt th:text="${ trade.sellFuel }"></dt>
+		                            <dt th:text="${ trade.region.regionName }"></dt>
+		                    </dl>
+		                </div>
+		                <div class="buy-seller">
+		                    <h3 class="text-left">판매자정보</h3>
+		                    <p class="text-center" th:text="${ trade.member.name }"></p>
+		                    <p class="text-center" th:text="${ trade.member.phone }"></p>
+		                    <p class="text-right "><a>신고하기</a></p>
+		                </div>
+		            </div>
+	        	</div>
+	    		<hr>
+        		<div class="car-middle-wrap">  
+		            <div class="car-detail-info01">
+		                <h3>차량정보</h3>
+		                    <table>
+		                        <colgroup>
+		                            <col width="5%">
+		                            <col width="20%">
+		                            <col width="5%">
+		                            <col width="20%">
+		                            <col width="5%">
+		                            <col width="20%">
+		                        </colgroup>
+		                        <tr>
+		                            <th>차량모델</th>
+		                            <td th:text="${ trade.sellCarName }"></td>
+		                            <th>연식</th>
+		                            <td th:text="${ trade.sellCarYear }"></td>
+		                            <th>연료</th>
+		                            <td th:text="${ trade.sellFuel }"></td>
+		                        </tr>
+		                        <tr>
+		                            <th>주행거리</th>
+		                            <td th:text="${ #numbers.formatInteger(trade.sellMileage, 0, 'COMMA') + 'km' }"></td>
+		                            <th>변속기</th>
+		                            <td th:text="${ trade.sellTransmission }"></td>
+		                            <th>배기량</th>
+		                            <td th:text="${ #numbers.formatInteger(trade.sellDisplacement, 0, 'COMMA') + 'cc' }"></td>
+		                        </tr>
+		                        <tr>
+		                            <th>차종</th>
+		                            <td th:text="${ trade.model.carModel }"></td>
+		                            <th>사고이력</th>
+		                            <td><a href="">조회하기</a></td>
+		                            <th>색상</th>
+		                            <td th:text="${ trade.color.colorName }">회색</td>
+		                        </tr>
+		                    </table>
+		            	</div>
+	            	<div class="car-detail-info02">
+		                <h3>차량옵션</h3>
+		                <ul>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="fas fa-check-square"></i>test</li>
+		                    <li><i class="fas fa-check-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="fas fa-check-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="fas fa-check-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="fas fa-check-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                    <li><i class="far fa-square"></i>test</li>
+		                </ul>
+		            </div>
+		            <div class="car-detail-info03">
+		                <h3>차량소개</h3>
+		                <div th:text="${ trade.sellCarDes }"></div>
+		            </div>
+		            <div class="car-photo" align="center">
+		            	<th:block th:if="${ trade.attachFileList.size() > 1 }"
+						  th:each="index : ${ #numbers.sequence(1, trade.attachFileList.size() - 1) }">
+						  <img width="700" height="500"
+								 th:src="${ trade.attachFileList[index].filePath + trade.attachFileList[index].fileSaveName }"/>
+						</th:block>
+		            </div>
+			        <div class="dropdown">
+			        	<span class="dropbtn"><img src="../images/attach.png" width="30px" height="30px"></span>
+				        <div class="photo-download">
+				            <th:block th:if="${ trade.attachFileList.size() > 1 }"
+								      th:each="index : ${ #numbers.sequence(1, trade.attachFileList.size() - 1) }">
+								<a th:href="${ trade.attachFileList[index].filePath + trade.attachFileList[index].fileSaveName }"
+								   th:download="${ trade.attachFileList[index].fileOrgName }">
+									<span th:text="${ trade.attachFileList[index].fileOrgName }"></span><br>
+								</a>
+							</th:block>
+				        </div>
+			        </div>
+            	</div>
+            	<div class="car-bottom-wrap">
+		            <div class="update-delete">
+			            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
+			            	<a>글 수정</a> &#124; 
+			            </th:block>
+			            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId or trade.member.getMemberRole().toString().equals('ROLEADMIN') }">
+			            	<a>글 삭제</a>
+			            </th:block>
+		            </div>
+		            <h4>댓글</h4>
+		            <div>
+		            <div class="reply-input">
+		              	<textarea name="reply" id="reply-box" cols="30" rows="10"></textarea><button>등록</button>
+		            </div>
+		           	</div>
+		       	</div>
+    		</div>
+	    
+		</div>
+
+</body>
+</html>

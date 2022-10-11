@@ -1,5 +1,5 @@
 window.onload = function() {
-
+   
     /* 화면에 랜더링 된 태그들이 존재하지 않는 경우 에러 발생 가능성이 있어서 if문으로 태그가 존재하는지 부터 확인하고 이벤트를 연결한다. */
     if(document.getElementById("regist")) {
         const $regist = document.getElementById("regist");
@@ -34,30 +34,13 @@ window.onload = function() {
             location.href = "/mypage/delete";
         }
     }
-}
+    
 
-/* 아이디 중복 체크 */ 
-function id_overlap_check() {
-	  const $duplication = document.getElementById("duplicationCheck");
+};
 
-        $duplication.onclick = function() {
-            let memberId = document.getElementById("memberId").value.trim();
-
-            fetch("/member/idDupCheck", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8'
-                },
-                body: JSON.stringify({memberId: memberId})
-            })
-                .then(result => result.text())
-                .then(result => alert(result))
-                .catch((error) => error.text().then((res) => alert(res)));
-
-        }
-	
 
 /* 자유게시판 게시물 등록 */
+
 
     if(document.getElementById("writeFree")) {
         const $writeFree = document.getElementById("writeFree");
@@ -66,3 +49,4 @@ function id_overlap_check() {
         }
     }
 }
+

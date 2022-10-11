@@ -2,6 +2,7 @@ package com.greedy.semi.member.controller;
 
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
@@ -73,18 +74,26 @@ public class MemberController {
     	
     	log.info("[MemberController] checkDuplication ========================== ");
     	
-    	String result = "사용 가능한 아이디입니다.";
+    	String result = "사용 가능한 아이디 입니다.";
+
     	log.info("[MemberController] Request Check ID : {}", member.getMemberId());
+    	
     	
     	if(memberService.selectMemberById(member.getMemberId())) {
     		log.info("[MemberController] Already Exist");
     		result = "중복 된 아이디가 존재합니다.";
     	}
+		
     	
     	log.info("[MemberController] checkDuplication ========================== ");
     	
     	return ResponseEntity.ok(result);
     }
+    
+    
+    
+    
+    
     
     /* 회원 가입 */
     @PostMapping("/regist")
@@ -115,12 +124,7 @@ public class MemberController {
     	return "redirect:/";
     }
     
-    private java.util.Date Date(String birthday) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@GetMapping("/searchId")
+    @GetMapping("/searchId")
 	public String searchId() {
 		return "/member/searchId";
 	}
@@ -150,23 +154,12 @@ public class MemberController {
 		log.info(resultId);
 		return resultId;
 	}
-    
-    
-	@GetMapping("/searchPassword")
-	public String searchPassword(Model model) {
-		
-		return "member/searchPassword";
-
-	}
 	
-	
-	@PostMapping("/changePassword")
-	public String changePassword(Model model) {
-		
-		return "member/changePassword";
-	}
-	
-	
+	   @GetMapping("/payment")
+		public String payment() {
+			return "/member/payment";
+		}
+	   
     protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
     	
     	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
@@ -175,34 +168,6 @@ public class MemberController {
         return newAuth;
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 
 }

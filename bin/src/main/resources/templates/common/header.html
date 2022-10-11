@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+ 
+	<link rel="stylesheet" th:href="@{/css/common.css}">
 
-    <div class="header">
+    <div th:fragment="headerFragment" class="header">
     
-        <h1 align="center">유레카 유레카 신나는 노래</h1>
-        
-        <div class="login-area" align="right">
-        
-            <th:block sec:authorize="isAnonymous()">
-                <div class="btns">
-                    <input type="button" value="로그인" id="login">
-                </div>
-            </th:block>
-
-            <th:block sec:authorize="isAuthenticated()">
-                <div class="login-info">
-                    <h3><span sec:authentication="principal.name"></span>님의 방문을 환영합니다.</h3>
-                    <div class="btns">
-                        <input type="button" class="btn btn-yg" value="정보수정" id="updateMember">
-                        <input type="button" class="btn btn-or" value="로그아웃" id="logout">
-                    </div>
-                </div>
-            </th:block>
+        <div class="gnbArea">
+            <h1><a th:href="@{/}"><img src="/images/logo.png" width="140px" height="108px"></a></h1>
+            <div class="menu">
+                <ul class="menuList">
+                    <li><a th:href="@{/}">판매</a></li>
+                    <li><a th:href="@{/}">구매</a></li>
+                    <li><a th:href="@{/free/list}">자유게시판</a></li>
+                    <li><a th:href="@{/}">공지사항</a></li>
+                    <li><a th:href="@{/}">마이페이지</a></li>
+                    <th:block sec:authorize="hasRole('ADMIN')">
+	                    <li><a th:href="@{/}">수익금</a></li>
+	                    <li><a th:href="@{/}">회원관리</a></li>
+                    </th:block>
+                </ul>
+            </div>
+            <div class="utilMenu">
+            	<th:block sec:authorize="isAnonymous()">
+	                <a th:href="@{/member/login}" id="loginBtn">로그인</a>
+	                <a th:href="@{/member/regist}" id="joinBtn">회원가입</a>
+	            </th:block>
+	            
+	            <th:block sec:authorize="isAuthenticated()">
+	            	<p><span sec:authentication="principal.name"></span>님 환영합니다.</p>
+	            	<a id="logout">로그아웃</a>
+	            </th:block>
+            </div>
         </div>
-    </div>
-
-    <div class="menu-area">
-        <div class="nav-area">
-            <ul style="display:flex; list-style-type:none; justify-content:center;">
-                <li style="padding-right:20px;"><a th:href="@{/}">홈으로</a></li>
-                <li style="padding-right:20px;"><a th:href="@{/board/list}">게시판</a></li>
-                <li style="padding-right:20px;"><a th:href="@{/thumbnail/list}">사진게시판</a></li>
-            </ul>
-        </div>
+        
     </div>
 
 </html>
