@@ -13,7 +13,7 @@ public class TradeDTO {
 	private Long sellNo;
 	private String sellCarOpt;
 	private String sellCarDes;
-	private MemberDTO memberId;
+	private MemberDTO member;
 	private String sellCarName;
 	private Long sellMileage;
 	private int sellPrice;
@@ -30,5 +30,6 @@ public class TradeDTO {
 	private Long sellCount;
 	private Long sellDisplacement;
 	private List<TradeAttachFileDTO> attachFileList;
+	private String reportStatus;
 
 }

@@ -24,6 +24,7 @@ public class MemberDTO implements UserDetails {
     private String address;
     private String memberStatus;
     private String memberRole;
+    private int reportCount;
 
 
 	@Override

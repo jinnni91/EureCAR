@@ -45,7 +45,7 @@ public class Trade {
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID")
-	private Member memberId;
+	private Member member;
 	
 	@Column(name = "SELL_CAR_NAME")
 	private String sellCarName;
@@ -97,6 +97,9 @@ public class Trade {
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "REF_SELL_NO")
-	private List<TradeAttachFile> tradeAttachList;
+	private List<TradeAttachFile> attachFileList;
+	
+	@Column(name = "REPORT_STATUS")
+	private String reportStatus;
 
 }

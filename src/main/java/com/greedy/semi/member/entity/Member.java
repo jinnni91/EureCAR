@@ -54,6 +54,9 @@ public class Member {
 	@Column(name = "MEMBER_ROLE")
     private String memberRole;
 	
+	@Column(name = "REPORT_COUNT")
+	private int reportCount;
+	
 
    
 }

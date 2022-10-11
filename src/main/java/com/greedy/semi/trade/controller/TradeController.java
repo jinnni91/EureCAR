@@ -26,6 +26,7 @@ import com.greedy.semi.common.PagingButtonInfo;
 import com.greedy.semi.member.dto.MemberDTO;
 import com.greedy.semi.trade.dto.TradeAttachFileDTO;
 import com.greedy.semi.trade.dto.TradeDTO;
+import com.greedy.semi.trade.dto.TradeReplyDTO;
 import com.greedy.semi.trade.service.TradeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -117,7 +118,7 @@ public class TradeController {
 					} else if(i == 1) {
 						
 						fileInfo.setFileType("TITLE");
-						Thumbnails.of(imageUploadDirectory + "/" + fileSaveName).size(300, 200)
+						Thumbnails.of(imageUploadDirectory + "/" + fileSaveName).size(500, 300)
 							.toFile(thumbnailDirectory + "/thumbnail_" + fileSaveName);
 						fileInfo.setThumPath("/upload/trade/thumbnail/thumbnail_" + fileSaveName);
 						
@@ -139,7 +140,7 @@ public class TradeController {
 		
 		log.info("[TradeController] trade : {}", trade);
 		
-		trade.setMemberId(member);
+		trade.setMember(member);
 		tradeService.registTrade(trade);
 		
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("trade.regist"));
@@ -166,5 +167,51 @@ public class TradeController {
 		return "redirect:/trade/list";
 		
 	}
-
+	
+	@GetMapping("/list")
+	public String selectAllTradeAllList(@RequestParam(defaultValue="1") int page,
+			@RequestParam(required=false) String searchValue, Model model) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] parameter page : {}", page);
+		log.info("[TradeController] parameter searchValue : {}", searchValue);
+		
+		Page<TradeDTO> tradeList = tradeService.selectTradeList(page, searchValue);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(tradeList);
+		
+		log.info("[TradeController] tradeList : {}", tradeList.getContent());
+		log.info("[TradeController] paging : {}", paging);
+		
+		model.addAttribute("tradeList", tradeList);
+		model.addAttribute("paging", paging);
+		if(searchValue != null && !searchValue.isEmpty()) {
+			
+			model.addAttribute("searchValue", searchValue);
+			
+		}
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return "trade/tradeList";
+		
+	}
+	
+	@GetMapping("/detail")
+	public String selectTradeDetail(Long sellNo, Model model) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] parameter sellNo : {}", sellNo);
+		
+		TradeDTO trade = tradeService.selectTradeDetail(sellNo);
+		
+		log.info("[TradeController] trade : {}", trade);
+		
+		model.addAttribute("trade", trade);
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return "trade/tradeDetail";
+		
+	}
+	
 }
