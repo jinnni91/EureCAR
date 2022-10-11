@@ -57,5 +57,12 @@ function id_overlap_check() {
         }
 	
 
+/* 자유게시판 게시물 등록 */
 
+    if(document.getElementById("writeFree")) {
+        const $writeFree = document.getElementById("writeFree");
+        $writeFree.onclick = function() {
+            location.href = "/free/make";
+        }
+    }
 }
