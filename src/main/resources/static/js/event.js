@@ -47,6 +47,5 @@ window.onload = function() {
         $writeFree.onclick = function() {
             location.href = "/free/make";
         }
-    }
 }
 
