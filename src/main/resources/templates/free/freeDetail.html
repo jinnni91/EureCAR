@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div th:replace="common/header.html"></div>
+
 		<table id="detail">
 	<tr>
 		<th class="xkdlxmf" th:text="${ free.freeTitle }"></th>
@@ -20,7 +21,7 @@
 
 	  <!-- 댓글 작성용 table -->  
 	<table id="replyWrite" style="margin:auto;">
-
+	<input type="hidden" id="freeNo" th:value="${free.freeNo}"/>
 		<tr>
 			<td class="eotrmf">댓글</td><tr>
 			<td><textarea cols="152" rows="5" id="replyContent" style="resize:none;"></textarea></td>
@@ -35,14 +36,14 @@
 	
 	<script>
 	/* 댓글 관련 로직 - 비동기 요청 */
-		loadReply();
+		loadFreeReply();
 		
 		/* 2. 댓글 로드 */
-		function loadReply() {
+		function loadFreeReply() {
 			
 			if(document.getElementById("freeNo")) {
 				
-				fetch("/free/loadReply?refFreeNo=" + document.getElementById("freeNo").value)
+				fetch("/free/loadFreeReply?freeNo=" + document.getElementById("freeNo").value)
 				.then(result => result.json())
 				.then(data => {
 					makeReplyTable(data);
@@ -57,7 +58,7 @@
 		if(document.getElementById("registReply")) {
 			
 			const $registReply = document.getElementById("registReply");
-			const $replyBody = document.getElementById("replyContent");
+			const $replyContent = document.getElementById("replyContent");
 			
 			$registReply.onclick = function() {
 				
@@ -76,17 +77,17 @@
 					},
 					body: JSON.stringify({
 						freeNo: freeNo,
-						replycontent: replycontent
+						replyContent: replyContent
 					})
 				})
 				.then(data => {
 					console.log(data);
-					loadReply();
+					loadFreeReply();
 				})
 				.catch(error => console.log(error));
 			}
 		}
-		/* 3. 댓글 삭제 */
+ 		/* 3. 댓글 삭제 */
 		function removeReply(replyNo) {
 			
 			fetch("/free/removeReply", {
@@ -100,11 +101,11 @@
 			})
 			.then(result => {
 				console.log(result);
-				loadReply();
+				loadFreeReply();
 			})
 			.catch(error => console.log(error));
 			
-		}
+		} 
 		
 		/* 댓글 데이터 테이블화 하는 함수 */
 		function makeReplyTable(replyList) {
@@ -112,22 +113,22 @@
 			const $table = document.querySelector("#replyResult");
 			$table.innerHTML = '';
 			
-			replyList.forEach(reply => {
+			replyList.forEach(freeReply => {
 				const $tr = document.createElement('tr');
 				const $replyContentTd = document.createElement('td');
-				const $memberTd = document.createElement('td');
+				const $memberIdTd = document.createElement('td');
 				const $replyDateTd = document.createElement('td');
 				const $buttonTd = document.createElement('td');
 				
-				$replyContentTd.textContent = reply.replyContent;
-				$memberTd.textContent = reply.writer.memberId;
-				$replyDateTd.textContent = reply.replyDate;
+				$replyContentTd.textContent = freeReply.replyContent;
+				$memberIdTd.textContent = freeReply.memberId.memberId;
+				$replyDateTd.textContent = freeReply.replyDate;
 				
-				if('[[${#authentication.principal.memberId}]]' == reply.memberId.memberId) {
-					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+				if('[[${#authentication.principal.memberId}]]' == freeReply.memberId.memberId) {
+					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})'>댓글삭제</button>`;
 				}
 				
-				$tr.append($replyContentTd, $memberTd, $replyDateTd, $buttonTd);
+				$tr.append($replyContentTd, $memberIdTd, $replyDateTd, $buttonTd);
 				$table.append($tr);
 			});
 			
