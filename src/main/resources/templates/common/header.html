@@ -28,7 +28,7 @@
 	            </th:block>
 	            
 	            <th:block sec:authorize="isAuthenticated()">
-	            	<p><span sec:authentication="principal.memberName"></span>님 환영합니다.</p>
+	            	<p><span sec:authentication="principal.name"></span>님 환영합니다.</p>
 	            	<a th:href="@{/}" id="logout">로그아웃</a>
 	            </th:block>
             </div>
