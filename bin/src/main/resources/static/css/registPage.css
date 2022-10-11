@@ -28,6 +28,7 @@ input[type=submit]{
 .regist:hover {
 	width:250px;
 }
+
 .pwcheck {
 	width: 250px;
 	height: 30px;
@@ -43,7 +44,35 @@ input[type=submit]{
 	width:250px;
 }
 
+.memberId{
+	width: 250px;
+	height: 30px;
+}
 
+
+.memberId:focus {
+    background: #80ffff;
+    color: black;
+}
+
+.memberId:hover {
+	width:250px;
+}
+
+.form-control {
+	width: 250px;
+	height: 30px;
+}
+
+
+.form-control:focus {
+    background: #80ffff;
+    color: black;
+}
+
+.form-control:hover {
+	width:250px;
+}
 
 .authentication {
 	width: 130px;
@@ -69,6 +98,13 @@ input[type=submit]{
 	width:80px;
 	height:30px;
 	cursor: pointer;
+}
+
+.btn_checkEmail {
+	width: 100px;
+	height: 30px;
+	cursor: pointer;
+	
 }
 
 
