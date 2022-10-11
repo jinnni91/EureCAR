@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/loginPage.css}">
+  <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script>
+	    const message = '[[${message}]]';
+		message && alert(message);
+	</script>
+</head>
+<body>
+
+	<div th:replace="common/header.html"></div>
+	
+	<div class="login_container">
+		<form id="loginForm" th:action="@{/member/login}" method="post">
+		
+			<img src="../images/icon-lock.png" class="lock" >
+			
+			<div class="login_id">
+				<input type="text" class="user_id" id="user_id"
+					name="memberId" placeholder="아이디">
+			</div>
+			<div style="line-height:50%;"> <!-- 하위 줄높이를 50%만큼 적게 설정 -->
+			<br>
+			</div>
+			<div class="login_password">
+				<input type="password" class="user_password"
+				id="password" name="memberPwd" placeholder="비밀번호">
+			</div>
+			<br>
+			<input type="submit" class="user_login" value="로그인" id="loginSubmit">	
+		</form>
+		<br>	
+	
+		<div class="login_etc">
+			<a class="find_id" href="/member/searchId" ><b>아이디 찾기</b></a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a class="find_password" href="/member/searchPassword"><b>비밀번호 찾기</b></a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="regist" href="/member/regist"><b>회원가입</b></a>
+		</div>
+	</div>
+</body>
+</html>

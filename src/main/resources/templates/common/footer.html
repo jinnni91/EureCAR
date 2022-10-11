@@ -2,8 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-	 <div th:fragment="footerFragment" class="footer">
-  		<h1 align="center">Footer</h1>
+
+	<link rel="stylesheet" th:href="@{/css/common.css}">
+
+	<div th:fragment="footerFragment" class="footer">
+	
+		<div>
+	        <h3>유레카</h3>
+	        <ul class="footer-info">
+	            <li>사업자등록번호: 123-88-45679</li>
+	            <li style="display: flex; justify-content: space-between;"><p>대표자 : 박상연</p><p>대표 메일 : EureCar@greedy.com</p></li>
+	            <li>주소 : 서울특별시 종로구 인사동길12 대일빌딩 15층</li>
+	            <li>개인정보관리책임자 : 김동영</li>
+	            <li>COPYRIGHTⓒ 유레카 ALL RIGHTS RESERVED</li>
+	         </ul>
+	    </div>
+       
 	</div>
 
 </html>

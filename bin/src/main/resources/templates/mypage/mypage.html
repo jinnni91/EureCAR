@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/mypage.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+<title>유레카 !</title>
+</head>
+<body>
+
+	<div class="header" th:replace="common/header.html"></div>
+
+	<div>
+		<ul class="sideul">
+			<button class="sidebutton" onclick="location.href='/mypage/list'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
+			<button class="sidebutton" onclick="location.href='/mypage/wishlist'" style="cursor: pointer;">찜 리스트</button><br><br><br>
+			<button class="sidebutton" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
+		</ul>
+	<div>
+			<ul align="center">
+				<h3 class="updatebar">회원 정보</h3>
+				<hr class="mypagehr" color=#77CFD1;>
+				<h4>아이디 : resunz4</h4>
+				<h4>비밀번호 : **********</h4>
+				<h4>이름 : 박태익</h4>
+				<h4>생년월일 : 1997년 9월 17일</h4>
+				<h4>이메일 : useremail@naver.com </h4>
+				<h4>휴대전화 : 010-4121-5472</h4>
+				<h4>우편번호 : 02791</h4>
+				<h4>주소 : 서울시 성북구 화랑로 18길 54 401호</h4>
+			</ul>
+	</div>
+	</div>
+	
+	<div align="right">
+            <button class="updatemember" onclick="location.href='/mypage/update'" style="cursor: pointer;">개인 정보 변경</button>    
+    </div>
+    
+    <div th:replace="common/footer.html"></div>
+
+</body>
+</html>
