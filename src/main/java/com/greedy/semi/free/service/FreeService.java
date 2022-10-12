@@ -84,4 +84,18 @@ public class FreeService {
 		foundReply.setReplyDelete("Y");
 		
 	}
+
+	public void deleteFree(FreeDTO removeFree) {
+		Free selectedFree = freeRepository.findByFreeNo(removeFree.getFreeNo());
+		selectedFree.setFreeDelete("Y");
+		
+	}
+
+	public void modifyFree(FreeDTO updateFree) {
+		Free savedFree = freeRepository.findByFreeNo(updateFree.getFreeNo());
+		savedFree.setFreeNo(updateFree.getFreeNo());
+		savedFree.setFreeTitle(updateFree.getFreeTitle());
+		savedFree.setFreeContent(updateFree.getFreeContent());
+	}
+	
 }

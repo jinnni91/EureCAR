@@ -9,10 +9,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.semi.common.Pagenation;
@@ -21,6 +23,7 @@ import com.greedy.semi.free.dto.FreeDTO;
 import com.greedy.semi.free.dto.FreeReplyDTO;
 import com.greedy.semi.free.service.FreeService;
 import com.greedy.semi.member.dto.MemberDTO;
+import com.greedy.semi.trade.dto.TradeDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,11 +33,11 @@ import lombok.extern.slf4j.Slf4j;
 public class FreeController {
 
 	private final FreeService freeService;
-	private final MessageSourceAccessor messageSourceAccesor;
+	private final MessageSourceAccessor messageSourceAccessor;
 	
-	public FreeController(FreeService freeService, MessageSourceAccessor messageSourceAccesor) {
+	public FreeController(FreeService freeService, MessageSourceAccessor messageSourceAccessor) {
 		this.freeService = freeService;
-		this.messageSourceAccesor = messageSourceAccesor;
+		this.messageSourceAccessor = messageSourceAccessor;
 	}
 	
 	@GetMapping("list")
@@ -77,7 +80,7 @@ public class FreeController {
 		free.setMemberId(member);
 		freeService.makeFree(free);
 		
-		rttr.addFlashAttribute("message", messageSourceAccesor.getMessage("free.make"));
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("free.make"));
 		
 		return "redirect:/free/list";
 	}
@@ -128,5 +131,46 @@ public class FreeController {
 		log.info("[FreeController] ========================================= ");
 		
 		return ResponseEntity.ok("댓글 삭제 완료");
+	}
+	
+	@GetMapping("/update")
+	public String goUpdate(Long freeNo, Model model) {
+		
+		log.info("[FreeController] =================================================================== ");
+		log.info("[FreeController] parameter freeNo : {}", freeNo);
+		
+		model.addAttribute("free", freeService.selectFreeDetail(freeNo));
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return "free/freeUpdate";
+		
+	}
+	
+	@PostMapping("/update")
+	public String modifyFree(@ModelAttribute FreeDTO updateFree, RedirectAttributes rttr) {
+		
+		log.info("[FreeController] =================================================================== ");
+		
+		log.info("[FreeController] updateFree request Free : {}", updateFree);
+		
+		freeService.modifyFree(updateFree);
+		
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("free.modify"));
+		
+		log.info("[FreeController] =================================================================== ");
+		
+		return "redirect:/free/list";
+		
+	}
+	
+	@GetMapping("/delete")
+	public String deleteFree(FreeDTO free, RedirectAttributes rttr) {
+
+		freeService.deleteFree(free);
+	
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("free.delete"));
+		
+		return "redirect:/free/list";
 	}
 }
