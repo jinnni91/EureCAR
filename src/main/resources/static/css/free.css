@@ -33,22 +33,15 @@
 
 
 /* make */
-#freemake {
+.freemake {
 	margin : auto;
 	text-align: center;
-}
-
-#emdfhra {
-	text-align: center;
-	margin : auto;
-	
-}
-
+} 
 
 
 
 #gdsImg {
-	margin-left : 23%;
+	margin-right:40%;
 }
 
 .emdfhr {

@@ -79,3 +79,15 @@ select::-webkit-scrollbar {
 .container1-item select {
     margin-top: 20px;
 }
+.trade-title {
+    font-weight: bold;
+    font-size: 17px;
+}
+.trade-des {
+    color: #757575;
+    font-size: 13px;
+}
+.trade-price {
+    color: #77CFD1;
+    font-weight: bold;
+}
