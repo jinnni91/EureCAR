@@ -12,13 +12,28 @@
 		<table id="detail">
 	<tr>
 		<th class="xkdlxmf" th:text="${ free.freeTitle }"></th>
+		<th class="dkdlel" th:text="${ free.memberId.memberId }"></th>
 		<th class="zkdnsxm" th:text="|조회수 ${ free.freeCount } / ${ free.freeDate }|"></th>
 		
 	</tr>
 	</table>
 
-	    <p id="content" th:text="${ free.freeContent }"></p>
 
+	    <p id="detailcontent" th:text="${ free.freeContent }"></p>
+
+
+    <div class="update-delete">
+     <th:block th:if="${ free.memberId.memberId == #authentication.principal.memberId }">
+     	<a th:onclick="|location.href='/free/update?freeNo=${free.freeNo}'|"
+     	 style="cursor:pointer;">수정</a> &#124; 
+     </th:block>
+     <th:block th:if="${ free.memberId.memberId == #authentication.principal.memberId or free.memberId.getMemberRole().toString().equals('ROLEADMIN') }">
+     	<a th:onclick="|location.href='/free/delete?freeNo=${free.freeNo}'|"
+     	 style="cursor:pointer;">삭제</a>
+     </th:block>
+    </div>
+    
+    
 	  <!-- 댓글 작성용 table -->  
 	<table id="replyWrite" style="margin:auto;">
 	<input type="hidden" id="freeNo" th:value="${free.freeNo}"/>
@@ -28,6 +43,9 @@
 			<td><button type="button" id="registReply">등록</button></td>
 		</tr>
 	</table>
+
+
+
 	
 	<!-- 댓글 내용 출력용 table -->
 	<table id="replyResult" style="margin:auto;"></table>
@@ -128,12 +146,36 @@
 					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})'>댓글삭제</button>`;
 				}
 				
-				$tr.append($replyContentTd, $memberIdTd, $replyDateTd, $buttonTd);
+				$tr.append($memberIdTd, $replyDateTd, $replyContentTd, $buttonTd);
 				$table.append($tr);
 			});
 			
+			
+			/* 게시글 삭제 */
+			/* function removeFree(FreeNo) {
+				
+				fetch("/free/removeFree", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json; charset=UTF-8'
+					},
+					body: JSON.stringify({
+						freeNo: freeNo
+					})
+				})
+				.then(result => {
+					console.log(result);
+					loadFree();
+				})
+				.catch(error => console.log(error));
+				
+				}
+	
+		};
+		if('[[${#authentication.principal.memberId}]]' == Free.memberId.memberId) {
+			$buttonTd.innerHTML = `<button type='button' onclick='removeFree(${Free.freeNo})'>삭제</button>`;
+			 */
 		}
-		
 	</script>
 </body>
 </html>
