@@ -44,10 +44,11 @@ public class TradeService {
 		
 	}
 	
-	public void registTrade(TradeDTO trade) {
+	public Long registTrade(TradeDTO trade) {
 		
 		tradeRepository.save(modelMapper.map(trade, Trade.class));
 		
+		return tradeRepository.getCurrvalSellNoSequence();
 	}
 
 	public Page<TradeDTO> selectTradeList(int page, String searchValue) {
@@ -156,6 +157,7 @@ public class TradeService {
 	public void registTradeReply(TradeReplyDTO registTradeReply) {
 
 		tradeReplyRepository.save(modelMapper.map(registTradeReply, TradeReply.class));
+		
 		
 	}
 	
