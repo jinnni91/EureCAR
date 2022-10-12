@@ -31,5 +31,6 @@ public class TradeDTO {
 	private Long sellDisplacement;
 	private List<TradeAttachFileDTO> attachFileList;
 	private String reportStatus;
+	private String payStatus;
 
 }

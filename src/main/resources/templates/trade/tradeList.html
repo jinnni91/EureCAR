@@ -4,16 +4,28 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/trade/tradeList.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
 <title>매물 보기</title>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
 </head>
 <body>
-    
+    <div th:replace="common/header.html"></div>
     <div class="outer outer-trade-list" style="margin: 100px 350px;">
         <div class="list-title">
             <h2>매물 보기</h2>
             <div class="search">
-                <input type="text" name="search" placeholder="  Search">
-                <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+            	<form id="searchFoam" th:action="@{/trade/list}" method="get">
+            		<th:block th:if="${ searchValue != null }">
+		                <input type="search" id="searchValue" name="searchValue" placeholder="  Search" th:value="${ searchValue }">
+		            </th:block>
+		            <th:block th:if="${ searchValue == null }">
+		                <input type="search" id="searchValue" name="searchValue" placeholder="  Search">
+		            </th:block>
+		            <button type="submit"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
+                </form>
             </div>
         </div>
         <div class="category-area" style="margin-bottom: 100px;">
@@ -115,6 +127,32 @@
         </div>
         
         <div class="thumbnail-area" id="thumbnailArea" style="width: 1200px; margin: auto; display: flex; justify-content: center; flex-wrap: wrap;">
+	           <!-- <th:block th:each="trade : ${ paidList }">
+	            	<div class="trade-list" align="left" style="margin:30px; cursor:pointer;"
+	            		 th:onclick="|location.href='/trade/detail?sellNo=${trade.sellNo}'|">
+	            		 <div>
+		            		 	<th:block th:each="attachment : ${ trade.attachFileList }">
+		            		 		
+		            		 		<img th:if="${ attachment.fileType == 'TITLE' }"
+		            		 		     th:src="${ attachment.thumPath }" width="320px" height="200px">
+		            		 		     
+		            		 	 </th:block>	
+		            	 </div>
+	            		 <div class="trade-thum" style="width: 250px; margin: auto;">
+							<div class="trade-title"><span th:text="${ trade.sellCarName }"></span><br></div>
+		            		<div class="trade-des">
+		            		 	<span th:text="${ trade.sellCarYear + '년식' }"></span><br>
+		            		 	<span th:text="${ #numbers.formatInteger(trade.sellMileage, 0, 'COMMA') + 'km　|　 ' }"></span>
+		            		 	<span th:text="${ trade.region.regionName }"></span>　　
+		            		 	조회수 <span th:text="${ trade.sellCount }"></span><br>
+		            		</div>
+							<div class="trade-price">	
+								<span th:text="${ #numbers.formatInteger(trade.sellPrice, 0, 'COMMA') + '만원' }"></span>
+							</div>
+						 </div>
+							
+	            	</div>
+	            </th:block> -->
 	            <th:block th:each="trade : ${ tradeList }">
 	            	<div class="trade-list" align="left" style="margin:30px; cursor:pointer;"
 	            		 th:onclick="|location.href='/trade/detail?sellNo=${trade.sellNo}'|">
@@ -168,6 +206,7 @@
 			</div>
         
     </div>
+    <div th:replace="common/footer.html"></div>
 
 </body>
 </html>
