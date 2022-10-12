@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -8,104 +9,74 @@
 
 </head>
 <body>
+ <div class="card-body bg-white mt-0 shadow">
+                <p style="font-weight: bold">카카오페이 현재 사용가능</p>
+				<input type="text" id="sellNo" th:value="${param.sellNo}"/>
   <table>
+               
                 <tr>
-                    <th class="width-40">
-                        상품명
-                    </th>
-                    <th>
-                        상품기간
-                    </th>
-                    <th>
-                        가격
-                    </th>
-                 </tr>
-                 <tr>
-                    <td>
-                    <input type="text" class="memberEmail" id="memberEmail"
-							name="memberEmail" placeholder="이메일">
-                    </td>
-                    <td>
-                    	<input type="text" class="totalPrice" id="totalPrice"
-							name="totalPrice" placeholder="가격">
-                    </td>
-                    <td>
-                         <input type="text" class="memberName" id="memberName"
-							name="memberName" placeholder="이름">
-                    </td>
-                    <td>
-                        <button type="button" id="payment">결제</button>
-                    </td>
+	                <th>7일권</th>
+	                <th>15일권</th>
+	                <th>30일권</th>
+                </tr>
+                <tr>
+	                <td><label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label></td>
+                	<td><label class="box-radio-input"><input type="radio" name="cp_item" value="20000"><span>20,000원</span></label></td>
+             	    <td><label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label></td>
                 </tr>
 			</table>
-
-
+   				 <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 10,000원이며 <br/>최대 충전금액은 30,000원 입니다.</p>
+                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
+		 </div>
 <script>
 
 /** 결제 **/
-// 결제 금액, 구매자의 이름, 이메일
-$(document).ready(function(){
-var $payment = $("#payment");
 
-const priceAmount = $("#totalPrice");
-const buyerMemberEmail = $("#memberEmail");
-const buyerMemberName = $("#memberName");
-// const form = document.getElementById("payment");
-
-console.log(priceAmount);
-console.log(buyerMemberName);
-console.log(buyerMemberEmail);
-const IMP = window.IMP;
-IMP.init('imp83723126');
-
-
-$payment.click(function() {
-
-
-    // IMP.request_pay(param, callback) 결제창 호출
-    IMP.request_pay({ // param
-        pg: "kakaopay.TC0ONETIME",
-        pay_method: "card",
-        merchant_uid: 'cart_' + new Date().getTime(),
-        name: "Helpring 강의",
-        amount: priceAmount.val(),
-        buyer_email: buyerMemberEmail.val(),
-        buyer_name: buyerMemberName.val(),
-
-    }, function (rsp) { // callback
-
-        /** 결제 검증 **/
-        $.ajax({
-            type: 'POST',
-            url: '/verifyIamport/'+rsp.imp_uid,
-            beforeSend: function(xhr){
-                xhr.setRequestHeader(header, token);
-            }
-        }).done(function(result){
-
-            // rsp.paid_amount와 result.response.amount(서버 검증) 비교 후 로직 실행
-            if(rsp.paid_amount === result.response.amount){
-                alert("결제가 완료되었습니다.");
+    $('#charge_kakao').click(function () {
+        // getter
+	 
+        
+       const IMP = window.IMP;
+        IMP.init('imp83723126');
+        var money = $('input[name="cp_item"]:checked').val();
+        console.log(money);
+        var sellNo = $('#sellNo').val();
+        
+        IMP.request_pay({
+            pg: "kakaopay.TC0ONETIME",
+            pay_method: "card",
+            merchant_uid: 'cart_' + new Date().getTime(),
+            name: '유레카 : 광고',
+            amount: money,
+            buyer_email: 'iamport@siot.do',
+            buyer_name: '구매자이름',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '인천광역시 부평구',
+            buyer_postcode: '123-456'
+        }, function (rsp) {
+            console.log(rsp);	
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
                 $.ajax({
-                    type:'POST',
-                    url:'/member/login',
-                    beforeSend: function(xhr){
-                        xhr.setRequestHeader(header, token);
-                    }
-                }).done(function() {
-                    window.location.reload();
-                }).fail(function(error){
-                        alert(JSON.stringify(error));
-                })
-            } else{
-                alert("결제에 실패했습니다."+"에러코드 : "+rsp.error_code+"에러 메시지 : "+rsp.error_message);
-
+                    type: "POST", 
+                    url: "/user/mypage", //충전 금액값을 보낼 url 설정
+                    data: {
+                        "amount" : money,
+                        "sellNo" : sellNo
+                    },
+                });
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
             }
-        })
-    })
-})
-})
-
+            alert(msg);
+            document.location.href="/"; //alert창 확인 후 이동할 url 설정
+        });
+    });
 </script>
 </body>
 

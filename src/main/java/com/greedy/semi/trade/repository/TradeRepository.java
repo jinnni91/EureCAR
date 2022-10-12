@@ -23,5 +23,17 @@ public interface TradeRepository extends JpaRepository<Trade, Long> {
 	Page<Trade> findBySearchValue(@Param("sellDelete")String sellDelete, @Param("searchValue")String searchValue, Pageable pageable);
 	
 	Trade findBySellNoAndSellDelete(Long sellNo, String sellDelete);
+
+	Trade findBySellNo(Long sellNo);
+
+	Page<Trade> findByPayStatus(@Param("payStatus")String payStatus, @Param("sellDelete")String sellDelete, @Param("searchValue")String searchValue, Pageable pageable);
+
+	Page<Trade> findBySellDeleteAndPayStatus(String payStatus, String sellDelete, Pageable pageable);
+	
+	
+	
+	
+	@Query(value = "SELECT SEQ_SELL_NO.currval FROM dual", nativeQuery = true)
+    public Long getCurrvalSellNoSequence();
 	
 }

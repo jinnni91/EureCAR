@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	
+	<h2>이달의 수익금</h2>  
+
+         <section class="part3">
+                <img src="../images/car.png">
+                <ol class="profit_contents" >이번달 수입액   <strong> 5,350,000 </strong>원<br>
+                지난 달 대비 수익   <strong> 5.7 % </strong>증가</ol>
+         </section>
+
+         <section class="part4">
+            <div class="chartTilte">
+                <h3> 6개월 수익 비교 </h3>
+            </div> 
+         </section>
+	
+ 		<div class="part5"  style="width: 700px; height: 400px;">
+            <canvas id="myChart"></canvas>
+         </div>
+
+            <script type="text/javascript">
+                var context = document
+                    .getElementById('myChart')
+                    .getContext('2d');
+                var myChart = new Chart(context, {
+                    type: 'line', 
+                    data: { 
+                        labels: [
+                            //x 축
+                            '1','2','3','4','5','6','7'
+                        ],
+                        datasets: [
+                            
+                            { //데이터
+                                label: '수익금 총계',
+                                fill: false, 
+                                data: [
+                                    21,19,25,20,23,26,25 
+                                ],
+                                backgroundColor: [
+                                    'rgba(62, 191, 180, 0.2)'
+                                ],
+                                borderColor: [
+                                    ' rgb(14, 179, 165)'
+                                ],
+                                borderWidth: 3,
+                                pointStyle: 'rectRot',
+                                pointRadius: 7,
+                                pointBackgroundColor:' rgb(14, 179, 165)'
+   
+
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [
+                                {
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                });
+            </script>
+
+            <section class="part6">
+            <div class="tableTitle">
+                <h3>일별 결제 건수</h3>
+            </div>
+            </section>
+
+         <!--테이블-->    
+            <section class="part7">
+
+                <div class="content-box1">
+                    <table class="member">
+                   
+                        <tr>
+                            <td>   </td>
+                            <th>No</th>
+                            <th>아이디</th>
+                            <th>성명</th>
+                            <th>누적횟수</th>
+                            <th>회원삭제</th>        
+                        </tr>
+                                      
+    
+                        <tr>
+                            <td><input type=checkbox></input></td>
+                            <th>1</th>
+                            <td>greedy123</td>
+                            <td>홍길동</td>
+                            <td>2</td>
+                            <td><button submit="delete">삭제</button></td>    
+                        </tr>
+                   
+    
+                        <tr>
+                            <td><input type=checkbox></input></td>
+                            <th>2</th>
+                            <td>merge321</td>
+                            <td>박상진</td>
+                            <td>1</td>
+                            <td><button submit="delete">삭제</button></td> 
+                        </tr>
+    
+                        <tr>
+                            <td><input type=checkbox></input></td>
+                            <th>3</th>
+                            <td>greedy321</td>
+                            <td>강다윤</td>
+                            <td>3</td>
+                           <td><button submit="delete">삭제</button></td>
+                        </tr>
+    
+                        <tr>
+                            <td><input type=checkbox></input></td>
+                            <th>4</th>
+                            <td>song236</td>
+                            <td>송나라</td>
+                            <td>2</td>
+                            <td><button submit="delete">삭제</button></td>
+                        </tr>
+    
+                        <tr>
+                            <td><input type=checkbox></input></td>
+                            <th>5</th>
+                            <td>greedy789</td>
+                            <td>고길동</td>
+                            <td>1</td>
+                            <td><button submit="delete">삭제</button></td>
+                        </tr>
+    
+                        <tr>
+                            <td><input type=checkbox></input></td>
+                            <th>6</th>
+                            <td>hana0101</td>
+                            <td>지하나</td>
+                            <td>1</td>
+                            <td><button submit="delete">삭제</button></td>
+                        </tr>
+    
+    
+                    </table>
+    
+                </div>
+    
+                
+            </section>
+
+        </div>
+	
+	<div th:replace="common/footer.html"></div>
+</body>
+</html>

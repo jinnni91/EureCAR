@@ -101,5 +101,8 @@ public class Trade {
 	
 	@Column(name = "REPORT_STATUS")
 	private String reportStatus;
+	
+	@Column(name = "PAY_STATUS")
+	private String payStatus;
 
 }
