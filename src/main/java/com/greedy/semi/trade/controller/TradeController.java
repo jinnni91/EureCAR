@@ -141,9 +141,12 @@ public class TradeController {
 		log.info("[TradeController] trade : {}", trade);
 		
 		trade.setMember(member);
-		tradeService.registTrade(trade);
+		
+		Long sellNo = tradeService.registTrade(trade);
+		
 		
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("trade.regist"));
+		rttr.addAttribute("sellNo", sellNo);
 		
 		} catch (IllegalStateException | IOException e) {
 			
@@ -164,9 +167,13 @@ public class TradeController {
 		log.info("[TradeController] =================================================================== ");
 		
 		
-		return "redirect:/trade/list";
+		return "redirect:/member/payment";
 		
 	}
+	
+	
+	
+	
 	
 	@GetMapping("/list")
 	public String selectAllTradeAllList(@RequestParam(defaultValue="1") int page,

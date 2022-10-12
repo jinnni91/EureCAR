@@ -24,4 +24,9 @@ public interface TradeRepository extends JpaRepository<Trade, Long> {
 	
 	Trade findBySellNoAndSellDelete(Long sellNo, String sellDelete);
 	
+	
+	
+	@Query(value = "SELECT SEQ_SELL_NO.currval FROM dual", nativeQuery = true)
+    public Long getCurrvalSellNoSequence();
+	
 }
