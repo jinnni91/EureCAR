@@ -182,7 +182,7 @@
 	        </div>
 	        <div id="paging" align="center" style="margin-top: 100px;">
 				<button
-					th:onclick="'location.href=\'/tradel/list?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+					th:onclick="'location.href=\'/trade/list?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
 	
 				<button
 					th:onclick="'location.href=\'/trade/list?page=' + @{${paging.currentPage - 1}} + '\''"
@@ -203,7 +203,7 @@
 				<button
 					th:onclick="'location.href=\'/trade/list?page=' + @{${paging.endPage}} + '\''">>></button>
 				</th:block>
-			</div>
+			</div> 
         
     </div>
     <div th:replace="common/footer.html"></div>

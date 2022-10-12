@@ -98,3 +98,129 @@ th,td {
 	border:0;
 	outline:0;
 }
+
+
+input[type="checkbox"]{
+    accent-color:  #319e9f;
+    color:rgba(rgb(54, 0, 0), rgb(0, 191, 0), rgb(0, 0, 255), alpha)
+    rgb(14, 179, 165)
+}
+
+/*수익금*/
+img{
+    margin-left: 200px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+}
+
+.part3{
+    position: relative;
+    display: flex;
+    gap: 40px;
+}
+
+strong{
+    color: #319e9f;
+}
+
+.profit-contents{
+    color:#319e9f;
+    font-size: large;
+    
+}
+
+.part4{
+    position: relative;
+    display:flex;
+    margin-top: 30px;
+   
+}
+
+.chartTilte{
+    margin-left:200px;
+    width: 100%;
+    border-bottom: 2px solid #77cfd1;
+}
+
+h3{
+    margin-left:50px;
+}
+
+.part5{
+    display: flex;
+    
+}
+
+#myChart{
+	
+    margin-left: 200px;
+    margin-top: 40px;
+    
+}
+
+.part6{
+   position: relative;
+   display: flex;
+   margin-top: 50px;
+   width:910px
+}
+.tableTitle{
+    margin-left: 200px;
+    width: 100%;
+    border-bottom: 2px solid #77cfd1;
+} 
+
+
+
+
+/*테이블*/
+.part7{
+    position:relative;
+    display: flex;
+   
+}
+
+.content-box1{
+    margin-left: 200px;
+    margin-top: 40px; 
+} 
+
+table{
+   
+    /* margin-left: 400px;
+    margin-bottom: 100px; */
+
+    border-collapse: collapse;
+    width:700px;
+  
+}
+
+.member tr {
+    border-bottom: 1px solid #77cfd1;;
+} 
+
+.member tr:last-child {
+    border-bottom: none;
+}
+
+
+
+th,td {
+    text-align: center;
+    padding: 10px;
+}
+
+button{
+    font-size:medium;
+    border-radius: 15px;
+    border: 3px solid rgb(233, 233, 233); 
+    font-style:normal;
+    background-color: rgba(125, 125, 125, 0.153);
+} 
+
+button:hover{
+   
+    transform: scale(1.05);
+    cursor: pointer;
+
+} 

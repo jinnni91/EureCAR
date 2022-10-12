@@ -17,17 +17,39 @@
 		
 		 <aside>
                 <nav class="layout_left">
-                    <a onclick="location.href='/admin/search'"> 회원정보조회</a> 
-                    <a onclick="location.href='/admin/warnedmember'"> 신고누적회원조회</a>
-                    <a onclick="location.href='/admin/search'"> 신고목록조회</a>
+                    <a href ="#" onclick="location.href='/admin/search'"> 회원정보조회</a> 
+                    <a href ="#" onclick="location.href='/admin/warnedmember'"> 신고누적회원조회</a>
+                    <a href ="#" onclick="location.href='/admin/warnedlist'"> 신고목록조회</a>
                 </nav>
         </aside>
         
-		<section class="part1">
-            <div class="searchTitle">
-                <h2 align="center">회원정보 조회</h2>
-            </div>
-        </section>
+	<!--체크박스+누적횟수 구역-->
+            <section class="part_top">
+
+                 <!--전체 체크박스-->
+                <div class="part1">
+                    <input type=checkbox id="check">
+                    <label>전체체크</label>
+                    <button>삭제</button>
+                </div>
+                
+               
+
+                <!--누적횟수 조회-->
+                <div class="part2">
+                    누적횟수: <select>
+                        <option> 1회 </option>
+                        <option> 2회 </option>
+                        <option> 3회 이상</option>
+                        </select>
+                        <button>확인</button>
+                </div>
+              
+                
+            </section>
+	
+	
+	
 		
 		<div class="table-area" style="text-align: center;">
 			<table class="member" style="margin: auto;">
