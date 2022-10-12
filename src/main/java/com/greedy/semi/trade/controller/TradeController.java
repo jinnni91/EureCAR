@@ -14,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -177,12 +178,15 @@ public class TradeController {
 		log.info("[TradeController] parameter searchValue : {}", searchValue);
 		
 		Page<TradeDTO> tradeList = tradeService.selectTradeList(page, searchValue);
+		Page<TradeDTO> paidList = tradeService.selectTradeList(page, searchValue);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(tradeList);
 		
 		log.info("[TradeController] tradeList : {}", tradeList.getContent());
+		log.info("[TradeController] paidList : {}", paidList.getContent());
 		log.info("[TradeController] paging : {}", paging);
 		
 		model.addAttribute("tradeList", tradeList);
+		model.addAttribute("paidList", paidList);
 		model.addAttribute("paging", paging);
 		if(searchValue != null && !searchValue.isEmpty()) {
 			
@@ -211,6 +215,52 @@ public class TradeController {
 		log.info("[TradeController] =================================================================== ");
 		
 		return "trade/tradeDetail";
+		
+	}
+	
+	@GetMapping("/update")
+	public String goUpdate(Long sellNo, Model model) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] parameter sellNo : {}", sellNo);
+		
+		model.addAttribute("trade", tradeService.selectTradeDetail(sellNo));
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return "trade/tradeUpdate";
+		
+	}
+	
+	@PostMapping("/update")
+	public String modifyTrade(@ModelAttribute TradeDTO updateTrade, RedirectAttributes rttr) {
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		log.info("[TradeController] updateTrade request Trade : {}", updateTrade);
+		
+		tradeService.modifyTrade(updateTrade);
+		
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("trade.modify"));
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return "redirect:/trade/list";
+		
+	}
+	
+	@GetMapping("/delete")
+	public String deleteTrade(TradeDTO trade, RedirectAttributes rttr) {
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		tradeService.deleteTrade(trade);
+		
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("trade.delete"));
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return "redirect:/trade/list";
 		
 	}
 	

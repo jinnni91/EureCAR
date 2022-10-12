@@ -11,7 +11,7 @@
     margin-left: auto;
 }  
 .search input {
-    width: 100%;
+    width: 90%;
     border: 1px solid #bbb;
     border-radius: 20px;
     padding: 10px 12px;
@@ -23,6 +23,11 @@
     top: 10px;
     right: -10px;
     margin: 0;
+}
+.search button {
+	padding: 0;
+	border: none;
+	background: none;
 }
 .search input:focus {
     outline: 2px solid #77CFD1;
@@ -45,8 +50,7 @@
     text-align: center;
     font-size:12px;
     font-weight: bold;
-    padding-top: 5px;
-    margin-top: 15px;
+    padding-top: 2px;
 }
 .select input[type=radio]+label{
     background-color: #fff;
@@ -73,11 +77,9 @@ select::-webkit-scrollbar {
     text-align: center;
 }
 .container1-item {
+	padding: 15px;
     width: 33%;
     margin: 5px auto;
-}
-.container1-item select {
-    margin-top: 20px;
 }
 .trade-title {
     font-weight: bold;
