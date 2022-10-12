@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/trade/tradeDetail.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
 <title>차량 상세페이지</title>
 </head>
 <body>
-
+		<div th:replace="common/header.html"></div>
 	    <div class="outer outer-trade-list" style="margin: 100px 350px;">
 	    	<div class="body">
 		    	<div class="car-top-wrap">
@@ -135,10 +136,10 @@
             	<div class="car-bottom-wrap">
 		            <div class="update-delete">
 			            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
-			            	<a>글 수정</a> &#124; 
+			            	<a th:onclick="|location.href='/trade/update?sellNo=${trade.sellNo}'|">글 수정</a> &#124; 
 			            </th:block>
 			            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId or trade.member.getMemberRole().toString().equals('ROLEADMIN') }">
-			            	<a>글 삭제</a>
+			            	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
 			            </th:block>
 		            </div>
 		            <h4>댓글</h4>
@@ -151,6 +152,7 @@
     		</div>
 	    
 		</div>
+		<div th:replace="common/footer.html"></div>
 
 </body>
 </html>

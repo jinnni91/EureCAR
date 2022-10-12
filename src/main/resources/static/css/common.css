@@ -61,9 +61,15 @@ a{text-decoration: none;}
     margin-left: 200px;
     margin-right: 80px;
 }
+.material-icons{
+	margin-left:-25px;
+	margin-top:3px;
+}
+
+
 .utilMenu > a {margin-left: 20px;}
 .footer {background-color: #F9F7F7;  padding: 50px 0;}
 .footer > div {width: 1100px; margin: auto;}
-.footer > div > h3 {font-size: 25px; margin-bottom: 20px;}
+.footer > div > h3 {font-size: 25px; margin-bottom: 10px;}
 .footer > div > ul {width: 400px;}
 .footer > div > ul > li {padding: 3px 0; font-size: 14px;}
