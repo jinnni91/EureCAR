@@ -178,15 +178,15 @@ public class TradeController {
 		log.info("[TradeController] parameter searchValue : {}", searchValue);
 		
 		Page<TradeDTO> tradeList = tradeService.selectTradeList(page, searchValue);
-		Page<TradeDTO> paidList = tradeService.selectTradeList(page, searchValue);
+		//Page<TradeDTO> paidList = tradeService.selectTradeList(page, searchValue);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(tradeList);
 		
 		log.info("[TradeController] tradeList : {}", tradeList.getContent());
-		log.info("[TradeController] paidList : {}", paidList.getContent());
+		//log.info("[TradeController] paidList : {}", paidList.getContent());
 		log.info("[TradeController] paging : {}", paging);
 		
 		model.addAttribute("tradeList", tradeList);
-		model.addAttribute("paidList", paidList);
+		//model.addAttribute("paidList", paidList);
 		model.addAttribute("paging", paging);
 		if(searchValue != null && !searchValue.isEmpty()) {
 			
