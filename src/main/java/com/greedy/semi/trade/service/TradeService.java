@@ -70,25 +70,25 @@ public class TradeService {
 		
 	}
 	
-	public Page<TradeDTO> paidTradeList(int page, String searchValue) {
-		
-		Pageable pageable = PageRequest.of(page - 1, TRADE_PAGE_SIZE, Sort.by(SORT_BY).descending());
-		
-		Page<Trade> paidList = tradeRepository.findByPayStatus(SELL_DELETE, PAY_STATUS, searchValue, pageable);
-		
-		if(searchValue != null && !searchValue.isEmpty()) {
-			
-			paidList = tradeRepository.findByPayStatus(SELL_DELETE, PAY_STATUS, searchValue, pageable);
-			
-		} else {
-			
-			paidList = tradeRepository.findBySellDeleteAndPayStatus(SELL_DELETE, PAY_STATUS, pageable);
-			
-		}
-		
-		return paidList.map(trade -> modelMapper.map(trade, TradeDTO.class));
-		
-	}
+//	public Page<TradeDTO> paidTradeList(int page, String searchValue) {
+//		
+//		Pageable pageable = PageRequest.of(page - 1, TRADE_PAGE_SIZE, Sort.by(SORT_BY).descending());
+//		
+//		Page<Trade> paidList = tradeRepository.findByPayStatus(SELL_DELETE, PAY_STATUS, searchValue, pageable);
+//		
+//		if(searchValue != null && !searchValue.isEmpty()) {
+//			
+//			paidList = tradeRepository.findByPayStatus(SELL_DELETE, PAY_STATUS, searchValue, pageable);
+//			
+//		} else {
+//			
+//			paidList = tradeRepository.findBySellDeleteAndPayStatus(SELL_DELETE, PAY_STATUS, pageable);
+//			
+//		}
+//		
+//		return paidList.map(trade -> modelMapper.map(trade, TradeDTO.class));
+//		
+//	}
 
 	public TradeDTO selectTradeDetail(Long sellNo) {
 		
