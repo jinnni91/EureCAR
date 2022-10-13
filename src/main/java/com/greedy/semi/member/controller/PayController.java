@@ -47,7 +47,6 @@ public class PayController {
     	/* OrderInfo 저장*/
     	/* 넘겨받은 sellNo 저장 */	
     	trade.setSellNo(sellNo);
-    	order.setTrade(trade);
     	
     	/* MemberId저장 */
     	order.setMember(member);
@@ -58,22 +57,32 @@ public class PayController {
         log.info("productDTO",product);*/
         
 
+    	if(payAmt < 10000)
+    	{
+    		trade.setPayStatus("N");
+    	}
+    	else 
+    	{
+    		trade.setPayStatus("Y");
+    		if(payAmt == 10000)
+    		{
+    			product.setProductCode(1);
+    		}
+    		else if(payAmt == 20000)
+    		{
+    			product.setProductCode(2);
+    		}
+    		else 
+    		{
+    			product.setProductCode(3);
+    		}
+    	}
+    	log.info("tradeDTO",trade);
+    	payService.updatePayStatus(trade);
     	
-		if(payAmt == 10000)
-		{
-			product.setProductCode(1);
-			order.setProduct(product);
-		}
-		else if(payAmt == 20000)
-		{
-			product.setProductCode(2);
-			order.setProduct(product);
-		}
-		else {
-			product.setProductCode(3);
-			order.setProduct(product);
-		}
-		
+		order.setProduct(product);
+    	order.setTrade(trade);
+
 		//orderInfoService.order(order);
 		
 		 /* pay OrderInfoDTO 저장 */
