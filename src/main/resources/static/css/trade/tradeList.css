@@ -11,7 +11,7 @@
     margin-left: auto;
 }  
 .search input {
-    width: 100%;
+    width: 90%;
     border: 1px solid #bbb;
     border-radius: 20px;
     padding: 10px 12px;
@@ -24,8 +24,24 @@
     right: -10px;
     margin: 0;
 }
+.search button {
+	padding: 0;
+	border: none;
+	background: none;
+}
 .search input:focus {
     outline: 2px solid #77CFD1;
+}
+.category-area img{
+    width: 15px;
+    top: 10px;
+    right: -10px;
+}
+.category-area button{
+	padding: 0;
+	border: none;
+	background: none;
+	margin-left: 20px;
 }
 .category-area {
     width: 1200px;
@@ -45,8 +61,7 @@
     text-align: center;
     font-size:12px;
     font-weight: bold;
-    padding-top: 5px;
-    margin-top: 15px;
+    padding-top: 2px;
 }
 .select input[type=radio]+label{
     background-color: #fff;
@@ -73,11 +88,20 @@ select::-webkit-scrollbar {
     text-align: center;
 }
 .container1-item {
+	padding: 15px;
     width: 33%;
     margin: 5px auto;
 }
-.container1-item select {
-    margin-top: 20px;
+.container2 {
+	width: 1050px;
+    display: flex;
+    margin: 0 30px;
+    text-align: center;
+}
+.container2-item {
+	padding: 15px;
+    width: 33%;
+    margin: 5px auto;
 }
 .trade-title {
     font-weight: bold;
@@ -90,4 +114,12 @@ select::-webkit-scrollbar {
 .trade-price {
     color: #77CFD1;
     font-weight: bold;
+}
+hr {
+	background-color: #77CFD1;
+	height: 3px;
+	border: 0;
+}
+.paid p {
+	margin-bottom: 7px;
 }

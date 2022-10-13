@@ -44,7 +44,7 @@ public class TradeReply {
 	private Date replyUpdate;
 	
 	@Column(name = "REPLY_DELETE")
-	private char replyDelete;
+	private String replyDelete;
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID")
