@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div th:replace="common/header.html"></div>
-		<div class="payment_container" style="margin: 100px 600px;">
+		<div class="payment_container" style="margin: 100px 400px;">
  			<div class="card-body bg-white mt-0 shadow">
 				<input type="hidden" id="sellNo" th:value="${param.sellNo}"/>
 				<h3 class="left" style="color:red;">추가 옵션</h3>
@@ -21,12 +21,12 @@
                 <hr style="border: solid 2px #77CFD1;">
 				<div class="pay">
 				<br>
-					<span style="color: rgb(107, 105, 105);" class="left">차량 판매글을 목록의 최상단으로 올려 광고할 수 있습니다.</span>
+					<span style="color: rgb(107, 105, 105); font-size:1.25em;" class="left" >차량 판매글을 목록의 최상단으로 올려 광고할 수 있습니다.</span>
 					<br><br><br>
 			</div>
                <form>
-               		<p style="font-weight: bold">결제 방식 : 카카오페이</p>
-	      			<br><br>&emsp;
+               		<p style="font-weight: bold; font-size:1.25em ">결제 방식 : 카카오페이</p>
+	      			<br><br>&nbsp;
 	      			<label style="font-size: 1.25em">7일권</label>&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
 	      			<label style="font-size: 1.25em">15일권</label>&emsp;&emsp;&emsp;&emsp;&nbsp;
 	      			<label style="font-size: 1.25em">30일권</label>

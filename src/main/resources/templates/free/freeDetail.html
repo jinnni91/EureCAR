@@ -53,7 +53,7 @@
 
 
     <div class="update-delete">
-     <th:block th:if="${ free.memberId.memberId == #authentication.principal.memberId }">
+     <th:block th:if="${ free.member.memberId == #authentication.principal.memberId }">
      	<a th:onclick="|location.href='/free/update?freeNo=${free.freeNo}'|"
      	 style="cursor:pointer;">수정</a> &#124; 
      </th:block>
