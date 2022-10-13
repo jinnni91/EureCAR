@@ -237,6 +237,7 @@ public class TradeController {
 		
 		log.info("[TradeController] trade : {}", trade);
 		
+		model.addAttribute("sellCarOpt", trade.getSellCarOpt().split(","));
 		model.addAttribute("trade", trade);
 		
 		log.info("[TradeController] =================================================================== ");

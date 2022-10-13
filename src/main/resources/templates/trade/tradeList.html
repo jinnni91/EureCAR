@@ -33,7 +33,7 @@
 	            <div class="container1">
 	                <div class="container1-item"><h5>차종</h5></div>
 	                <div class="container1-item"><select name="model.modelCode">
-	                    <option value="0" selected>차종 선택</option>
+	                    <option value="0">차종 선택</option>
 	                    <option value="1">경차</option>
 	                    <option value="2">소형</option>
 	                    <option value="3">준중형</option>
@@ -129,13 +129,13 @@
         </form>
         
         <div class="thumbnail-area" id="thumbnailArea" style="width: 1200px; margin: auto; display: flex; justify-content: center; flex-wrap: wrap;">
+	           <div class="paid" style="width: 1200px;">
+			        <th:block th:if="${ !paidList.isEmpty() }">
+						<p style="font-size: 18px;">프리미엄 광고</p>
+						<hr>
+		        	</th:block>
+	           </div>
 	           <th:block th:each="trade : ${ paidList }">
-		           <div class="paid" style="width: 1200px;">
-			           <th:block th:if="${ paidList != null }">
-					        <p style="font-size: 18px;">프리미엄 광고</p>
-					        <hr>
-		        		</th:block>
-	        		</div>
 	            	<div class="trade-list" align="left" style="margin:30px; cursor:pointer;"
 	            		 th:onclick="|location.href='/trade/detail?sellNo=${trade.sellNo}'|">
 	            		 <div>
