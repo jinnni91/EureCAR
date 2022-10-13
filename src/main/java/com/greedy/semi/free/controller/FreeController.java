@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.semi.common.Pagenation;
@@ -23,7 +22,6 @@ import com.greedy.semi.free.dto.FreeDTO;
 import com.greedy.semi.free.dto.FreeReplyDTO;
 import com.greedy.semi.free.service.FreeService;
 import com.greedy.semi.member.dto.MemberDTO;
-import com.greedy.semi.trade.dto.TradeDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -121,13 +119,16 @@ public class FreeController {
 	}
 	
 	@PostMapping("/removeReply")
-	public ResponseEntity<String> removeReply(@RequestBody FreeReplyDTO removeReply) {
+	public ResponseEntity<String> removeReply(@RequestBody FreeReplyDTO removeReply, RedirectAttributes rttr) {
 
 		log.info("[FreeController] ========================================= ");
 		log.info("[FreeController] loadReply : {}", removeReply);
 		
 		freeService.removeReply(removeReply);
-	
+		
+		rttr.addFlashAttribute("message",
+		messageSourceAccessor.getMessage("freeReply.remove")); 
+		
 		log.info("[FreeController] ========================================= ");
 		
 		return ResponseEntity.ok("댓글 삭제 완료");
@@ -141,7 +142,7 @@ public class FreeController {
 		
 		model.addAttribute("free", freeService.selectFreeDetail(freeNo));
 		
-		log.info("[TradeController] =================================================================== ");
+		log.info("[FreeController] =================================================================== ");
 		
 		return "free/freeUpdate";
 		
@@ -156,7 +157,8 @@ public class FreeController {
 		
 		freeService.modifyFree(updateFree);
 		
-		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("free.modify"));
+		rttr.addFlashAttribute("message", 
+				messageSourceAccessor.getMessage("free.modify"));
 		
 		log.info("[FreeController] =================================================================== ");
 		
