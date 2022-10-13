@@ -27,7 +27,7 @@ import lombok.Setter;
 @Table(name = "FREE_REPLY")
 @SequenceGenerator(
 		name = "REPLY_SEQ_GENERATOR",
-		sequenceName = "SEQ_REPLY_NO",
+		sequenceName = "SEQ_FREE_REPLY_NO",
 		initialValue = 1,
 		allocationSize = 1
 )
@@ -42,8 +42,8 @@ public class FreeReply {
 	)
     private Long replyNo;
 	
-	@Column(name = "REFLY_CONTENT")
-    private Long reflyContent;
+	@Column(name = "REPLY_CONTENT")
+    private String replyContent;
 	
 	@Column(name = "REPLY_DELETE")
     private String replyDelete;

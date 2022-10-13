@@ -55,7 +55,7 @@ public class MemberService {
 	
 	public String findIdByNameAndEmail(String name, String email) {
 		
-		Member member = memberRepository.findIdByNameAndEmail(name, email);
+		Member member = memberRepository.findIdByNameAndEmailAndMemberStatus(name, email, "N");
 		
 		 if (member == null)
 	            return null;
@@ -65,7 +65,7 @@ public class MemberService {
 	public MemberDTO findByMemberIdAndNameAndPhone(String memberId, String name, String phone) {
 		
 		
-		Member member = memberRepository.findByMemberIdAndNameAndPhone(memberId, name, phone);
+		Member member = memberRepository.findByMemberIdAndNameAndPhoneAndMemberStatus(memberId, name, phone,"N");
 		return modelMapper.map(member, MemberDTO.class);
 		
 

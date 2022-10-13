@@ -27,7 +27,6 @@ public class MemberDTO implements UserDetails {
     private int reportCount;
     private Date enrolldate;
 
-
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> roles = new HashSet<>();
