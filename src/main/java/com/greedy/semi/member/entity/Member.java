@@ -57,6 +57,7 @@ public class Member {
 	@Column(name = "REPORT_COUNT")
 	private int reportCount;
 	
-
+	@Column(name = "ENROLLDATE")
+	private Date enrolldate;
    
 }

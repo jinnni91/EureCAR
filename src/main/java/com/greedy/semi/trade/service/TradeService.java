@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.semi.member.entity.Member;
+import com.greedy.semi.trade.dto.Criteria;
 import com.greedy.semi.trade.dto.TradeDTO;
 import com.greedy.semi.trade.dto.TradeReplyDTO;
 import com.greedy.semi.trade.entity.Color;
@@ -22,6 +23,7 @@ import com.greedy.semi.trade.entity.Trade;
 import com.greedy.semi.trade.entity.TradeReply;
 import com.greedy.semi.trade.repository.TradeReplyRepository;
 import com.greedy.semi.trade.repository.TradeRepository;
+import com.greedy.semi.trade.repository.TradeRepositoryCustom;
 
 @Service
 @Transactional
@@ -34,12 +36,14 @@ public class TradeService {
 	
 	private final TradeRepository tradeRepository;
 	private final TradeReplyRepository tradeReplyRepository;
+	private final TradeRepositoryCustom tradeRepositoryCustom;
 	private final ModelMapper modelMapper;
 	
-	public TradeService(TradeRepository tradeRepository, TradeReplyRepository tradeReplyRepository, ModelMapper modelMapper) {
+	public TradeService(TradeRepository tradeRepository, TradeReplyRepository tradeReplyRepository, TradeRepositoryCustom tradeRepositoryCustom, ModelMapper modelMapper) {
 		
 		this.tradeRepository = tradeRepository;
 		this.tradeReplyRepository = tradeReplyRepository;
+		this.tradeRepositoryCustom = tradeRepositoryCustom;
 		this.modelMapper = modelMapper;
 		
 	}
@@ -70,25 +74,28 @@ public class TradeService {
 		
 	}
 	
-//	public Page<TradeDTO> paidTradeList(int page, String searchValue) {
-//		
-//		Pageable pageable = PageRequest.of(page - 1, TRADE_PAGE_SIZE, Sort.by(SORT_BY).descending());
-//		
-//		Page<Trade> paidList = tradeRepository.findByPayStatus(SELL_DELETE, PAY_STATUS, searchValue, pageable);
-//		
-//		if(searchValue != null && !searchValue.isEmpty()) {
-//			
-//			paidList = tradeRepository.findByPayStatus(SELL_DELETE, PAY_STATUS, searchValue, pageable);
-//			
-//		} else {
-//			
-//			paidList = tradeRepository.findBySellDeleteAndPayStatus(SELL_DELETE, PAY_STATUS, pageable);
-//			
-//		}
-//		
-//		return paidList.map(trade -> modelMapper.map(trade, TradeDTO.class));
-//		
-//	}
+	public Page<TradeDTO> paidTradeList(int page) {
+		
+		Pageable pageable = PageRequest.of(page - 1, TRADE_PAGE_SIZE, Sort.by(SORT_BY).descending());
+		
+		Page<Trade> paidList = tradeRepository.findByPayStatus(SELL_DELETE, PAY_STATUS, pageable);
+		
+		paidList = tradeRepository.findBySellDeleteAndPayStatus(SELL_DELETE, PAY_STATUS, pageable);
+		
+		
+		return paidList.map(trade -> modelMapper.map(trade, TradeDTO.class));
+		
+	}
+
+	public Page<TradeDTO> filteringTradeList(Criteria criteria, int page) {
+		
+		Pageable pageable = PageRequest.of(page - 1, TRADE_PAGE_SIZE, Sort.by(SORT_BY).descending());
+
+		Page<Trade> filteringList = tradeRepositoryCustom.findTradeDynamicQuery(criteria, pageable);
+		
+		return filteringList.map(trade -> modelMapper.map(trade, TradeDTO.class));
+		
+	}
 
 	public TradeDTO selectTradeDetail(Long sellNo) {
 		
@@ -171,9 +178,8 @@ public class TradeService {
 	public void removeTradeReply(TradeReplyDTO removeTradeReply) {
 		
 		TradeReply foundTradeReply = tradeReplyRepository.findByReplyNo(removeTradeReply.getReplyNo());
-		foundTradeReply.setReplyDelete('Y');
+		foundTradeReply.setReplyDelete("Y");
 		
 	}
-
 
 }
