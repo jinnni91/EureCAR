@@ -11,7 +11,7 @@
 <body>
  <div class="card-body bg-white mt-0 shadow">
                 <p style="font-weight: bold">카카오페이 현재 사용가능</p>
-				<input type="text" id="sellNo" th:value="${param.sellNo}"/>
+				<input type="hidden" id="sellNo" th:value="${param.sellNo}"/>
   <table>
                
                 <tr>
@@ -26,7 +26,9 @@
                 </tr>
 			</table>
    				 <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 10,000원이며 <br/>최대 충전금액은 30,000원 입니다.</p>
-                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
+                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">결제하기</button>
+                 <button type="button" onclick="location.href='/'">취소</button>
+                
 		 </div>
 <script>
 

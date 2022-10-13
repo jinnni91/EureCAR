@@ -28,7 +28,7 @@ spring:
       
       #location: C:\Users\hi\git\semi_project999
       #location: C:/Lecture/ShareFolder/eurecar/Eurecar
-      location: C:/Lecture/ShareFolder/9_spring/03_spring-boot/10.11/semi_project
+      location: C:\Lecture\ShareFolder\9_spring\03_spring-boot\10.11\semi_project
 image:
   image-dir: src/main/resources
      

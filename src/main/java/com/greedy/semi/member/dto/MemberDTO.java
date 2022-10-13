@@ -25,7 +25,7 @@ public class MemberDTO implements UserDetails {
     private String memberStatus;
     private String memberRole;
     private int reportCount;
-
+    private Date enrolldate;
 
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
