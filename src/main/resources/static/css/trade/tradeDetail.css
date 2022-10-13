@@ -10,6 +10,9 @@ li{
 }
 
 a {text-decoration: none; color: #999; cursor: pointer;}
+.date {
+	color: #999;
+}
 
 .text-left {text-align: left;}
 .text-center {text-align: center;}

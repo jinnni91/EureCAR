@@ -1,7 +1,9 @@
 package com.greedy.semi.free.entity;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,12 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
 import com.greedy.semi.member.entity.Member;
+import com.greedy.semi.trade.entity.TradeAttachFile;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,5 +58,8 @@ public class Free {
 	
 	@Column(name = "FREE_COUNT")
 	private int freeCount;
-
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "REF_FREE_NO")
+	private List<FreeAttachFile> attachFileList;
 }
