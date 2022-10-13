@@ -8,8 +8,10 @@
 </head>
 <body>
 <div th:replace="common/header.html"></div>
-
+<form id="freeUpdateForm" th:action="@{/free/update}"
+            method="post" enctype="multipart/form-data">
 <div id="update">
+<input type="hidden" name="freeNo" th:value="${ free.freeNo }"/>
 <input class="title2" name="freeTitle" th:value="${ free.freeTitle }">
 <input class="content2" name="freeContent" th:value="${ free.freeContent }">
 </div>
@@ -20,6 +22,7 @@
            <button type="button"class="btn22"
             style="cursor:pointer;">취소</button>
 	</div>
+</form>
 <div th:replace="common/footer.html"></div>
 </body>
 </html>

@@ -6,11 +6,11 @@
 }
 
 .footer{
-	margin-top : 20px;
+	margin-top: 20px;
+	
 }
 
-	
-	
+
 #free {
 	background-color:#77CFD1;
 	font-size : 25px;
@@ -171,8 +171,11 @@
 }
 
 #replyResult{
-	padding-top : 6%;
+	padding-top : 6.5%;
+	padding-left : 20%;
+	position: absolute;
 }
+
 
 
 /* 업데이트 */
