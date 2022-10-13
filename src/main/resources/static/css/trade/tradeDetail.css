@@ -59,6 +59,18 @@ a {text-decoration: none; color: #999; cursor: pointer;}
     clear: both;
 }
 
+.car-detail-info02 table {
+    width: 1200px;
+    margin: 20px auto;
+    border-collapse: separate;
+    border-spacing: 80px 20px;
+}
+
+.car-detail-info02 img {
+	width: 15px;
+	height: 15px;
+}
+
 .car-detail-info03 > div {min-height: 250px;}
 
 .dropdown { margin-top: 100px; position: relative; display: inline-block; }
