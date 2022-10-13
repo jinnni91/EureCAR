@@ -62,5 +62,6 @@ public class Member {
 	
 	@Column(name = "ENROLLDATE")
 	private Date enrolldate;
+
    
 }
