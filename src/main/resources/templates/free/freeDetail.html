@@ -90,9 +90,9 @@
 	<div th:replace="common/footer.html"></div>
 	
 	<th:block sec:authorize="isAuthenticated()">
-	<script>	
-		const loginUser ='[[${#authentication.principal.memberId}]]';
-	</script>
+		<script>	
+			const loginUser ='[[${#authentication.principal.memberId}]]';
+		</script>
 	</th:block>
 
 	<script>
@@ -190,8 +190,6 @@
 				if(loginUser == freeReply.memberId.memberId) {
 
 					
-					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})' style="cursor:pointer;">댓글삭제</button>`;
-
 					$button1Td.innerHTML = `<button type='button' onclick='updateReply(${freeReply.replyNo})' style="cursor:pointer;">수정</button>`; 
 					$button2Td.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})' style="cursor:pointer;">삭제</button>`;
 
