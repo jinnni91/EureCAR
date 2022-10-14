@@ -5,6 +5,10 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/free.css}">
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
 </head>
 <body>
 <div th:replace="common/header.html"></div>
@@ -19,10 +23,13 @@
 	<div id="btn123">
            <button type="submit" class="btn11"
             style="cursor:pointer;">수정</button>
-           <button type="button"class="btn22"
-            style="cursor:pointer;">취소</button>
+           <button type="button"  
+           th:onclick="|location.href='/free/detail?freeNo=${free.freeNo}'|"
+           class="btn22" style="cursor:pointer;">취소</button>
 	</div>
+	
 </form>
 <div th:replace="common/footer.html"></div>
+
 </body>
 </html>

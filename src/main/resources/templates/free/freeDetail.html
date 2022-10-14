@@ -4,16 +4,19 @@
 <head>
 <meta charset="UTF-8" />
 <link rel="stylesheet" th:href="@{/css/free.css}">
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
 </head>
 <body>
 	<div th:replace="common/header.html"></div>
-
+<div class="table-area">
 		<table id="detail">
 	<tr>
 		<th class="xkdlxmf" th:text="${ free.freeTitle }"></th>
-		<th class="dkdlel" th:text="${ free.memberId.memberId }"></th>
+		<!-- <th class="dkdlel" th:text="${ free.memberId.memberId }"></th> -->
 		<th class="zkdnsxm" th:text="|조회수 ${ free.freeCount } / ${ free.freeDate }|"></th>
-		
 	</tr>
 	</table>
 	
@@ -53,6 +56,8 @@
 
 
     <div class="update-delete">
+
+    <th:block sec:authorize="isAuthenticated()">
      <th:block th:if="${ free.memberId.memberId == #authentication.principal.memberId }">
      	<a th:onclick="|location.href='/free/update?freeNo=${free.freeNo}'|"
      	 style="cursor:pointer;">수정</a> &#124; 
@@ -60,6 +65,7 @@
      <th:block th:if="${ free.memberId.memberId == #authentication.principal.memberId or free.memberId.getMemberRole().toString().equals('ROLEADMIN') }">
      	<a th:onclick="|location.href='/free/delete?freeNo=${free.freeNo}'|"
      	 style="cursor:pointer;">삭제</a>
+     </th:block>
      </th:block>
     </div>
     
@@ -78,9 +84,15 @@
 
 	
 	<!-- 댓글 내용 출력용 table -->
-	<table id="replyResult" style="margin:auto;"></table>
-
+	<table id="replyResult" ></table>
+	</div>
 	<div th:replace="common/footer.html"></div>
+	
+	<th:block sec:authorize="isAuthenticated()">
+	<script>	
+		const loginUser ='[[${#authentication.principal.memberId}]]';
+	</script>
+	</th:block>
 	
 	<script>
 	/* 댓글 관련 로직 - 비동기 요청 */
@@ -166,21 +178,41 @@
 				const $replyContentTd = document.createElement('td');
 				const $memberIdTd = document.createElement('td');
 				const $replyDateTd = document.createElement('td');
-				const $buttonTd = document.createElement('td');
+				const $button1Td = document.createElement('td');
+				const $button2Td = document.createElement('td');
 				
 				$replyContentTd.textContent = freeReply.replyContent;
 				$memberIdTd.textContent = freeReply.memberId.memberId;
-				$replyDateTd.textContent = freeReply.replyDate;
+				$replyDateTd.textContent = freeReply.replyDate; 
 				
-				if('[[${#authentication.principal.memberId}]]' == freeReply.memberId.memberId) {
-					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})' style="cursor:pointer;">댓글삭제</button>`;
+				if(loginUser == freeReply.memberId.memberId) {
+					$button1Td.innerHTML = `<button type='button' onclick='updateReply(${freeReply.replyNo})' style="cursor:pointer;">수정</button>`; 
+					$button2Td.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})' style="cursor:pointer;">삭제</button>`;
 				}
-				
-				$tr.append($memberIdTd, $replyDateTd, $replyContentTd, $buttonTd);
+					
+				$tr.append($memberIdTd, $replyDateTd, $replyContentTd, $button1Td, $button2Td);
 				$table.append($tr);
 			});
 			
-
+	 		/* 댓글 수정 */
+/* 			function updateReply(replyNo) {
+				
+				fetch("/free/updateReply", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json; charset=UTF-8'
+					},
+					body: JSON.stringify({
+						replyNo: replyNo
+					})
+				})
+				.then(result => {
+					console.log(result);
+					loadFreeReply();
+				})
+				.catch(error => console.log(error));
+	 		} */
+				
 		}
 	</script>
 	
