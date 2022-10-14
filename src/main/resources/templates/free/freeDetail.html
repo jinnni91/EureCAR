@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8" />
 <link rel="stylesheet" th:href="@{/css/free.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
 <script>
 	const message = '[[${message}]]';
 	message && alert(message);
@@ -123,9 +124,10 @@
 			$registReply.onclick = function() {
 				
 				if(!$replyContent.value.trim()) {
-					alert("댓글을 입력해주세요");
+					alert("댓글을 입력해주세요.");
 					return;
 				}
+				
 				
 				const freeNo = document.getElementById("freeNo").value;
 				const replyContent = $replyContent.value;

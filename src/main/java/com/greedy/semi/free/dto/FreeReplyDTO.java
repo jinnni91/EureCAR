@@ -16,6 +16,5 @@ public class FreeReplyDTO {
     private Date replyUpdate;		      
     private Long freeNo;
     private MemberDTO memberId;
-    private Long refreplyNo;
 
 }
