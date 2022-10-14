@@ -51,7 +51,8 @@
 
 
 #gdsImg {
-	margin-right:40%;
+	
+	margin-right:42%;
 }
 
 .emdfhr {
@@ -77,8 +78,8 @@
 }
 
 .content {
-	width : 1000px;
-	margin : 50px;
+	width : 1070px;
+	margin : 25px;
 	padding : 5px 0 400px 15px;
 }
 
@@ -88,6 +89,7 @@
 	top : 61%;
 	right : 20%;
 	position:absolute;
+	
 }
 
 #paging{
@@ -117,17 +119,22 @@
 }
 
 .dkdlel{
-	text-align : right;
+	font-size : 17px;
+	opacity : 0.8;
+	padding-right : 40%;
 }
 
 #detailcontent{
 	font-size : 25px;
 	width : 60%;
 	margin : auto;
-	padding-top : 50px;
+	padding-top : 25px;
 	padding-left : 1%;
 }
 
+#freeReply{
+	font-size:50px;
+}
 
 #detail {
 	background-color:#77CFD1;
@@ -161,8 +168,8 @@
 }
 
 #replyWrite{
-	padding-left : 20%;
-	position: absolute;
+	
+	
 }
 
 .eotrmf{
@@ -171,9 +178,9 @@
 }
 
 #replyResult{
-	padding-top : 6.5%;
-	padding-left : 20%;
-	position: absolute;
+	
+	margin-left:20%;
+	font-size : 20px;
 }
 
 
@@ -187,6 +194,10 @@
 	font-size : 20px;
 	border-radius: 5px; 
 	
+}
+
+memberIdTd{
+	font-size:50px;	
 }
 
 .btn22 {
@@ -213,6 +224,6 @@
 
 .content2 {
 	width : 1000px;
-	margin-top : 50px;
+	margin-top : 25px;
 	padding : 5px 0 400px 15px;
 }

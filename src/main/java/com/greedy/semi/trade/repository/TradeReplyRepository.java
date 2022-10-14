@@ -8,7 +8,7 @@ import com.greedy.semi.trade.entity.TradeReply;
 
 public interface TradeReplyRepository extends JpaRepository<TradeReply, Long> {
 
-	List<TradeReply> findBySellNoAndReplyDelete(Long sellNo, String sellDelete);
+	List<TradeReply> findBySellNoAndReplyDelete(Long sellNo, String replyDelete);
 	
 	TradeReply findByReplyNo(Long replyNo);
 	

@@ -12,8 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+
 import com.greedy.semi.member.entity.Member;
 import com.greedy.semi.trade.dto.Criteria;
+
 import com.greedy.semi.trade.dto.TradeDTO;
 import com.greedy.semi.trade.dto.TradeReplyDTO;
 import com.greedy.semi.trade.entity.Color;
@@ -134,32 +136,6 @@ public class TradeService {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public void registTradeReply(TradeReplyDTO registTradeReply) {
 
@@ -181,7 +157,15 @@ public class TradeService {
 		
 		TradeReply foundTradeReply = tradeReplyRepository.findByReplyNo(removeTradeReply.getReplyNo());
 		foundTradeReply.setReplyDelete("Y");
+
 		
+	}
+
+	public void updateTradeReply(TradeReplyDTO updateTradeReply) {
+		
+		tradeReplyRepository.save(modelMapper.map(updateTradeReply, TradeReply.class));
+
+	
 	}
 
 }

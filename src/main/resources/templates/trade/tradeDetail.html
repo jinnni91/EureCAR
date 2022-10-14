@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" th:href="@{/css/trade/tradeDetail.css}">
-<script type="text/javascript" th:src="@{/js/event.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/trade/tradeDetail.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+	<script type="text/javascript" th:src="@{/js/event.js}"></script>
 <title>차량 상세페이지</title>
 </head>
 <body>
+
 		<div th:replace="common/header.html"></div>
+
 	    <div class="outer outer-trade-list" style="margin: 100px 350px;">
 	    	<div class="body">
 		    	<div class="car-top-wrap">
@@ -22,7 +25,7 @@
 		                <div class="buy-detail">
 		                    <h2 th:text="${ trade.sellCarName }"></h2>
 		                    <dl>
-		                        <dt>찜하기 <i class="fas fa-heart"></i></dt>
+		                        <dt>찜하기 <i class="far fa-heart"></i></dt>
 		                        <dt>판매가격 <span id="car-price" th:text="${ #numbers.formatInteger(trade.sellPrice, 0, 'COMMA') + '만원' }"></span></dt>
 		                    </dl>
 		                    <hr>
@@ -37,7 +40,9 @@
 		                    <h3 class="text-left">판매자정보</h3>
 		                    <p class="text-center" th:text="${ trade.member.name }"></p>
 		                    <p class="text-center" th:text="${ trade.member.phone }"></p>
-		                    <p class="text-right "><a>신고하기</a></p>
+		                    <th:block sec:authorize="hasRole('MEMBER')">
+		                    	<p class="text-right "><a>신고하기</a></p>
+		                    </th:block>
 		                </div>
 		            </div>
 	        	</div>
@@ -248,24 +253,137 @@
             	</div>
             	<div class="car-bottom-wrap">
 		            <div class="update-delete">
-			            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
-			            	<a th:onclick="|location.href='/trade/update?sellNo=${trade.sellNo}'|">글 수정</a> &#124; 
-			            </th:block>
-			            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId or trade.member.getMemberRole().toString().equals('ROLEADMIN') }">
-			            	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
-			            </th:block>
+		            	<th:block sec:authorize="isAuthenticated()">
+				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
+				            	<a>글 수정</a> &#124; 
+				            </th:block>
+				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId or trade.member.getMemberRole().toString().equals('ROLEADMIN') }">
+				            	<a>글 삭제</a>
+				            </th:block>
+				        </th:block>
 		            </div>
-		            <h4>댓글</h4>
-		            <div>
-		            <div class="reply-input">
-		              	<textarea name="reply" id="reply-box" cols="30" rows="10"></textarea><button>등록</button>
-		            </div>
-		           	</div>
+		            
+		            <!-- 댓글 -->
+		       
+		            	<input type="hidden" id="sellNo" th:value="${trade.sellNo}"/>
+		            	<h4>댓글</h4>
+			            <div>
+				            <div class="reply-input">
+				              	<textarea name="reply" id="replyContent" cols="30" rows="10"></textarea>
+				              	<button id="registTradeReply">등록</button>
+				            </div>
+			           	</div>
+		           	
+		           	<table id="replyResult"></table>
+		           	
 		       	</div>
     		</div>
 	    
 		</div>
+		
 		<div th:replace="common/footer.html"></div>
+		
+		<script>
+			
+			loadReply();
+			
+			function loadReply() {
+				
+				if(document.getElementById("sellNo")) {
+					
+					fetch("/trade/loadTradeReply?sellNo=" + document.getElementById("sellNo").value)
+					.then(result => result.json())
+					.then(data => {
+						makeReplyTable(data);
+					})
+					.catch(error => console.log(error));
+				}
+			}
+			
+			if(document.getElementById("registTradeReply")) {
+				
+				const $registTradeReply = document.getElementById("registTradeReply");
+				const $replyContent = document.getElementById("replyContent");
+				
+				$registTradeReply.onclick = function() {
+					
+					if(!$replyContent.value.trim()) {
+						alert("댓글을 입력해주세요.");
+						return;
+					}
+					
+					const sellNo = document.getElementById("sellNo").value;
+					const replyContent = $replyContent.value;
+					
+					fetch("/trade/registTradeReply", {
+						method: "POST",
+						headers: {
+							'Content-Type': 'application/json;charset=UTF-8'
+						},
+						body: JSON.stringify({
+							sellNo: sellNo,
+							replyContent: replyContent
+						})
+					})
+					.then(data => {
+						console.log(data);
+						$replyContent.value = '';
+						loadReply();
+					})
+					.catch(error => console.log(error));
+				}
+			}
+			
+			function removeTradeReply(replyNo) {
+				
+				fetch("/trade/removeTradeReply", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json; charset=UTF-8'
+					},
+					body: JSON.stringify({
+						replyNo: replyNo
+					})
+				})
+				.then(result => {
+					console.log(result);
+					loadReply();
+				})
+				.catch(error => console.log(error));
+			}
+			
+			function makeReplyTable(tradeReplyList) {
+				
+				const $table = document.querySelector("#replyResult");
+				
+				console.log(tradeReplyList);
+				
+				$table.innerHTML = '';
+				
+				tradeReplyList.forEach(reply => {
+					const $tr = document.createElement('tr');
+					const $memberIdTd = document.createElement('td');
+					const $replyContentTd = document.createElement('td');
+					const $replyDateTd = document.createElement('td');
+					const $buttonTd = document.createElement('td');
+					
+					$memberIdTd.textContent = reply.memberId.memberId;
+					$replyContentTd.textContent = reply.replyContent;
+					$replyDateTd.textContent = reply.replyDate;
+					
+					if('[[${#authentication.principal.memberId}]]' == reply.memberId.memberId) {
+						
+						$buttonTd.innerHTML = `<button type='button' onclick='removeTradeReply(${reply.replyNo})'>삭제</button>`;
+					}
+					
+					$tr.append($memberIdTd, $replyContentTd, $replyDateTd, $buttonTd);
+					$table.append($tr);
+					
+				});
+				
+			}
+			
+		</script>
 
 </body>
 </html>
