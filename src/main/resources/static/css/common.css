@@ -68,7 +68,7 @@ a{text-decoration: none;}
 
 .footer{
 	position:relretive;
-	margin: 200px auto;
+	/* margin: 200px auto; */
 	margin-bottom:0px;
 }
 .utilMenu > a {margin-left: 20px;}

@@ -1,5 +1,6 @@
 package com.greedy.semi.free.entity;
 
+
 import java.sql.Date;
 import java.util.List;
 
