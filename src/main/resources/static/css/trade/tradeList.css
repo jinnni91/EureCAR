@@ -123,3 +123,12 @@ hr {
 .paid p {
 	margin-bottom: 7px;
 }
+.paging button {
+	font-size: 18px;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+.paging button:active {
+	color: #77CFD1;
+}
