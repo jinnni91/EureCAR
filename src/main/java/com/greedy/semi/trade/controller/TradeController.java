@@ -9,14 +9,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,9 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.greedy.semi.common.Pagenation;
 import com.greedy.semi.common.PagingButtonInfo;
 import com.greedy.semi.member.dto.MemberDTO;
+import com.greedy.semi.trade.dto.Criteria;
 import com.greedy.semi.trade.dto.TradeAttachFileDTO;
 import com.greedy.semi.trade.dto.TradeDTO;
-import com.greedy.semi.trade.dto.TradeReplyDTO;
 import com.greedy.semi.trade.service.TradeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -71,21 +69,17 @@ public class TradeController {
 		
 		String imageUploadDirectory = rootLocation + "/upload/trade/original";
 		String thumbnailDirectory = rootLocation + "/upload/trade/thumbnail";
-		String accidentDirectory = rootLocation + "/upload/trade/accident";
 		
 		File directory = new File(imageUploadDirectory);
 		File directory2 = new File(thumbnailDirectory);
-		File directory3 = new File(accidentDirectory);
 		
 		log.info("[TradeController] directory request : {}", directory);
 		log.info("[TradeController] directory2 request : {}", directory2);
-		log.info("[TradeController] directory3 request : {}", directory3);
 		
-		if(!directory.exists() || !directory2.exists() || !directory3.exists()) {
+		if(!directory.exists() || !directory2.exists()) {
 			
 			log.info("[TradeController] 폴더 생성 : {}", directory.mkdirs());
 			log.info("[TradeController] 폴더 생성 : {}", directory2.mkdirs());
-			log.info("[TradeController] 폴더 생성 : {}", directory3.mkdirs());
 			
 		}
 		
@@ -114,7 +108,6 @@ public class TradeController {
 					if(i == 0) {
 						
 						fileInfo.setFileType("ACCIDENT");
-						fileInfo.setFilePath("/upload/trade/accident/accident_" + fileSaveName);
 						
 					} else if(i == 1) {
 						
@@ -142,9 +135,12 @@ public class TradeController {
 		log.info("[TradeController] trade : {}", trade);
 		
 		trade.setMember(member);
-		tradeService.registTrade(trade);
+		
+		Long sellNo = tradeService.registTrade(trade);
+		
 		
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("trade.regist"));
+		rttr.addAttribute("sellNo", sellNo);
 		
 		} catch (IllegalStateException | IOException e) {
 			
@@ -165,12 +161,16 @@ public class TradeController {
 		log.info("[TradeController] =================================================================== ");
 		
 		
-		return "redirect:/trade/list";
+		return "redirect:/member/payment";
 		
 	}
 	
+	
+	
+	
+	
 	@GetMapping("/list")
-	public String selectAllTradeAllList(@RequestParam(defaultValue="1") int page,
+	public String selectAllTradeAllList(@RequestParam(defaultValue="1") int page, 
 			@RequestParam(required=false) String searchValue, Model model) {
 		
 		log.info("[TradeController] =================================================================== ");
@@ -178,15 +178,15 @@ public class TradeController {
 		log.info("[TradeController] parameter searchValue : {}", searchValue);
 		
 		Page<TradeDTO> tradeList = tradeService.selectTradeList(page, searchValue);
-		//Page<TradeDTO> paidList = tradeService.selectTradeList(page, searchValue);
+		Page<TradeDTO> paidList = tradeService.paidTradeList(page);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(tradeList);
 		
 		log.info("[TradeController] tradeList : {}", tradeList.getContent());
-		//log.info("[TradeController] paidList : {}", paidList.getContent());
+		log.info("[TradeController] paidList : {}", paidList.getContent());
 		log.info("[TradeController] paging : {}", paging);
 		
 		model.addAttribute("tradeList", tradeList);
-		//model.addAttribute("paidList", paidList);
+		model.addAttribute("paidList", paidList);
 		model.addAttribute("paging", paging);
 		if(searchValue != null && !searchValue.isEmpty()) {
 			
@@ -200,6 +200,26 @@ public class TradeController {
 		
 	}
 	
+	@GetMapping("/criteria")
+	public String selectFilteringTradeList(Criteria criteria, Model model, @RequestParam(defaultValue="1") int page) {
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] criteria : {}", criteria);
+		
+		Page<TradeDTO> paidList = tradeService.paidTradeList(page);
+		Page<TradeDTO> filteringList = tradeService.filteringTradeList(criteria, page);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(filteringList);
+		
+		log.info("[TradeController] paidList : {}", paidList);
+		log.info("[TradeController] filteringList : {}", filteringList);
+		log.info("[TradeController] paging : {}", paging);
+		
+		model.addAttribute("paidList", paidList);
+		model.addAttribute("tradeList", filteringList);
+		model.addAttribute("paging", paging);
+		
+		return "trade/tradeList";
+	} 
+	
 	@GetMapping("/detail")
 	public String selectTradeDetail(Long sellNo, Model model) {
 		
@@ -210,6 +230,7 @@ public class TradeController {
 		
 		log.info("[TradeController] trade : {}", trade);
 		
+		model.addAttribute("sellCarOpt", trade.getSellCarOpt().split(","));
 		model.addAttribute("trade", trade);
 		
 		log.info("[TradeController] =================================================================== ");
