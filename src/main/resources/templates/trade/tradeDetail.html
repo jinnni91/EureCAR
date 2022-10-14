@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/trade/tradeDetail.css}">
@@ -246,12 +246,14 @@
             	</div>
             	<div class="car-bottom-wrap">
 		            <div class="update-delete">
+		            	  <th:block sec:authorize="isAuthenticated()">
 			            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
 			            	<a th:onclick="|location.href='/trade/update?sellNo=${trade.sellNo}'|">글 수정</a> &#124; 
-			            </th:block>
 			            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId or trade.member.getMemberRole().toString().equals('ROLEADMIN') }">
 			            	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
 			            </th:block>
+			            			            	            </th:block>
+			            
 		            </div>
 		            <h4>댓글</h4>
 		            <div>
