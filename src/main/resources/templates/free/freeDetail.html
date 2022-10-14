@@ -63,7 +63,8 @@
      	<a th:onclick="|location.href='/free/update?freeNo=${free.freeNo}'|"
      	 style="cursor:pointer;">수정</a> &#124; 
      </th:block>
-     <th:block th:if="${ free.memberId.memberId == #authentication.principal.memberId or free.memberId.getMemberRole().toString().equals('ROLEADMIN') }">
+     <th:block th:if="${ free.memberId.memberId == #authentication.principal.memberId 
+     					or free.memberId.getMemberRole().toString().equals('ROLEADMIN') }">
      	<a th:onclick="|location.href='/free/delete?freeNo=${free.freeNo}'|"
      	 style="cursor:pointer;">삭제</a>
      </th:block>
@@ -81,8 +82,6 @@
 		</tr>
 	</table>
 
-
-
 	
 	<!-- 댓글 내용 출력용 table -->
 	<table id="replyResult" ></table>
@@ -90,9 +89,11 @@
 	<div th:replace="common/footer.html"></div>
 	
 	<th:block sec:authorize="isAuthenticated()">
-		<script>	
-			const loginUser ='[[${#authentication.principal.memberId}]]';
-		</script>
+
+	<script>	
+		const loginUser ="[[${#authentication.principal.memberId}]]";
+	</script>
+
 	</th:block>
 
 	<script>
@@ -128,7 +129,7 @@
 					return;
 				}
 				
-				
+
 				const freeNo = document.getElementById("freeNo").value;
 				const replyContent = $replyContent.value;
 				
@@ -189,18 +190,18 @@
 				
 				if(loginUser == freeReply.memberId.memberId) {
 
-					
+
 					$button1Td.innerHTML = `<button type='button' onclick='updateReply(${freeReply.replyNo})' style="cursor:pointer;">수정</button>`; 
 					$button2Td.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})' style="cursor:pointer;">삭제</button>`;
 
 				}
 					
-				$tr.append($memberIdTd, $replyDateTd, $replyContentTd, $button1Td, $button2Td);
+				$tr.append($memberIdTd, ('\u00A0\u00A0\u00A0'), /* $replyDateTd, */ $replyContentTd,('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'),/*  $button1Td, */ $button2Td);
 				$table.append($tr);
 			});
 			
 	 		/* 댓글 수정 */
-/* 			function updateReply(replyNo) {
+ 			/* function updateReply(replyNo) {
 				
 				fetch("/free/updateReply", {
 					method: "POST",
@@ -216,7 +217,7 @@
 					loadFreeReply();
 				})
 				.catch(error => console.log(error));
-	 		} */
+	 		}  */
 				
 		}
 	</script>
