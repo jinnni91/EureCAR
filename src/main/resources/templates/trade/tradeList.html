@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/trade/tradeList.css}">
-<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script type="text/javascript" th:src="@{/js/trade.js}"></script>
 <title>매물 보기</title>
 <script>
 	const message = '[[${message}]]';
@@ -25,7 +25,7 @@
 		            <th:block th:if="${ searchValue == null }">
 		                <input type="search" id="searchValue" name="searchValue" placeholder="  Search">
 		            </th:block>
-		            <button type="submit"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
+		            <button type="submit" onclick="tradeSearch();"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
                 </form>
             </div>
         </div>
@@ -269,7 +269,9 @@
 			</div>
         
     </div>
+
     <th:block th:if="${ criteria != null }">
+
     <script>
 
 			const modelCode = '[[${criteria?.model.modelCode}]]';
@@ -309,5 +311,6 @@
     <div th:replace="common/footer.html"></div>
 
 	
+
 </body>
 </html>

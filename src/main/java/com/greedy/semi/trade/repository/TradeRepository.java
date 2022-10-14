@@ -34,7 +34,11 @@ public interface TradeRepository extends JpaRepository<Trade, Long> {
 	@EntityGraph(attributePaths = {"attachFileList"})
 	@Query("SELECT t " +
 			  "FROM Trade t " +
-			  "JOIN OrderInfo o On (t.sellNo = o.trade.sellNo)"  +
+
+
+			  "JOIN OrderInfo o " +
+			    "ON (t.sellNo = o.trade.sellNo) " +
+
 			 "WHERE t.sellDelete = :sellDelete " +
 			   "AND t.payStatus = :payStatus " +
 			   "AND o.expirationDate >= CURRENT_DATE")

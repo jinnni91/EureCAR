@@ -3,6 +3,7 @@ package com.greedy.semi.member.dto;
 
 import java.util.Date;
 
+
 import com.greedy.semi.trade.dto.TradeDTO;
 
 import lombok.Data;
@@ -15,5 +16,5 @@ public class OrderInfoDTO {
 	private TradeDTO trade;
 	private Date orderDate;
 	private Date expirationDate;
-	
+
 }

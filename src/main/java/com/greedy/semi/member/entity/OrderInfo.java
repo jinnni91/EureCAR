@@ -3,7 +3,9 @@ package com.greedy.semi.member.entity;
 
 
 
+
 import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,6 +59,7 @@ public class OrderInfo {
 	
 	@JoinColumn(name = "EXPIRATION_DATE")
 	private Date expirationDate;
+
 
    
 }

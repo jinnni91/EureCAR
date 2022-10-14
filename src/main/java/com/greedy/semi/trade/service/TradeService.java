@@ -81,9 +81,11 @@ public class TradeService {
 
 		Pageable pageable = PageRequest.of(page - 1, TRADE_PAGE_SIZE, Sort.by(SORT_BY).descending());
 
+
 		Page<Trade> paidList = tradeRepository.findByPayStatus(PAY_STATUS, SELL_DELETE, pageable);
 
-		//paidList = tradeRepository.findBySellDeleteAndPayStatus(SELL_DELETE, PAY_STATUS, pageable);
+	
+		
 
 		return paidList.map(trade -> modelMapper.map(trade, TradeDTO.class));
 
