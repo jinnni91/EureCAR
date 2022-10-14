@@ -1,5 +1,7 @@
 package com.greedy.semi.mypage.controller;
 
+import java.util.Optional;
+
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -7,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +24,7 @@ import com.greedy.semi.common.PagingButtonInfo;
 import com.greedy.semi.free.dto.FreeDTO;
 import com.greedy.semi.free.service.FreeService;
 import com.greedy.semi.member.dto.MemberDTO;
+import com.greedy.semi.member.entity.Member;
 import com.greedy.semi.member.service.AuthenticationService;
 import com.greedy.semi.member.service.MemberService;
 
@@ -35,13 +39,19 @@ public class MypageController {
     private final MemberService memberService;
 	private final AuthenticationService authenticationService;
 	private final FreeService freeService;
+	private final PasswordEncoder passwordEncoder;
 	
-	public MypageController(MessageSourceAccessor messageSourceAccessor, MemberService memberService, AuthenticationService authenticationService, FreeService freeService) {
+	public MypageController(MessageSourceAccessor messageSourceAccessor, 
+			                MemberService memberService, 
+			                AuthenticationService authenticationService, 
+			                FreeService freeService,
+			                PasswordEncoder passwordEncoder) {
 		
 		this.authenticationService = authenticationService;
         this.memberService = memberService;
         this.messageSourceAccessor = messageSourceAccessor;
         this.freeService = freeService;
+        this.passwordEncoder = passwordEncoder;
 	}	
 	
 	@GetMapping("/mypage")
@@ -80,6 +90,8 @@ public class MypageController {
 			                   RedirectAttributes rttr) {
 		
 		memberService.removeMember(member);
+		
+		SecurityContextHolder.clearContext();
 
         rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.delete"));
 		

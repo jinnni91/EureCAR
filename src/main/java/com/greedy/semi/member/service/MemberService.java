@@ -49,7 +49,7 @@ public class MemberService {
 	public void removeMember(MemberDTO member) {
 		
 		Member savedMember = memberRepository.findByMemberId(member.getMemberId());
-		savedMember.setMemberStatus("N");
+		savedMember.setMemberStatus("Y");
 
 	}
 	
