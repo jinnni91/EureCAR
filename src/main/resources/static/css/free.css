@@ -3,11 +3,11 @@
 /* 헤더 푸터 */
 .header{
 	margin-bottom: 20px;
+
 }
 
 .footer{
 	margin-top: 20px;
-	
 }
 
 
@@ -180,7 +180,7 @@
 #replyResult{
 	
 	margin-left:20%;
-	font-size : 20px;
+	font-size : 25px;
 }
 
 

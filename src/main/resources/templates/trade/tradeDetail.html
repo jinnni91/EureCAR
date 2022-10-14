@@ -252,14 +252,19 @@
             	</div>
             	<div class="car-bottom-wrap">
 		            <div class="update-delete">
+
 		            	<th:block sec:authorize="isAuthenticated()">
 				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
+
 				            	<a th:onclick="|location.href='/trade/update?sellNo=${trade.sellNo}'|">글 수정</a> &#124;
+
 				            </th:block>
 				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId or trade.member.getMemberRole().toString().equals('ROLEADMIN') }">
 				            	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
 				            </th:block>
+
 				        </th:block>
+		            </th:block>
 		            </div>
 		            
 		            <!-- 댓글 -->
@@ -281,6 +286,11 @@
 		</div>
 		
 		<div th:replace="common/footer.html"></div>
+		<th:block sec:authorize="isAuthenticated()">
+		<script>	
+			const loginUser ='[[${#authentication.principal.memberId}]]';
+		</script>
+		</th:block>
 		
 		<script>
 			
@@ -370,7 +380,7 @@
 					$replyContentTd.textContent = reply.replyContent;
 					$replyDateTd.textContent = reply.replyDate;
 					
-					if('[[${#authentication.principal.memberId}]]' == reply.memberId.memberId) {
+					if(loginUser == reply.memberId.memberId) {
 						
 						$buttonTd.innerHTML = `<button type='button' onclick='removeTradeReply(${reply.replyNo})'>삭제</button>`;
 					}
