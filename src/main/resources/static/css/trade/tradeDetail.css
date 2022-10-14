@@ -67,11 +67,13 @@ a {text-decoration: none; color: #999; cursor: pointer;}
 .car-bottom-wrap > div:first-child {color: #999; text-align: right;}
 .car-bottom-wrap > h4 {font-size: 18px; margin-bottom: 15px;}
 
+.car-bottom-wrap #replyResult {margin:auto;}
+
 .update-delete { align: right; }
 
 .car-bottom-wrap .reply-input {display: flex; height: 80px;}
 .car-bottom-wrap .reply-input textarea {width: 92%; margin-right: 10px; padding: 10px; resize: none; border-radius: 10px;}
 .car-bottom-wrap .reply-input button {width: 8%; font-size: 18px; color: #fff; font-weight: bold; border:1px solid #6fb6b8; border-radius: 10px; background-color: #77CFD1;
-	box-shadow: 1px 4px 0px 0px #64b8b9; 
+	box-shadow: 1px 4px 0px 0px #64b8b9; cursor: pointer; 
 }
 .car-bottom-wrap .reply-input button:active { position:relative; top:2px; }

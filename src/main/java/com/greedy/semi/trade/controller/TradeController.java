@@ -264,4 +264,62 @@ public class TradeController {
 		
 	}
 	
+	@PostMapping("/registTradeReply")
+	public ResponseEntity<String> registReply(@RequestBody TradeReplyDTO registTradeReply,
+			@AuthenticationPrincipal MemberDTO member) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] registTradeReply : {}", registTradeReply);
+		
+		registTradeReply.setMemberId(member);
+		
+		tradeService.registTradeReply(registTradeReply);
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return ResponseEntity.ok("댓글 등록이 완료되었습니다.");
+		
+	}
+	
+	@GetMapping("/loadTradeReply")
+	public ResponseEntity<List<TradeReplyDTO>> loadTradeReply(TradeReplyDTO loadTradeReply) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] loadTradeReply : {}", loadTradeReply);
+		
+		List<TradeReplyDTO> tradeReplyList = tradeService.loadTradeReply(loadTradeReply);
+		
+		log.info("[TradeController] tradeReplyList : {}", tradeReplyList);
+		log.info("[TradeController] =================================================================== ");
+		
+		return ResponseEntity.ok(tradeReplyList);
+	}
+	
+//	@PostMapping("/updateTradeReply")
+//	public ResponseEntity<String> updateTradeReply(@RequestBody TradeReplyDTO updateTradeReply,
+//			@AuthenticationPrincipal MemberDTO member) {
+//		
+//		log.info("[TradeController] =================================================================== ");
+//		log.info("[TradeController] updateTradeReply : {}", updateTradeReply);
+//		
+//		tradeService.updateTradeReply(updateTradeReply);
+//		
+//		log.info("[TradeController] =================================================================== ");		
+//		
+//		return ResponseEntity.ok("댓글 수정이 완료되었습니다.");
+//	}
+//	
+	@PostMapping("/removeTradeReply")
+	public ResponseEntity<String> removeTradeReply(@RequestBody TradeReplyDTO removeTradeReply) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] removeTradeReply : {}", removeTradeReply);
+		
+		tradeService.removeTradeReply(removeTradeReply);
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return ResponseEntity.ok("댓글 삭제가 완료되었습니다.");
+	}
+	
 }

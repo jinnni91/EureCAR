@@ -17,5 +17,6 @@ public class TradeReplyDTO {
 	private String replyDelete;
 	private MemberDTO memberId;
 	private Long refReplyNo;
+	
 
 }
