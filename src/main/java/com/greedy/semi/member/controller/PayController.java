@@ -1,5 +1,7 @@
 package com.greedy.semi.member.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,6 +46,23 @@ public class PayController {
     	TradeDTO trade = new TradeDTO();
 		ProductDTO product = new ProductDTO();
 		
+		 	Date date = new Date();
+	        long timeInMilliSeconds = date.getTime();
+	        java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
+	        System.out.println("SQL Date: " + sqlDate);
+	        log.info(sqlDate.toString());
+	        
+	        String today = null;              
+	        Date time = new Date();     
+	        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
+	         
+	       
+	        Calendar cal = Calendar.getInstance();
+	         
+	        	
+	      
+
+
     	/* OrderInfo 저장*/
     	/* 넘겨받은 sellNo 저장 */	
     	trade.setSellNo(sellNo);
@@ -77,12 +96,40 @@ public class PayController {
     			product.setProductCode(3);
     		}
     	}
+    	
     	log.info("tradeDTO",trade);
     	payService.updatePayStatus(trade);
+		
     	
+
+        cal.setTime(time);
+     
+        
+    	
+    	if(product.getProductCode() == 1)
+    	{
+    		cal.add(Calendar.DATE, 7);	//날짜 더하기
+			
+    	}
+    	else if(product.getProductCode() == 2)
+    	{
+    		cal.add(Calendar.DATE, 15);	//날짜 더하기
+    	}
+    	else if(product.getProductCode() == 3)
+    	{
+    		cal.add(Calendar.DATE, 30);	//날짜 더하기
+    	}
+
+    	today = sdformat.format(cal.getTime());  
+          System.out.println("1일 후 : " + today); //2021-12-12
+          java.sql.Date expirationDate = java.sql.Date.valueOf(today);
+    	
+
+        
+        
 		order.setProduct(product);
     	order.setTrade(trade);
-
+    	order.setExpirationDate(expirationDate);
 		//orderInfoService.order(order);
 		
 		 /* pay OrderInfoDTO 저장 */
@@ -93,13 +140,9 @@ public class PayController {
 		String str = "" + pay.getPayAmt();
 		log.info("결제금액 : "+str + str2);
 		/* pay date 저장*/
-        Date date = new Date();
-        long timeInMilliSeconds = date.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
-        System.out.println("SQL Date: " + sqlDate);
-        log.info(sqlDate.toString());
-        pay.setPayDate(sqlDate);
        
+        pay.setPayDate(sqlDate);
+        
     	
     	
         payService.payAmount(pay);

@@ -5,6 +5,12 @@
 <link rel="stylesheet" th:href="@{/css/mypage.css}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script type="text/javascript" th:src="@{/js/mypage.js}"></script>
+    <script>
+	    const message = '[[${message}]]';
+		message && alert(message);
+	</script>
+    
 <title>유레카 !</title>
 </head>
 <body>
@@ -13,27 +19,27 @@
 	<div>
 	<div>
 		<ul class="sideul" align="left">
-			<button class="sidebutton" onclick="location.href='/mypage/list'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
-			<button class="sidebutton" onclick="location.href='/mypage/wishlist'" style="cursor: pointer;">찜 리스트</button><br><br><br>
+			<button class="sidebutton" onclick="location.href='/mypage/update'" style="cursor: pointer;">회원 정보 변경</button><br><br><br>
+			<button class="sidebutton" onclick="location.href='/mypage/mylist'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
 			<button class="hereiam" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
 		</ul>
 	</div>
+	<form th:action="@{/member/update}" method="post">
 	<div>
 		<ul align="center">
-			<h3 class="deletebar">회원 탈퇴</h3>
-			<hr class="mypagehr" color=#01DFA5;>
+			<br><br><h3 class="deletebar">회원 탈퇴</h3><br><br>
 			<h3>고객님의 개인정보 보호를 위해 본인확인을 진행합니다.<br>
-			    회원의 비밀번호를 입력해주세요.</h3>
-			<h4>비밀번호 : <input type="password" maxlength="20" name="pwd">
-			<button class="updatemember" onclick="location.href='/mypage/mypage'" style="cursor: pointer;">확인</button></h4>
+			    회원의 비밀번호를 입력해주세요.</h3><br><br>
+			<h4>비밀번호																																																														&nbsp&nbsp&nbsp
+			<input type="password" class="pwcheck" maxlength="20" style="height:25px; width:160px;" name="memberPwd" id="memberPwd" placeholder="비밀번호를 입력하세요." required><br>
+																																																																			&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			<input type="password" class="pwcheck" maxlength="20" style="height:25px; width:160px;" name="memberPwd2" id="memberPwd2" placeholder="한번 더 입력하세요." required>
+			<input type="button" id="deleteMember" class="deletemember" value="확인">
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</ul>
 	</div>
-	<div>
-		<ul align="right">
-			<button class="updatemember" onclick="location.href='/mypage/mypage'" style="cursor: pointer;">확인</button>
-		</ul>
 	</div>
-	</div>
+	</form>
 	
 	<div th:replace="common/footer.html"></div>
 	
