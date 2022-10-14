@@ -4,30 +4,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/regist/payment.css}">
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <body>
- <div class="card-body bg-white mt-0 shadow">
-                <p style="font-weight: bold">카카오페이 현재 사용가능</p>
-				<input type="text" id="sellNo" th:value="${param.sellNo}"/>
-  <table>
-               
-                <tr>
-	                <th>7일권</th>
-	                <th>15일권</th>
-	                <th>30일권</th>
-                </tr>
-                <tr>
-	                <td><label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label></td>
-                	<td><label class="box-radio-input"><input type="radio" name="cp_item" value="20000"><span>20,000원</span></label></td>
-             	    <td><label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label></td>
-                </tr>
-			</table>
-   				 <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 10,000원이며 <br/>최대 충전금액은 30,000원 입니다.</p>
-                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
+	<div th:replace="common/header.html"></div>
+		<div class="payment_container" style="margin: 100px 400px;">
+ 			<div class="card-body bg-white mt-0 shadow">
+				<input type="hidden" id="sellNo" th:value="${param.sellNo}"/>
+				<h3 class="left" style="color:red;">추가 옵션</h3>
+				<br>
+				<h3 class="left">판매글 프리미엄 등록</h3>
+				<br>
+                <hr style="border: solid 2px #77CFD1;">
+				<div class="pay">
+				<br>
+					<span style="color: rgb(107, 105, 105); font-size:1.25em;" class="left" >차량 판매글을 목록의 최상단으로 올려 광고할 수 있습니다.</span>
+					<br><br><br>
+			</div>
+               <form>
+               		<p style="font-weight: bold; font-size:1.25em ">결제 방식 : 카카오페이</p>
+	      			<br><br>&nbsp;
+	      			<label style="font-size: 1.25em">7일권</label>&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+	      			<label style="font-size: 1.25em">15일권</label>&emsp;&emsp;&emsp;&emsp;&nbsp;
+	      			<label style="font-size: 1.25em">30일권</label>
+	      			<br><br>
+	                <label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span style="font-size: 1.25em">10,000원</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+	                 <label class="box-radio-input"><input type="radio" name="cp_item" value="20000"><span style="font-size: 1.25em">20,000원</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             	    <label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span style="font-size: 1.25em">30,000원</span></label>
+			</form>
+				<br>
+   				 <p  style="color: #ac2925; margin-top: 30px">※프리미엄 상품의 유효기간은 결제 날짜 기준입니다.</p><br><br>
+                <button type="button" class="btn1" id="charge_kakao">결제하기</button>&emsp;
+                 <button type="button" class="btn2" onclick="location.href='/'">결제취소</button>
+           </div>     
 		 </div>
+		<div th:replace="common/footer.html"></div>
 <script>
 
 /** 결제 **/
