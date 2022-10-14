@@ -69,10 +69,10 @@
      </th:block>
     </div>
     
-    
+    	
 	  <!-- 댓글 작성용 table -->  
 	<table id="replyWrite" style="margin:auto;">
-	<input type="hidden" id="freeNo" th:value="${free.freeNo}"/>
+		<input type="hidden" id="freeNo" th:value="${free.freeNo}"/>
 		<tr>
 			<td class="eotrmf">댓글</td><tr>
 			<td><textarea cols="152" rows="5" id="replyContent" style="resize:none;"></textarea></td>
@@ -93,7 +93,7 @@
 		const loginUser ='[[${#authentication.principal.memberId}]]';
 	</script>
 	</th:block>
-	
+
 	<script>
 	/* 댓글 관련 로직 - 비동기 요청 */
 		loadFreeReply();
@@ -186,8 +186,13 @@
 				$replyDateTd.textContent = freeReply.replyDate; 
 				
 				if(loginUser == freeReply.memberId.memberId) {
+
+					
+					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})' style="cursor:pointer;">댓글삭제</button>`;
+
 					$button1Td.innerHTML = `<button type='button' onclick='updateReply(${freeReply.replyNo})' style="cursor:pointer;">수정</button>`; 
 					$button2Td.innerHTML = `<button type='button' onclick='removeReply(${freeReply.replyNo})' style="cursor:pointer;">삭제</button>`;
+
 				}
 					
 				$tr.append($memberIdTd, $replyDateTd, $replyContentTd, $button1Td, $button2Td);
