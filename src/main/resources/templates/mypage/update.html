@@ -1,60 +1,177 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<meta charset="UTF-8">
 	<link rel="stylesheet" th:href="@{/css/mypage.css}">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script>
+	    const message = '[[${message}]]';
+		message && alert(message);
+	</script>
+    
 <title>유레카 !</title>
 </head>
 <body>
-
+  
 	<div th:replace="common/header.html"></div>
 
 	<div>
 		<div>
 			<ul class="sideul" align="left">
-				<button class="sidebutton" onclick="location.href='/mypage/list'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
-				<button class="sidebutton" onclick="location.href='/mypage/wishlist'" style="cursor: pointer;">찜 리스트</button><br><br><br>
+				<button class="hereiam" onclick="location.href='/mypage/update'" style="cursor: pointer;">회원 정보 변경</button><br><br><br>
+				<button class="sidebutton" onclick="location.href='/mypage/mylist'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
 				<button class="sidebutton" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
 			</ul>
 		</div>
 		<div>
-		 	<h3 class="mypagebar" align="center">회원 정보 변경</h3>
-            <hr class="mypagehr" color=#77CFD1;>
+		 	<br><br><h3 class="mypagebar" align="center">회원 정보 변경</h3>
 			<div align="center">
-			<form th:action="@{/mypage/update}" method="POST">
-                <h4>아이디 : resunz4</h4>
-				<h4>비밀번호 : **********</h4>
-				<h4>이름 : 박태익</h4>
-				<h4>생년월일 : 1997년 9월 17일</h4>
-				<h4>이메일 : <input type="email" name="email" style="width:100px;" th:value="${ #authentication.principal.email }"> @ 
-				           <select name="email" style="cursor: pointer;">
-				           	<option value="선택" selected="selected">선택</option>
-				           	<option value="naver.com">naver.com</option>
-				           	<option value="google.com">google.com</option>
-				           	<option value="nate.com">nate.com</option>
-				           	<option value="daum.net">daum.net</option>
-				           	<option value="hanmail.net">hanmail.net</option>
-				           </select></h4>
-	  			<h4>휴대전화 : <input type="tel" name="phone" maxlength="20" style="width:80px;" th:value="${ #authentication.principal.phone }"></h4>
-				<h4>우편번호 : <input type="text" name="zipCode" style="width:48px;">
-				             <!-- th:value="${ #strings.listSplit(#authentication.principal.address,'$').size() > 0 ? #strings.listSplit(#authentication.principal.address,'$')[0] : '' }" readonly -->
-				        
-				<button onclick="location.href='/mypage/mail'" style="cursor: pointer;">찾기</button></h4>
-				<h4>주소 : 서울시 성북구 화랑로 18길 54 401호</h4>
-				</form>    
+			<form class="updatetd" th:action="@{/mypage/update}" method="post">
+			<table align="center">
+				<tr>
+                <td style="font-weight:bolder; font-size:17px;">아이디&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr style="background: #77CFD1"><br></td>
+                <td><input type="id" name="memberId" style="border:0 solid black; font-size:17px; border-radius: 10px;" 
+                           th:value="${ #authentication.principal.memberId }"></td>
+                </tr>
+                
+                <tr>
+                <td style="font-weight:bolder; font-size:17px;">비밀번호<hr><br></td>
+                <td><input type="password" class="form-control" name="memberPwd" style="width:200px; height:25px;" placeholder="비밀번호를 입력하세요." required></td>
+                </tr>
+                
+                <tr>
+				<td style="font-weight:bolder; font-size:17px;">이름<hr><br></td>
+				<td><input type="text" name="username" style="border:0 solid black; font-size: 17px;"
+				           th:value="${ #authentication.principal.name }" required/></td>
+				</tr>
+				
+				<tr>
+				<td style="font-weight:bolder; font-size:17px;"><label for="email" id="mailTxt">이메일<hr><br></label> </td>	
+				<td><input type="text" class="form-control" name="email" id="memail" style="opacity: 0.7;"
+				           th:value="${ #authentication.principal.email }"></td>
+				<td><button class="btn_123" type="button" id="checkEmail">인증번호 받기</button></td><br><br>
+				</tr>
+				
+				<tr>
+				<td style="font-weight:bolder; font-size:17px;">인증 번호<hr><br></td>
+				<td><input type="text" class="form-control" id="memailconfirm" placeholder="인증번호를 입력하세요."></td>
+				</tr>
+				
+				<tr>
+	  			<td style="font-weight:bolder; font-size:17px;">휴대 전화<hr><br></td>
+	  			<td><input type="tel" name="phone" maxlength="20" style="border:0 solid black; font-size:17px;" th:value="${ #authentication.principal.phone }"></td>
+	  			</tr>
+	  			
+	  			<tr>
+				<td style="font-weight:bolder; font-size:17px;">우편 번호<hr><br></td>
+				<td><input type="text" class="form-control" name="zipCode" style="width:50px; height:25px; opacity: 0.7;"
+				           th:value="${ #strings.listSplit(#authentication.principal.address,'$').size() > 0 ? #strings.listSplit(#authentication.principal.address,'$')[0] : '' }" readonly></td>
+				<td><input type="button" value="검색" class="btn_123" id="searchZipCode"></td>
+				</tr>
+							 
+				<tr>
+				<td style="font-weight:bolder; font-size:17px;">주소<hr><br></td>
+				<td><input type="text" class="form-control" name="address1" style="height:25px; width:250px; opacity: 0.7;" placeholder="주소"
+				           th:value="${ #strings.listSplit(#authentication.principal.address,'$').size() > 1 ? #strings.listSplit(#authentication.principal.address,'$')[1] : '' }"/></td>
+				</tr>
+				
+				<tr>
+				<td style="font-weight:bolder; font-size:17px;">상세주소<hr><br></td>
+				<td><input type="text" class="form-control" name="address2" style="width:200px; height:25px; opacity: 0.7;"
+				           th:value="${ #strings.listSplit(#authentication.principal.address,'$').size() > 2 ? #strings.listSplit(#authentication.principal.address,'$')[2] : '' }"/></td>
+				</tr>
+			</table>
+			<br>
+			<div align="right">
+            <input type="submit" class="btns" style="cursor: pointer;" value="확인">
+    		</div>
+			</form>    
 				<br>
                 <br>
-            </form> 
 		</div>
 	</div>
-	
-	<div align="right">
-            <button class="updatemember" onclick="location.href='/mypage/mypage'" style="cursor: pointer;">확인</button>    
-    </div>
     
     <div th:replace="common/footer.html"></div>
+    
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	
+	    const $searchZipCode = document.getElementById("searchZipCode");
+	    const $goMain = document.getElementById("goMain");
+	
+	    $searchZipCode.onclick = function() {
+	
+	        /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+	        new daum.Postcode({
+	            oncomplete: function(data){
+	                /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+	                document.getElementById("zipCode").value = data.zonecode;
+	                document.getElementById("address1").value = data.address;
+	                document.getElementById("address2").focus();
+	            }
+	        }).open();
+	    }
+	
+	    $goMain.onclick = function() {
+	        location.href = "/";
+	    }
+	
+	</script>
+	
+	<script>
+		// 이메일 인증번호
+		$(document).ready(function(){    
+		var $memail = $("#memail");
+		var $checkEmail = $("#checkEmail"); // 인증번호 발송 버튼
+		var $memailconfirm = $("#memailconfirm"); // 인증번호 확인input
+		var $memailconfirmTxt = $("#memailconfirmTxt"); // 인증번호 확인 txt
+	
+		$checkEmail.click(function() {
+
+		   $.ajax({
+		      type : "POST",
+		      url : "/regist/mailConfirm",
+		      data : {
+		         "email" : $memail.val()
+		      },
+		      success : function(data){
+		         alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+		         console.log("data : "+data);
+		         chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
+		      }
+		   })
+		})
+
+	// 이메일 인증번호 체크 함수
+	function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
+		$memailconfirm.on("keyup", function(){
+			if (data != $memailconfirm.val()) { //
+				emconfirmchk = false;
+				$memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+				
+				$("#emconfirmchk").css({
+					"color" : "#FA3E3E",
+					"font-weight" : "bold",
+					"font-size" : "20px"
+
+				})
+				//console.log("중복아이디");
+			} else { // 아니면 중복아님
+				emconfirmchk = true;
+				$memailconfirmTxt.html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+
+				$("#emconfirmchk").css({
+					"color" : "green",
+					"font-weight" : "bold",
+					"font-size" : "20px"
+
+				})
+			}
+		})
+	}
+})
+	</script>
+    
 
 </body>
 </html>
