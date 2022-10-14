@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +26,6 @@ import com.greedy.semi.member.dto.MemberDTO;
 import com.greedy.semi.trade.dto.Criteria;
 import com.greedy.semi.trade.dto.TradeAttachFileDTO;
 import com.greedy.semi.trade.dto.TradeDTO;
-import com.greedy.semi.trade.entity.Trade;
 import com.greedy.semi.trade.service.TradeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -71,21 +69,17 @@ public class TradeController {
 		
 		String imageUploadDirectory = rootLocation + "/upload/trade/original";
 		String thumbnailDirectory = rootLocation + "/upload/trade/thumbnail";
-		String accidentDirectory = rootLocation + "/upload/trade/accident";
 		
 		File directory = new File(imageUploadDirectory);
 		File directory2 = new File(thumbnailDirectory);
-		File directory3 = new File(accidentDirectory);
 		
 		log.info("[TradeController] directory request : {}", directory);
 		log.info("[TradeController] directory2 request : {}", directory2);
-		log.info("[TradeController] directory3 request : {}", directory3);
 		
-		if(!directory.exists() || !directory2.exists() || !directory3.exists()) {
+		if(!directory.exists() || !directory2.exists()) {
 			
 			log.info("[TradeController] 폴더 생성 : {}", directory.mkdirs());
 			log.info("[TradeController] 폴더 생성 : {}", directory2.mkdirs());
-			log.info("[TradeController] 폴더 생성 : {}", directory3.mkdirs());
 			
 		}
 		
@@ -114,7 +108,6 @@ public class TradeController {
 					if(i == 0) {
 						
 						fileInfo.setFileType("ACCIDENT");
-						fileInfo.setFilePath("/upload/trade/accident/accident_" + fileSaveName);
 						
 					} else if(i == 1) {
 						
@@ -290,6 +283,64 @@ public class TradeController {
 		
 		return "redirect:/trade/list";
 		
+	}
+	
+	@PostMapping("/registTradeReply")
+	public ResponseEntity<String> registReply(@RequestBody TradeReplyDTO registTradeReply,
+			@AuthenticationPrincipal MemberDTO member) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] registTradeReply : {}", registTradeReply);
+		
+		registTradeReply.setMemberId(member);
+		
+		tradeService.registTradeReply(registTradeReply);
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return ResponseEntity.ok("댓글 등록이 완료되었습니다.");
+		
+	}
+	
+	@GetMapping("/loadTradeReply")
+	public ResponseEntity<List<TradeReplyDTO>> loadTradeReply(TradeReplyDTO loadTradeReply) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] loadTradeReply : {}", loadTradeReply);
+		
+		List<TradeReplyDTO> tradeReplyList = tradeService.loadTradeReply(loadTradeReply);
+		
+		log.info("[TradeController] tradeReplyList : {}", tradeReplyList);
+		log.info("[TradeController] =================================================================== ");
+		
+		return ResponseEntity.ok(tradeReplyList);
+	}
+	
+//	@PostMapping("/updateTradeReply")
+//	public ResponseEntity<String> updateTradeReply(@RequestBody TradeReplyDTO updateTradeReply,
+//			@AuthenticationPrincipal MemberDTO member) {
+//		
+//		log.info("[TradeController] =================================================================== ");
+//		log.info("[TradeController] updateTradeReply : {}", updateTradeReply);
+//		
+//		tradeService.updateTradeReply(updateTradeReply);
+//		
+//		log.info("[TradeController] =================================================================== ");		
+//		
+//		return ResponseEntity.ok("댓글 수정이 완료되었습니다.");
+//	}
+//	
+	@PostMapping("/removeTradeReply")
+	public ResponseEntity<String> removeTradeReply(@RequestBody TradeReplyDTO removeTradeReply) {
+		
+		log.info("[TradeController] =================================================================== ");
+		log.info("[TradeController] removeTradeReply : {}", removeTradeReply);
+		
+		tradeService.removeTradeReply(removeTradeReply);
+		
+		log.info("[TradeController] =================================================================== ");
+		
+		return ResponseEntity.ok("댓글 삭제가 완료되었습니다.");
 	}
 	
 }

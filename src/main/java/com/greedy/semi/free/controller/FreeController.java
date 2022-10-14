@@ -134,6 +134,31 @@ public class FreeController {
 		return ResponseEntity.ok("댓글 삭제 완료");
 	}
 	
+	@GetMapping("/updateReply")
+	public String goUpdateReply(Long replyNo, Model model) {
+		
+		log.info("[FreeReplyController] =================================================================== ");
+		log.info("[FreeReplyController] parameter freeNo : {}", replyNo);
+		
+		model.addAttribute("free", freeService.selectFreeDetail(replyNo));
+		
+		log.info("[FreeReplyController] =================================================================== ");
+		
+		return "free/freeDetail";
+		
+	}
+	
+	@PostMapping("/updateReply")
+	public String modifyReply(@ModelAttribute FreeReplyDTO updateReply, RedirectAttributes rttr) {
+	
+		freeService.modifyReply(updateReply);
+		
+		rttr.addFlashAttribute("message", 
+				messageSourceAccessor.getMessage("freeReply.modify"));
+
+		return "redirect:/free/detail?freeNo=" + updateReply.getFreeNo();
+	} 
+	
 	@GetMapping("/update")
 	public String goUpdate(Long freeNo, Model model) {
 		
@@ -161,10 +186,9 @@ public class FreeController {
 				messageSourceAccessor.getMessage("free.modify"));
 		
 		log.info("[FreeController] =================================================================== ");
-		
-		return "redirect:/free/list";
-		
-	}
+
+		return "redirect:/free/detail?freeNo=" + updateFree.getFreeNo();
+	} 
 	
 	@GetMapping("/delete")
 	public String deleteFree(FreeDTO free, RedirectAttributes rttr) {
