@@ -16,5 +16,5 @@ public class TradeReplyDTO {
 	private Date replyUpdate;
 	private String replyDelete;
 	private MemberDTO memberId;
-	
+
 }

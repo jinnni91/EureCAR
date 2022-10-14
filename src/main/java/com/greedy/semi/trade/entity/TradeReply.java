@@ -52,5 +52,5 @@ public class TradeReply {
 	
 	@Column(name = "SELL_NO")
 	private Long sellNo;
-	
+
 }
