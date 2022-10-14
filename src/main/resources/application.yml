@@ -5,8 +5,8 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:xe
-    username: C##EURECAR
-    password: EURECAR
+    username: C##EURECAR2
+    password: EURECAR2
     hikari:
       auto-commit: false
   jpa:
