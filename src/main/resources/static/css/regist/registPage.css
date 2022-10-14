@@ -1,6 +1,16 @@
 @charset "UTF-8";
 
+.regist_container {
+  width: 600px;
+  height: 600px;
+ 
 
+}
+
+td {
+	
+	line-height:30px;
+}
 input[type=submit]{
 	width: 300px;
 	height: 35px;

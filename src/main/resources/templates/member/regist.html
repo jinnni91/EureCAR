@@ -11,9 +11,9 @@
 
 </head>
 <body>
-		<!--<div th:replace="common/header.html"></div>  -->
+			<div th:replace="common/header.html"></div>
 		
-        <div class="outer outer-member-insert">
+		<div class="regist_container" style="margin: 100px 300px;">
 
 
             <form th:action="@{/member/regist}" method="post">
@@ -22,7 +22,7 @@
                         <td>아이디 </td>
                     </tr>
                     <tr>
-                        <td style="width:260px"><input type="text" class="memberId" id="memberId" maxlength="13"  name="memberId" placeholder="아이디" required>
+                        <td><input type="text" class="memberId" id="memberId" maxlength="13"  name="memberId" placeholder="아이디" required>
                       	<font id = "CheckId" size = "2"></font>
                         </td>
                         <td><input type="button" value="중복확인" class="btn_duplicationCheck" id="duplicationCheck"></td>
@@ -120,7 +120,7 @@
                	 </div>
             </form>
         </div>	
-    
+    	<div th:replace="common/footer.html"></div>
     <!-- <div th:replace="common/footer.html"></div> -->
     
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
