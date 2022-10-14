@@ -61,4 +61,5 @@ public class FreeReply {
 	@JoinColumn(name = "MEMBER_ID")
 	private Member memberId;
 
+
 }

@@ -269,12 +269,11 @@
 			</div>
         
     </div>
-    
-    <div th:replace="common/footer.html"></div>
-    
+
+    <th:block th:if="${ criteria != null }">
+
     <script>
 
-		if('[[${criteria}]]'){
 			const modelCode = '[[${criteria?.model.modelCode}]]';
 			const sellCarYear = '[[${criteria?.sellCarYear}]]';
 			const regionCode = '[[${criteria?.region.regionCode}]]';
@@ -306,9 +305,12 @@
 				document.getElementById("price").value = sellPrice;
 			}
 			
-		}
-	
 
 	</script>
+	</th:block>
+    <div th:replace="common/footer.html"></div>
+
+	
+
 </body>
 </html>
