@@ -60,8 +60,5 @@ public class FreeReply {
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID")
 	private Member memberId;
-	
-	@Column(name = "REF_REPLY_NO")
-	private Long refreplyNo;
 
 }
