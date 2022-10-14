@@ -35,15 +35,13 @@ public class FindPwMail implements MailServiceInter {
 
 		String msgg = "";
 		msgg += "<div style='margin:100px;'>";
-		msgg += "<h1> 안녕하세요</h1>";
-		msgg += "<h1> 유레카 입니다</h1>";
+		msgg += "<h1> 안녕하세요 유레카입니다</h1>";
 		msgg += "<br>";
 		msgg += "<p>회원님의 임시 비밀번호 입니다<p>";
 		msgg += "<p>해당 비밀번호로 로그인 후 패스워드 변경 부탁드립니다.<p>";
 		msgg += "<br>";
-		msgg += "<p>항상 당신의 꿈을 응원합니다. 감사합니다!<p>";
 		msgg += "<br>";
-		msgg += "<div align='center' style='border:1px solid black; font-family:verdana';>";
+		msgg += "<div>";
 		msgg += "<h3 style='color:blue;'>임시 비밀번호</h3>";
 		msgg += "<div style='font-size:130%'>";
 		msgg += "CODE : <strong>";

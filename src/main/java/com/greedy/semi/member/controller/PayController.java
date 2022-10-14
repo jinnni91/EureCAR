@@ -4,11 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.semi.member.dto.MemberDTO;
 import com.greedy.semi.member.dto.OrderInfoDTO;
@@ -28,17 +30,20 @@ public class PayController {
     private final PayService payService;
     private final OrderInfoService orderInfoService;
     private final ProductService productService;
-    
-    private PayController(ProductService productService, PayService payService, OrderInfoService orderInfoService)
+	private final MessageSourceAccessor messageSourceAccessor;
+
+	private PayController(MessageSourceAccessor messageSourceAccessor, ProductService productService, PayService payService, OrderInfoService orderInfoService)
     {
     	this.payService = payService;
     	this.orderInfoService=orderInfoService;
     	this.productService = productService;
+		this.messageSourceAccessor = messageSourceAccessor;
+
     }
     
     @ResponseBody
 	@PostMapping("/user/mypage")
-	public String chargetPoint(@RequestParam("amount") int payAmt, @AuthenticationPrincipal MemberDTO member,@RequestParam("sellNo") Long sellNo)
+	public String chargetPoint(RedirectAttributes rttr, @RequestParam("amount") int payAmt, @AuthenticationPrincipal MemberDTO member,@RequestParam("sellNo") Long sellNo)
  {
     	
     	PayDTO pay = new PayDTO();
@@ -124,9 +129,6 @@ public class PayController {
           System.out.println("1일 후 : " + today); //2021-12-12
           java.sql.Date expirationDate = java.sql.Date.valueOf(today);
     	
-
-        
-        
 		order.setProduct(product);
     	order.setTrade(trade);
     	order.setExpirationDate(expirationDate);
@@ -143,10 +145,9 @@ public class PayController {
        
         pay.setPayDate(sqlDate);
         
-    	
-    	
         payService.payAmount(pay);
-    	
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("trade.regist"));
+
         return "redirect:/";	
         }
 }

@@ -40,7 +40,7 @@ public class SecurityConfig {
         return http
         		.csrf().disable()
                 .authorizeRequests()
-                .mvcMatchers("/member/update", "/member/delete", "/trade/regist", "/trade/update", "/trade/delete","/free/make").hasAnyAuthority("ROLE_MEMBER", "ROLE_ADMIN")
+                .mvcMatchers("/member/update", "/member/delete", "/member/payment","/trade/regist", "/trade/update", "/trade/delete","/free/make").hasAnyAuthority("ROLE_MEMBER", "ROLE_ADMIN")
                 .mvcMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .mvcMatchers("/member/login").anonymous()
                 .mvcMatchers("/**", "/member/**").permitAll()

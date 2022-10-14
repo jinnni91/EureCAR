@@ -7,7 +7,10 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/regist/payment.css}">
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
 </head>
 <body>
 	<div th:replace="common/header.html"></div>
@@ -49,7 +52,8 @@
     $('#charge_kakao').click(function () {
         // getter
 	 
-        
+       
+
        const IMP = window.IMP;
         IMP.init('imp83723126');
         var money = $('input[name="cp_item"]:checked').val();
@@ -62,19 +66,13 @@
             merchant_uid: 'cart_' + new Date().getTime(),
             name: '유레카 : 광고',
             amount: money,
-            buyer_email: 'iamport@siot.do',
-            buyer_name: '구매자이름',
-            buyer_tel: '010-1234-5678',
-            buyer_addr: '인천광역시 부평구',
-            buyer_postcode: '123-456'
         }, function (rsp) {
             console.log(rsp);	
             if (rsp.success) {
-                var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
+                var msg = rsp.paid_amount;
+                msg += '원 결제가 완료되었습니다.\n';
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
-                msg += '결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
+              
                 $.ajax({
                     type: "POST", 
                     url: "/user/mypage", //충전 금액값을 보낼 url 설정
