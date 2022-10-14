@@ -78,8 +78,19 @@ public class MemberService {
 
 	}
 
+	public void modifyMember(MemberDTO updateMember) {
+		
+		Member savedMember = memberRepository.findByMemberId(updateMember.getMemberId());
+		savedMember.setMemberPwd(updateMember.getMemberPwd());
+		savedMember.setPhone(updateMember.getPhone());
+		savedMember.setEmail(updateMember.getEmail());
+		savedMember.setAddress(updateMember.getAddress());
+
+	}
+
+
 	}
 	
 
 
-
+  
