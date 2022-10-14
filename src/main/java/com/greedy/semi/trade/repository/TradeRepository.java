@@ -32,16 +32,19 @@ public interface TradeRepository extends JpaRepository<Trade, Long> {
 	Trade findBySellNo(Long sellNo);
 
 	@EntityGraph(attributePaths = {"attachFileList"})
-	@Query(
-			"SELECT t " +
+	@Query("SELECT t " +
 			  "FROM Trade t " +
+
+
 			  "JOIN OrderInfo o " +
 			    "ON (t.sellNo = o.trade.sellNo) " +
+
 			 "WHERE t.sellDelete = :sellDelete " +
 			   "AND t.payStatus = :payStatus " +
 			   "AND o.expirationDate >= CURRENT_DATE")
 	Page<Trade> findByPayStatus(@Param("payStatus")String payStatus, @Param("sellDelete")String sellDelete, Pageable pageable);
 
+	
 	@EntityGraph(attributePaths = {"attachFileList"})
 	Page<Trade> findBySellDeleteAndPayStatus(String payStatus, String sellDelete, Pageable pageable);
 

@@ -1,7 +1,8 @@
 package com.greedy.semi.member.dto;
 
 
-import java.sql.Date;
+import java.util.Date;
+
 
 import com.greedy.semi.trade.dto.TradeDTO;
 
@@ -15,4 +16,5 @@ public class OrderInfoDTO {
 	private TradeDTO trade;
 	private Date orderDate;
 	private Date expirationDate;
+
 }
