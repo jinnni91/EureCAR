@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/free.css}">
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
 </head>
 <body>
 	<div th:replace="common/header.html"></div>
@@ -30,11 +34,11 @@
 				<table style="margin: auto;">
 
 					<tr>
-						<td><input type="text" name="freeTitle"
+						<td><input type="text" name="freeTitle" placeholder="제목을 입력해주세요."
 							style="width: 1070px;" class="title"></td>
 					</tr>
 					<tr>
-						<td><textarea name="freeContent" 
+						<td><textarea name="freeContent" placeholder="내용을 입력해주세요."
 								rows="7" style="resize: none;" class="content"></textarea></td>
 					</tr>
 				</table>

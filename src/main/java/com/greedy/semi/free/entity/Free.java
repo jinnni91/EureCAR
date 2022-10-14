@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 
 import com.greedy.semi.member.entity.Member;
-import com.greedy.semi.trade.entity.TradeAttachFile;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
