@@ -319,20 +319,6 @@ public class TradeController {
 		return ResponseEntity.ok(tradeReplyList);
 	}
 	
-//	@PostMapping("/updateTradeReply")
-//	public ResponseEntity<String> updateTradeReply(@RequestBody TradeReplyDTO updateTradeReply,
-//			@AuthenticationPrincipal MemberDTO member) {
-//		
-//		log.info("[TradeController] =================================================================== ");
-//		log.info("[TradeController] updateTradeReply : {}", updateTradeReply);
-//		
-//		tradeService.updateTradeReply(updateTradeReply);
-//		
-//		log.info("[TradeController] =================================================================== ");		
-//		
-//		return ResponseEntity.ok("댓글 수정이 완료되었습니다.");
-//	}
-//	
 	@PostMapping("/removeTradeReply")
 	public ResponseEntity<String> removeTradeReply(@RequestBody TradeReplyDTO removeTradeReply) {
 		
