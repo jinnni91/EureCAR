@@ -40,8 +40,7 @@ nav{
 .searchTitle{
 	/*margin-top: 50px;
     margin-left: 150px;*/
-    margin: 50px auto;
-    margin-bottom:20px;
+    margin: 50px auto 0 auto;
     width: 700px;
     border-bottom: 1px solid #77CFD1;
 }
@@ -93,7 +92,7 @@ th,td {
     text-align: center;
     padding: 8px;
 }
-
+/*페이징바*/
 .paging button{
 	background-color:transparent;
 	border:0;
@@ -108,7 +107,7 @@ input[type="checkbox"]{
 }
 
 /*수익금*/
-.carpic{
+img{
     margin-left: 200px;
     margin-bottom: 30px;
     border-radius: 15px;
@@ -139,12 +138,12 @@ strong{
 
 .chartTilte{
     margin-left:200px;
-    width: 700px;
+    width: 100%;
     border-bottom: 2px solid #77cfd1;
 }
 
-h3 pagetitle{
-    margin-left:5px;
+h3{
+    margin-left:50px;
 }
 
 .part5{
@@ -236,48 +235,15 @@ button:hover{
 	
 }
 
-.part_top{
-    position: relative;
-    margin: 0 auto;
-    margin-bottom:30px;
-    width:700px;
-    display: flex;
-    gap:340px;
-   
-}
-
-.checkarea{
-	margin-top:50px;
-	margin-left:10px;
-}
-
-.part2{
-    float:right;
-    margin-top:50px;
-}
-
 form{
-	position: absolute;
-	margin-top:60px;
-	magin-bottom:30px;
+	position:absolute;
+	margin-top:80px;
     left:45%;
     padding:20px;
     gap:10px;   
    
   }
-  
-.profitsection{
-	position:relative;
-	margin-top:0px;
-	
-}
 
-
-.profit-title{
-	margin:40px auto 30px 200px;
-	width:700px;
-	padding-left:380px
-}
 label{
 	
     padding-top: 3px;

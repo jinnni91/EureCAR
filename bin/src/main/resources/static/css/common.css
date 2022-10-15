@@ -1,55 +1,63 @@
 @charset "UTF-8";
-
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-
 .header{
     position: relative;
     height: 150px;
     border-bottom: 2px solid #77CFD1;
 }
-
 h1{
-    width: 300px;
+    width: 120px;
     padding-top: 30px;
-    padding-left: 30px;
+    padding-left: -30px;
+    margin-bottom:5px;
 }
-
 .gnbArea {
-    margin-left: 80px;
+	position:relretive;
+	display:flex;
+    margin-left: 40px;
     margin-right: 80px;
+    gap:5px;
 }
-
 li{
     list-style: none;
 }
-
-a {text-decoration: none; color: #999; cursor: pointer;}
-
+a{text-decoration: none;}
+.utilMenu a {text-decoration: none; color: rgb(128, 128, 128); cursor: pointer;}
 .menu {
     display: flex;
     position: absolute;
-    bottom: 30px;
+    bottom: 25px;
     width: 1200px;
     left: 50%;
     transform: translateX(-50%);
 }
-
-.menuList{
+.menuList {
     display: flex;
-    justify-content: center;
+    justify-content: right;
+    padding-right: 20px;
     width: 100%;
 }
-
-.menuList li {
-    padding-left: 70px;
+.menu li a {
+	text-decoration: none;
+    padding-left: 60px;
     font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    color:rgb(0, 0, 0);
 }
 
-.menuList > li > a {color: black;}
+.menu li :hover{
+    color: #77CFD1;
+}
+
+.adminMenu {
+	display: flex;
+	width: 400px;
+}
 
 .utilMenu {
     display: flex;
@@ -57,14 +65,22 @@ a {text-decoration: none; color: #999; cursor: pointer;}
     position: absolute;
     top: 20px;
     right: 50px;
-    margin-left: 80px;
+    margin-left: 200px;
     margin-right: 80px;
 }
+.material-icons{
+	margin-left:-25px;
+	margin-top:3px;
+}
 
+.footer{
+	position:relretive;
+	/* margin: 200px auto; */
+	margin-bottom:0px;
+}
 .utilMenu > a {margin-left: 20px;}
-
-.footer {background-color: #F9F7F7;  padding: 50px 0;}
+.footer { background-color: #F9F7F7;  padding: 50px 0;}
 .footer > div {width: 1100px; margin: auto;}
-.footer > div > h3 {font-size: 25px; margin-bottom: 20px;}
+.footer > div > h3 {font-size: 25px; margin-bottom: 10px;}
 .footer > div > ul {width: 400px;}
 .footer > div > ul > li {padding: 3px 0; font-size: 14px;}
