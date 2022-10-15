@@ -253,7 +253,7 @@
             	<div class="car-bottom-wrap">
 		            <div class="update-delete">
 
-		            	<th:block sec:authorize="isAuthenticated()">
+		            	<th:block sec:authorize="hasRole('ROLE_MEMBER')">
 				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
 
 				            	<a th:onclick="|location.href='/trade/update?sellNo=${trade.sellNo}'|">글 수정</a> &#124;
