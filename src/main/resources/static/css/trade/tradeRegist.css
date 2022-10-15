@@ -61,7 +61,6 @@ input::file-selector-button:active {
     text-align: center;
     font-size:12px;
     font-weight: bold;
-    padding-top: 3px;
 }
 .select input[type=radio]+label{
     background-color: #fff;

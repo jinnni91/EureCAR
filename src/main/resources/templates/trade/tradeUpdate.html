@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/trade/tradeRegist.css}">
 <script type="text/javascript" th:src="@{/js/trade.js}"></script>
+<script type="text/javascript" th:src="@{/js/trade.js}"></script>
 <title>차량 판매</title>
 </head>
 <body>
@@ -93,8 +94,8 @@
                         <tr>
                             <td>변속기</td>
                             <td class="select" th:value="${ trade.sellTransmission }">
-                                <input type="radio" id="transmission" name="sellTransmission" value="오토" th:checked="${ trade.sellTransmission }=='오토'" requried/><label for="transmission">오토</label>		
-                                <input type="radio" id="transmission" name="sellTransmission" value="수동" th:checked="${ trade.sellTransmission }=='수동'"/><label for="transmission">수동</label>			
+                                <input type="radio" id="auto" name="sellTransmission" value="오토" th:checked="${ trade.sellTransmission }=='오토'" requried/><label for="auto">오토</label>		
+                                <input type="radio" id="manual" name="sellTransmission" value="수동" th:checked="${ trade.sellTransmission }=='수동'"/><label for="manual">수동</label>			
                             </td>
                             <td>배기량</td>
                             <td><input type="number" id="displacement" name="sellDisplacement" placeholder="cc" th:value="${ trade.sellDisplacement }" requried></td>
@@ -134,8 +135,8 @@
                             </div></td>
                             <td>국산/수입</td>
                             <td class="select" th:value="${ trade.sellCountry }">
-                                <input type="radio" id="country" name="sellCountry" value="국산" th:checked="${ trade.sellCountry }=='국산'" requried/><label for="country">국산</label>		
-                                <input type="radio" id="country" name="sellCountry" value="수입" th:checked="${ trade.sellCountry }=='수입'"/><label for="country">수입</label>			
+                                <input type="radio" id="domestic" name="sellCountry" value="국산" th:checked="${ trade.sellCountry }=='국산'" requried/><label for="domestic">국산</label>		
+                                <input type="radio" id="imported" name="sellCountry" value="수입" th:checked="${ trade.sellCountry }=='수입'"/><label for="imported">수입</label>			
                             </td>
                         </tr>
                     </table>

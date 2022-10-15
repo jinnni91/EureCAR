@@ -7,7 +7,6 @@ function tradeRegist() {
 	let fuel = document.getElementById('fuel').value;
 	let mileage = document.getElementById('mileage').value;
 	let region = document.getElementById('region').value;
-	let transmission = document.getElementById('transmission').value;
 	let displacement = document.getElementById('displacement').value;
 	let model = document.getElementById('model').value;
 	let color = document.getElementById('color').value;
@@ -16,7 +15,7 @@ function tradeRegist() {
 	let carDes = document.getElementById('carDes').value;
 	
 	if(con_check == true && carName == '' || price == '' || year == '' || fuel == '' || mileage == '' || region == ''
-	|| transmission == '' || displacement == '' || model == '' || color == '' || accident == '' || photo == '' || carDes == '') {
+	|| displacement == '' || model == '' || color == '' || accident == '' || photo == '' || carDes == '') {
 		alert('차량의 데이터를 모두 입력해주세요.');
 		return false;
 	}
@@ -32,7 +31,6 @@ function tradeUpdate() {
 	let fuel = document.getElementById('fuel').value;
 	let mileage = document.getElementById('mileage').value;
 	let region = document.getElementById('region').value;
-	let transmission = document.getElementById('transmission').value;
 	let displacement = document.getElementById('displacement').value;
 	let model = document.getElementById('model').value;
 	let color = document.getElementById('color').value;
@@ -41,7 +39,7 @@ function tradeUpdate() {
 	let carDes = document.getElementById('carDes').value;
 	
 	if(con_check == true && carName == '' || price == '' || year == '' || fuel == '' || mileage == '' || region == ''
-	|| transmission == '' || displacement == '' || model == '' || color == '' || accident == '' || photo == '' || carDes == '') {
+	|| displacement == '' || model == '' || color == '' || accident == '' || photo == '' || carDes == '') {
 		alert('차량의 데이터를 모두 입력해주세요.');
 		return false;
 	}
