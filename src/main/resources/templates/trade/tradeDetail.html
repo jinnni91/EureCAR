@@ -253,15 +253,19 @@
             	<div class="car-bottom-wrap">
 		            <div class="update-delete">
 
-		            	<th:block sec:authorize="isAuthenticated()">
+		            	<th:block sec:authorize="hasRole('ROLE_MEMBER')">
 				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
 				            	<a th:onclick="|location.href='/trade/update?sellNo=${trade.sellNo}'|">글 수정</a> &#124;
 				            </th:block>
-				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId or trade.member.getMemberRole().toString().equals('ROLEADMIN') }">
+				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
 				            	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
 				            </th:block>
 
 				        </th:block>
+
+				        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+				        	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
+		            	</th:block>
 		            
 		            </div>
 		            
