@@ -42,7 +42,7 @@ a {text-decoration: none; color: #999; cursor: pointer;}
 .car-detail-info01 > table * {vertical-align:top}
 .car-detail-info01 > table  tr {border-spacing: 20px 0;}
 .car-detail-info01 > table td {padding: 10px; }
-.car-detail-info01 > table th {padding: 10px 0; color: #999}
+.car-detail-info01 > table th {width: 16%; padding: 10px; color: #999}
 
 .car-middle-wrap > div > h3 {margin: 50px 0 20px;}
 
