@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 	<link rel="stylesheet" th:href="@{/css/trade/tradeDetail.css}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<script type="text/javascript" th:src="@{/js/event.js}"></script>
 <title>차량 상세페이지</title>
 </head>
@@ -29,10 +28,10 @@
 		                    </dl>
 		                    <hr>
 		                    <dl>
-		                            <dt th:text="${ (trade.sellCarYear) + '년식' }"></dt>
-		                            <dt th:text="${ #numbers.formatInteger(trade.sellMileage, 0, 'COMMA') + 'km' }"></dt>
-		                            <dt th:text="${ trade.sellFuel }"></dt>
-		                            <dt th:text="${ trade.region.regionName }"></dt>
+		                        <dt th:text="${ (trade.sellCarYear) + '년식' }"></dt>
+		                        <dt th:text="${ #numbers.formatInteger(trade.sellMileage, 0, 'COMMA') + 'km' }"></dt>
+		                        <dt th:text="${ trade.sellFuel }"></dt>
+		                        <dt th:text="${ trade.region.regionName }"></dt>
 		                    </dl>
 		                </div>
 		                <div class="buy-seller">
@@ -250,24 +249,24 @@
 			        	등록일 : <span th:text="${ trade.sellDate }"></span>
 			        </div>
             	</div>
+            	<hr>
             	<div class="car-bottom-wrap">
 		            <div class="update-delete">
 
 		            	<th:block sec:authorize="hasRole('ROLE_MEMBER')">
 				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
-
 				            	<a th:onclick="|location.href='/trade/update?sellNo=${trade.sellNo}'|">글 수정</a> &#124;
-
 				            </th:block>
 				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
 				            	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
 				            </th:block>
 
 				        </th:block>
+
 				        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
 				        	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
 		            	</th:block>
-		            	
+		            
 		            </div>
 		            
 		            <!-- 댓글 -->
