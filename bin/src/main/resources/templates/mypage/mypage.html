@@ -8,34 +8,68 @@
 <title>유레카 !</title>
 </head>
 <body>
-
+  
 	<div class="header" th:replace="common/header.html"></div>
-
 	<div>
-		<ul class="sideul">
-			<button class="sidebutton" onclick="location.href='/mypage/list'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
-			<button class="sidebutton" onclick="location.href='/mypage/wishlist'" style="cursor: pointer;">찜 리스트</button><br><br><br>
-			<button class="sidebutton" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
-		</ul>
-	<div>
-			<ul align="center">
-				<h3 class="updatebar">회원 정보</h3>
-				<hr class="mypagehr" color=#77CFD1;>
-				<h4>아이디 : resunz4</h4>
-				<h4>비밀번호 : **********</h4>
-				<h4>이름 : 박태익</h4>
-				<h4>생년월일 : 1997년 9월 17일</h4>
-				<h4>이메일 : useremail@naver.com </h4>
-				<h4>휴대전화 : 010-4121-5472</h4>
-				<h4>우편번호 : 02791</h4>
-				<h4>주소 : 서울시 성북구 화랑로 18길 54 401호</h4>
+		<div>
+			<ul class="sideul" align="left">
+				<button class="sidebutton" onclick="location.href='/mypage/update'" style="cursor: pointer;">회원 정보 변경</button><br><br><br>
+				<button class="sidebutton" onclick="location.href='/mypage/mylist'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
+				<button class="sidebutton" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
 			</ul>
+		</div>
+	<div>
+			<div align="center">
+			<br><br><h3 class="mypagebar">회원 정보</h3><br><br><br>
+			<table>
+				<tr>
+                <td style="font-weight:bolder; font-size:17px;">아이디&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr><br></td>
+                <td><input type="text" name="id" style="border:0 solid black; font-size:17px;" 
+                           th:value="${ #authentication.principal.memberId }"></td>
+                </tr>
+                  
+                <tr>
+				<td style="font-weight:bolder; font-size:17px;">이름<hr><br></td>
+				<td><input type="name" name="username" style="border:0 solid black; font-size:17px;" 
+						   th:value="${ #authentication.principal.name }" required/></td>
+				</tr>
+				
+				<tr>
+				<td style="font-weight:bolder; font-size:17px;">이메일<hr><br></td>
+				<td><input type="email" name="email" style="border:0 solid black; font-size:17px;" 
+				           th:value="${ #authentication.principal.email }"></td>
+				</tr>
+				
+				<tr>
+	  			<td style="font-weight:bolder; font-size:17px;">휴대전화<hr><br></td>
+	  			<td><input type="tel" name="phone" maxlength="20" style="border:0 solid black; font-size:17px;" 
+	  			           th:value="${ #authentication.principal.phone }"></td>
+	  			</tr>
+	  			
+	  			<tr>
+				<td style="font-weight:bolder; font-size:17px;">우편번호<hr><br></td>
+				<td><input type="text" name="zipCode" style="border:0 solid black; font-size:17px;"
+				           th:value="${ #strings.listSplit(#authentication.principal.address,'$').size() > 0 ? #strings.listSplit(#authentication.principal.address,'$')[0] : '' }" readonly>
+				           </td>
+				</tr>
+							 
+				<tr>
+				<td style="font-weight:bolder; font-size:17px;">주소<hr><br></td>
+				<td><input type="text" name="address1" style="border:0 solid black; font-size:17px; width:275px;" 
+				           th:value="${ #strings.listSplit(#authentication.principal.address,'$').size() > 1 ? #strings.listSplit(#authentication.principal.address,'$')[1] : '' }"/></td>
+				</tr>
+				
+				<tr>
+				<td style="font-weight:bolder; font-size:17px;">상세주소<hr><br></td>
+				<td><input type="text" name="address2" style="border:0 solid black; font-size:17px; width:200px;"
+				           th:value="${ #strings.listSplit(#authentication.principal.address,'$').size() > 2 ? #strings.listSplit(#authentication.principal.address,'$')[2] : '' }"/></td>
+				</tr>
+				</table>
+				<br>
+                <br>
+		</div>
 	</div>
 	</div>
-	
-	<div align="right">
-            <button class="updatemember" onclick="location.href='/mypage/update'" style="cursor: pointer;">개인 정보 변경</button>    
-    </div>
     
     <div th:replace="common/footer.html"></div>
 

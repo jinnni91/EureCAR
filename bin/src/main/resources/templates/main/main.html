@@ -19,26 +19,7 @@
 	<!-- 배너 -->
 	<div class="banner"><img src="images/mainban.png"></div>
 	
-	<!-- 검색 창 -->
-	<div class="search-bar" align="center">
-		
-		<form id="searchForm" th:action="@{/}" method="get"
-			style="display: inlin-block">
-			<th:block th:if="${ searchValue != null }">
-				<input type="search" id="searchList" name="searchList"
-					th:value="${ searchValue }">
-			</th:block>
-			<th:block th:if="${ searchValue == null }">
-				
-			
-			</th:block>	
-			
-		
-		</form>
-	
-	</div>
-	
-	<!-- 소개 이미지 -->
+	<!-- 소개 이미지 -->ㄴ
 	<div class="illust"><img src="images/mainil.png"></div>
 	
 	<div th:replace="common/footer.html"></div>

@@ -35,5 +35,25 @@ window.onload = function() {
         }
     }
     
+/* 공지사항 게시판 */
+window.onload = function() {
 
+
+	if(document.getElementById("writeNotice")) {
+	        const $writeNotice = document.getElementById("writeNotice");
+	        $writeNotice.onclick = function() {
+	            location.href = "/notice/regist";
+	   }
+	}
+	    
+	if(document.getElementById("modifyNotice")) {
+	        const $modifyNotice = document.getElementById("modifyNotice");
+	        $modifyNotice.onclick = function() {
+	            location.href = "/notice/modify";
+	   }
+	}    
+	    
+	    
+	    
+};
 };

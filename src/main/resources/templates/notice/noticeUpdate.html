@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/notice.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
+</head>
+<body>
+<div th:replace="common/header.html"></div>
+<form id="noticeUpdateForm" th:action="@{/notice/update}"
+            method="post" enctype="multipart/form-data">
+<div id="update">
+<input type="hidden" name="noticeNo" th:value="${ notice.noticeNo }"/>
+<input class="title2" name="noticeTitle" th:value="${ notice.noticeTitle }">
+<input class="content2" name="noticeContent" th:value="${ notice.noticeContent }">
+</div>
+
+<!-- class="btn11" th:onclick="|location.href='/notice/detail?noticeNo=${notice.noticeNo}'|" -->
+	<div id="btn123">
+           <button type="submit" class="btn11"  style="cursor:pointer;">수정</button>
+           <button type="button"  class="btn22" th:onclick="|location.href='/notice/detail?noticeNo=${notice.noticeNo}'|"
+            style="cursor:pointer;">취소</button>
+	</div>
+</form>
+<div th:replace="common/footer.html"></div>
+</body>
+</html>

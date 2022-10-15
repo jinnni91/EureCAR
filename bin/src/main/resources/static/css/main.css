@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.banner{width:1100px; margin:50px auto 50px;}
+.banner > img {width:100%}
+
+.illust{width:800px; margin:50px auto 50px;}
+.illust > img {width:100%}
+

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<div class="outer outer-board-list;">
+		
+		 <aside>
+                <nav class="layout_left">
+                    <a href ="#" onclick="location.href='/admin/search'"> 회원정보조회</a> 
+                    <a href ="#" onclick="location.href='/admin/warnedmember'"> 신고누적회원조회</a>
+                    <a href ="#" onclick="location.href='/admin/warnedlist'"> 신고목록조회</a>
+                </nav>
+        </aside>
+        
+	<!--체크박스+누적횟수 구역-->
+            <section class="part_top">
+
+                 <!--전체 체크박스-->
+                <div class="part1">
+                    <input type=checkbox id="check">
+                    <label>전체체크</label>
+                    <button>삭제</button>
+                </div>
+                
+               
+
+                <!--누적횟수 조회-->
+                <div class="part2">
+                    누적횟수: <select>
+                        <option> 1회 </option>
+                        <option> 2회 </option>
+                        <option> 3회 이상</option>
+                        </select>
+                        <button>확인</button>
+                </div>
+              
+                
+            </section>
+	
+	
+	
+		
+		<div class="table-area" style="text-align: center;">
+			<table class="member" style="margin: auto;">
+				<tr>
+					<th >체크</th>
+					<th >성명</th>
+					<th >아이디</th>
+					<th >생년월일</th>
+					<th >휴대전화</th>
+					<th >가입일</th>
+					<th >회원삭제</th>
+				 </tr>
+			
+                   
+                   
+				 <tr th:each="member : ${ warnedMember }"
+				   
+				    style="cursor:pointer;" >
+					<td><input type=checkbox id="check"></td>
+					<td th:text="${ member.name }"></td>
+					<td th:text="${ member.memberId }"></td>
+					<td th:text="${ member.birthday }"></td>
+					<td th:text="${ member.phone }"></td>
+					<td th:text="${ member.enrolldate }"></td>
+					<td><button submit="delete">삭제</button></td>
+				</tr>
+			
+			</table>
+		</div>
+			
+				
+			<div class="paging" align="center" style="margin-top:30px;">
+
+			<th:block th:if="${ searchValue != null }">
+				<!-- 맨앞 -->
+				<button
+					th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
+					
+				<!-- 이전 페이지 -->
+				<button
+					th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ warnedMember.first }">&lt;</button>
+					
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+				
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ warnedMember.last }">></button>
+				
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+
+			</th:block>
+				
+				
+				
+			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+
+			<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${paging.currentPage - 1}} + '\''"
+					th:disabled="${ warnedMember.first }">&lt;</button>
+					
+			<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${page}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+				
+			<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${paging.currentPage + 1}} + '\''"
+					th:disabled="${ warnedMember.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/warnedmember?page=' + @{${paging.endPage}} + '\''">>></button>
+			</th:block>
+				  
+		
+				
+			
+
+
+	<div th:replace="common/footer.html"></div>
+</body>
+</html>

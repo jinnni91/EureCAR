@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/css/trade/tradeDetail.css}">
+	<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<title>차량 상세페이지</title>
+</head>
+<body>
+
+		<div th:replace="common/header.html"></div>
+
+	    <div class="outer outer-trade-list" style="margin: 100px 350px;">
+	    	<div class="body">
+		    	<div class="car-top-wrap">
+		            <div class="car-view">
+						<th:block th:if="${ trade.attachFileList[1].thumPath != null }">
+							<img width="500" height="350"
+							th:src="${ trade.attachFileList[1].filePath + trade.attachFileList[1].fileSaveName }"/>
+						</th:block>
+		            </div>
+		            <div class="car-buy-info">
+		                <div class="buy-detail">
+		                    <h2 th:text="${ trade.sellCarName }"></h2>
+		                    <dl>
+		                        <dt>판매가격 <span id="car-price" th:text="${ #numbers.formatInteger(trade.sellPrice, 0, 'COMMA') + '만원' }"></span></dt>
+		                    </dl>
+		                    <hr>
+		                    <dl>
+		                        <dt th:text="${ (trade.sellCarYear) + '년식' }"></dt>
+		                        <dt th:text="${ #numbers.formatInteger(trade.sellMileage, 0, 'COMMA') + 'km' }"></dt>
+		                        <dt th:text="${ trade.sellFuel }"></dt>
+		                        <dt th:text="${ trade.region.regionName }"></dt>
+		                    </dl>
+		                </div>
+		                <div class="buy-seller">
+		                    <h3 class="text-left">판매자정보</h3>
+		                    <p class="text-center" th:text="${ trade.member.name }"></p>
+		                    <p class="text-center" th:text="${ trade.member.phone }"></p>
+		                    <th:block sec:authorize="hasRole('MEMBER')">
+		                    	<p class="text-right "><a th:href="@{|/report/regist?sellNo=${trade.sellNo}|}">신고하기</a></p>
+		                    </th:block>
+		                </div>
+		            </div>
+	        	</div>
+	    		<hr>
+        		<div class="car-middle-wrap">  
+		            <div class="car-detail-info01">
+		                <h3>차량정보</h3>
+		                    <table>
+		                        <colgroup>
+		                            <col width="5%">
+		                            <col width="20%">
+		                            <col width="5%">
+		                            <col width="20%">
+		                            <col width="5%">
+		                            <col width="20%">
+		                        </colgroup>
+		                        <tr>
+		                            <th>차량모델</th>
+		                            <td th:text="${ trade.sellCarName }"></td>
+		                            <th>연식</th>
+		                            <td th:text="${ trade.sellCarYear + '년식' }"></td>
+		                            <th>연료</th>
+		                            <td th:text="${ trade.sellFuel }"></td>
+		                        </tr>
+		                        <tr>
+		                            <th>주행거리</th>
+		                            <td th:text="${ #numbers.formatInteger(trade.sellMileage, 0, 'COMMA') + 'km' }"></td>
+		                            <th>변속기</th>
+		                            <td th:text="${ trade.sellTransmission }"></td>
+		                            <th>배기량</th>
+		                            <td th:text="${ #numbers.formatInteger(trade.sellDisplacement, 0, 'COMMA') + 'cc' }"></td>
+		                        </tr>
+		                        <tr>
+		                            <th>차종</th>
+		                            <td th:text="${ trade.model.carModel }"></td>
+		                            <th>사고이력</th>
+		                            <td><a th:href="${ trade.attachFileList[0].filePath + trade.attachFileList[0].fileSaveName }"
+								   th:download="${ trade.attachFileList[0].fileOrgName }">조회하기</a></td>
+		                            
+		                            <th>색상</th>
+		                            <td th:text="${ trade.color.colorName }">회색</td>
+		                        </tr>
+		                    </table>
+		            	</div>
+	            	<div class="car-detail-info02">
+		                <h3>차량옵션</h3>
+		                <table>
+	                        <tr>
+	                            <td>
+		                            <img th:if="${ #arrays.contains(sellCarOpt, 'ABS')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, 'ABS')}" src="../images/blank-check-box.png">
+		                            　ABS
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '전동트렁크')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '전동트렁크')}" src="../images/blank-check-box.png">
+	                            	　전동트렁크
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '네비게이션')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '네비게이션')}" src="../images/blank-check-box.png">
+	                            	　네비게이션
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '블랙박스')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '블랙박스')}" src="../images/blank-check-box.png">
+	                            	　블랙박스
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '후방카메라')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '후방카메라')}" src="../images/blank-check-box.png">
+	                            	　후방카메라
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '하이패스')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '하이패스')}" src="../images/blank-check-box.png">
+	                            	　하이패스
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '썬루프')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '썬루프')}" src="../images/blank-check-box.png">
+	                            	　썬루프
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '스마트키')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '스마트키')}" src="../images/blank-check-box.png">
+	                            	　스마트키
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '핸들열선')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '핸들열선')}" src="../images/blank-check-box.png">
+	                            	　핸들열선
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '가죽시트')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '가죽시트')}" src="../images/blank-check-box.png">
+	                            	　가죽시트
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '열선시트')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '열선시트')}" src="../images/blank-check-box.png">
+	                            	　열선시트
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '전동시트')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '전동시트')}" src="../images/blank-check-box.png">
+	                            	　전동시트
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, 'HID')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, 'HID')}" src="../images/blank-check-box.png">
+	                            	　HID
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '레인센서와이퍼')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '레인센서와이퍼')}" src="../images/blank-check-box.png">
+	                            	　레인센서와이퍼
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '블루투스(통화)')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '블루투스(통화)')}" src="../images/blank-check-box.png">
+	                            	　블루투스(통화)
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '블루투스(스트리밍)')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '블루투스(스트리밍)')}" src="../images/blank-check-box.png">
+	                            	　블루투스(스트리밍)
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '자동도어잠금')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '자동도어잠금')}" src="../images/blank-check-box.png">
+	                            	　자동도어잠금
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '자동주차시스템')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '자동주차시스템')}" src="../images/blank-check-box.png">
+	                            	　자동주차시스템
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '자동주행시스템')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '자동주행시스템')}" src="../images/blank-check-box.png">
+	                            	　자동주행시스템
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, 'LDWS')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, 'LDWS')}" src="../images/blank-check-box.png">
+	                            	　LDWS
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, 'TPMS')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, 'TPMS')}" src="../images/blank-check-box.png">
+	                            	　TPMS
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '도난경보기')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '도난경보기')}" src="../images/blank-check-box.png">
+	                            	　도난경보기
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '전방감지센서')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '전방감지센서')}" src="../images/blank-check-box.png">
+	                            	　전방감지센서
+	                            </td>
+	                            <td>
+	                            	<img th:if="${ #arrays.contains(sellCarOpt, '후방감지센서')}" src="../images/check-box.png">
+		                            <img th:unless="${ #arrays.contains(sellCarOpt, '후방감지센서')}" src="../images/blank-check-box.png">
+	                            	　후방감지센서
+	                            </td>
+	                        </tr>
+                    	</table>
+		            </div>
+		            <div class="car-detail-info03">
+		                <h3>차량소개</h3>
+		                <div th:text="${ trade.sellCarDes }"></div>
+		            </div>
+		            <div class="car-photo" align="center">
+		            	<th:block th:if="${ trade.attachFileList.size() > 1 }"
+						  th:each="index : ${ #numbers.sequence(1, trade.attachFileList.size() - 1) }">
+						  <img width="700" height="500"
+								 th:src="${ trade.attachFileList[index].filePath + trade.attachFileList[index].fileSaveName }"/>
+						</th:block>
+		            </div>
+			        <div class="dropdown">
+			        	<span class="dropbtn"><img src="../images/attach.png" width="30px" height="30px"></span>
+				        <div class="photo-download">
+				            <th:block th:if="${ trade.attachFileList.size() > 1 }"
+								      th:each="index : ${ #numbers.sequence(1, trade.attachFileList.size() - 1) }">
+								<a th:href="${ trade.attachFileList[index].filePath + trade.attachFileList[index].fileSaveName }"
+								   th:download="${ trade.attachFileList[index].fileOrgName }">
+									<span th:text="${ trade.attachFileList[index].fileOrgName }"></span><br>
+								</a>
+							</th:block>
+				        </div>
+			        </div>
+			        <div class="date" align="right">
+			        	등록일 : <span th:text="${ trade.sellDate }"></span>
+			        </div>
+            	</div>
+            	<hr>
+            	<div class="car-bottom-wrap">
+		            <div class="update-delete">
+
+		            	<th:block sec:authorize="hasRole('ROLE_MEMBER')">
+				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
+				            	<a th:onclick="|location.href='/trade/update?sellNo=${trade.sellNo}'|">글 수정</a> &#124;
+				            </th:block>
+				            <th:block th:if="${ trade.member.memberId == #authentication.principal.memberId }">
+				            	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
+				            </th:block>
+
+				        </th:block>
+
+				        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+				        	<a th:onclick="|location.href='/trade/delete?sellNo=${trade.sellNo}'|">글 삭제</a>
+		            	</th:block>
+		            
+		            </div>
+		            
+		            <!-- 댓글 -->
+		       
+		            	<input type="hidden" id="sellNo" th:value="${trade.sellNo}"/>
+		            	<h4>댓글</h4>
+			            <div>
+				            <div class="reply-input">
+				              	<textarea name="reply" id="replyContent" cols="30" rows="10"></textarea>
+				              	<button id="registTradeReply">등록</button>
+				            </div>
+			           	</div>
+		           	
+		           	<table id="replyResult"></table>
+		           	
+		       	</div>
+    		</div>
+	    
+		</div>
+		
+		<div th:replace="common/footer.html"></div>
+		<th:block sec:authorize="isAuthenticated()">
+		<script>	
+			const loginUser ='[[${#authentication.principal.memberId}]]';
+		</script>
+		</th:block>
+		
+		<script>
+			
+			loadReply();
+			
+			function loadReply() {
+				
+				if(document.getElementById("sellNo")) {
+					
+					fetch("/trade/loadTradeReply?sellNo=" + document.getElementById("sellNo").value)
+					.then(result => result.json())
+					.then(data => {
+						makeReplyTable(data);
+					})
+					.catch(error => console.log(error));
+				}
+			}
+			
+			if(document.getElementById("registTradeReply")) {
+				
+				const $registTradeReply = document.getElementById("registTradeReply");
+				const $replyContent = document.getElementById("replyContent");
+				
+				$registTradeReply.onclick = function() {
+					
+					if(!$replyContent.value.trim()) {
+						alert("댓글을 입력해주세요.");
+						return;
+					}
+					
+					const sellNo = document.getElementById("sellNo").value;
+					const replyContent = $replyContent.value;
+					
+					fetch("/trade/registTradeReply", {
+						method: "POST",
+						headers: {
+							'Content-Type': 'application/json;charset=UTF-8'
+						},
+						body: JSON.stringify({
+							sellNo: sellNo,
+							replyContent: replyContent
+						})
+					})
+					.then(data => {
+						console.log(data);
+						$replyContent.value = '';
+						loadReply();
+					})
+					.catch(error => console.log(error));
+				}
+			}
+			
+			function removeTradeReply(replyNo) {
+				
+				fetch("/trade/removeTradeReply", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json; charset=UTF-8'
+					},
+					body: JSON.stringify({
+						replyNo: replyNo
+					})
+				})
+				.then(result => {
+					console.log(result);
+					loadReply();
+				})
+				.catch(error => console.log(error));
+			}
+			
+			function makeReplyTable(tradeReplyList) {
+				
+				const $table = document.querySelector("#replyResult");
+				
+				console.log(tradeReplyList);
+				
+				$table.innerHTML = '';
+				
+				tradeReplyList.forEach(reply => {
+					const $tr = document.createElement('tr');
+					const $memberIdTd = document.createElement('td');
+					const $replyContentTd = document.createElement('td');
+					const $replyDateTd = document.createElement('td');
+					const $buttonTd = document.createElement('td');
+					
+					$memberIdTd.textContent = reply.memberId.memberId;
+					$replyContentTd.textContent = reply.replyContent;
+					$replyDateTd.textContent = reply.replyDate;
+					
+					if(loginUser == reply.memberId.memberId) {
+						
+						$buttonTd.innerHTML = `<button type='button' onclick='removeTradeReply(${reply.replyNo})'>삭제</button>`;
+					}
+					
+					$tr.append($memberIdTd, $replyContentTd, $replyDateTd, $buttonTd);
+					$table.append($tr);
+					
+				});
+				
+			}
+			
+		</script>
+
+</body>
+</html>
