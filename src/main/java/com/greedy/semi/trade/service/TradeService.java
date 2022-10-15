@@ -160,10 +160,4 @@ public class TradeService {
 
 	}
 
-	public void updateTradeReply(TradeReplyDTO updateTradeReply) {
-
-		tradeReplyRepository.save(modelMapper.map(updateTradeReply, TradeReply.class));
-
-	}
-
 }
