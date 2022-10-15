@@ -35,13 +35,13 @@ a{text-decoration: none;}
     left: 50%;
     transform: translateX(-50%);
 }
-.menuList{
-	
+.menuList {
     display: flex;
-    justify-content: center;
+    justify-content: right;
+    padding-right: 20px;
     width: 100%;
 }
-.menuList li a {
+.menu li a {
 	text-decoration: none;
     padding-left: 60px;
     font-size: 20px;
@@ -49,9 +49,16 @@ a{text-decoration: none;}
     font-size: large;
     color:rgb(0, 0, 0);
 }
-.menuList li :hover{
+
+.menu li :hover{
     color: #77CFD1;
 }
+
+.adminMenu {
+	display: flex;
+	width: 400px;
+}
+
 .utilMenu {
     display: flex;
     font-size: 14px;
