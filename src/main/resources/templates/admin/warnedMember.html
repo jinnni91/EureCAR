@@ -6,6 +6,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+      $( document ).ready( function() {
+        $( '.check-all' ).click( function() {
+          $( '.check' ).prop( 'checked', this.checked );
+        } );
+      } );
+</script>
 <script>
 	const message = '[[${message}]]';
 	message && alert(message);
@@ -13,7 +21,7 @@
 </head>
 <body>
 	<div th:replace="common/header.html"></div>
-	<div class="outer outer-board-list;">
+	<div class="outer outer-board-list;"></div>
 		
 		 <aside>
                 <nav class="layout_left">
@@ -27,8 +35,8 @@
             <section class="part_top">
 
                  <!--전체 체크박스-->
-                <div class="part1">
-                    <input type=checkbox id="check">
+                <div class="checkarea">
+                    <input type=checkbox class="check-all">
                     <label>전체체크</label>
                     <button>삭제</button>
                 </div>
@@ -68,7 +76,7 @@
 				 <tr th:each="member : ${ warnedMember }"
 				   
 				    style="cursor:pointer;" >
-					<td><input type=checkbox id="check"></td>
+					<td><input type=checkbox class="check"></td>
 					<td th:text="${ member.name }"></td>
 					<td th:text="${ member.memberId }"></td>
 					<td th:text="${ member.birthday }"></td>

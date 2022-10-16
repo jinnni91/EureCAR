@@ -15,12 +15,16 @@
 <body>
 	<div th:replace="common/header.html"></div>
 	
-	<h2>이달의 수익금</h2>  
+	<section class="profitsection">
+	<div class="profit-title">
+	<h2>이달의 수익금</h2>
+	</div>
+	  
 
          <section class="part3">
-                <img src="../images/car.png">
+                <img src="../images/car.png" class="carpic">
                 <ol class="profit_contents" >이번달 수입액   <strong> 5,350,000 </strong>원<br>
-                지난 달 대비 수익   <strong> 5.7 % </strong>증가</ol>
+                지난 달 대비 수익   <strong> 19.8 % </strong>증가</ol>
          </section>
 
          <section class="part4">
@@ -41,8 +45,8 @@
                     type: 'line', 
                     data: { 
                         labels: [
-                            //x 축
-                            '1','2','3','4','5','6','7'
+                        
+                            '4월','5월','6월','7월','8월','9월','10월'
                         ],
                         datasets: [
                             
@@ -50,7 +54,7 @@
                                 label: '수익금 총계',
                                 fill: false, 
                                 data: [
-                                    21,19,25,20,23,26,25 
+                                    380,320,400,480,440,410,530 
                                 ],
                                 backgroundColor: [
                                     'rgba(62, 191, 180, 0.2)'
@@ -94,70 +98,59 @@
                     <table class="member">
                    
                         <tr>
-                            <td>   </td>
-                            <th>No</th>
-                            <th>아이디</th>
+                            <td>아이디</td>
                             <th>성명</th>
-                            <th>누적횟수</th>
-                            <th>회원삭제</th>        
+                            <th>결제건수</th>          
+                            <th>결제액</th>
+                            <th>결제일</th>        
                         </tr>
                                       
     
                         <tr>
-                            <td><input type=checkbox></input></td>
-                            <th>1</th>
                             <td>greedy123</td>
-                            <td>홍길동</td>
+                            <th>홍길동</th>
                             <td>2</td>
-                            <td><button submit="delete">삭제</button></td>    
+                            <td>70,000</td>
+                            <td>2022-10-01</td>                               
                         </tr>
                    
     
                         <tr>
-                            <td><input type=checkbox></input></td>
-                            <th>2</th>
-                            <td>merge321</td>
-                            <td>박상진</td>
+                            <td>gildong123</td>
+                            <th>고길동</th>
                             <td>1</td>
-                            <td><button submit="delete">삭제</button></td> 
+                            <td>30,000</td>
+                            <td>2022-10-01</td>                               
                         </tr>
-    
                         <tr>
-                            <td><input type=checkbox></input></td>
-                            <th>3</th>
-                            <td>greedy321</td>
-                            <td>강다윤</td>
+                            <td>jiyoung258</td>
+                            <th>박지영</th>
+                            <td>1</td>
+                            <td>30,000</td>
+                            <td>2022-10-02</td>                               
+                        </tr>
+                        <tr>
+                            <td>greedy123</td>
+                            <th>송다인</th>
+                            <td>1</td>
+                            <td>30,000</td>
+                            <td>2022-10-02</td>                               
+                        </tr>
+                        <tr>
+                            <td>byeol555</td>
+                            <th>우별림</th>
                             <td>3</td>
-                           <td><button submit="delete">삭제</button></td>
+                            <td>70,000</td>
+                            <td>2022-10-03</td>                               
                         </tr>
     
                         <tr>
-                            <td><input type=checkbox></input></td>
-                            <th>4</th>
-                            <td>song236</td>
-                            <td>송나라</td>
+                            <td>dong369</td>
+                            <th>김동훈</th>
                             <td>2</td>
-                            <td><button submit="delete">삭제</button></td>
+                            <td>70,000</td>
+                            <td>2022-10-03</td>                               
                         </tr>
-    
-                        <tr>
-                            <td><input type=checkbox></input></td>
-                            <th>5</th>
-                            <td>greedy789</td>
-                            <td>고길동</td>
-                            <td>1</td>
-                            <td><button submit="delete">삭제</button></td>
-                        </tr>
-    
-                        <tr>
-                            <td><input type=checkbox></input></td>
-                            <th>6</th>
-                            <td>hana0101</td>
-                            <td>지하나</td>
-                            <td>1</td>
-                            <td><button submit="delete">삭제</button></td>
-                        </tr>
-    
     
                     </table>
     
