@@ -31,14 +31,11 @@ public class AuthenticationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
 
-        log.info("[AuthenticationService] =====================================================");
-        log.info("[AuthenticationService] memberId : " + memberId);
 
         Member selectedMember = memberRepository.findByMemberIdAndMemberStatus(memberId, "N").orElseThrow(() -> new UsernameNotFoundException("회원 정보가 존재하지 않습니다."));
 
         MemberDTO member = modelMapper.map(selectedMember, MemberDTO.class);
         
-        log.info("[AuthenticationService] member : " + member);
         
         return member;
     }

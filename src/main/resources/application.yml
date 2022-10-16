@@ -26,7 +26,9 @@ spring:
       max-request-size: 10MB
       # 업로드 된 파일의 임시 저장 공간
       
+
       location: C:\Users\gram\git\semi_projects
+
       #location: C:\Lecture\ShareFolder\9_spring\03_spring-boot\10.14\semi_project2\semi_project
       #location:  C:\Lecture\ShareFolder\eurecar\semi_project
       #location: C:\Users\hi\git\semi_project999

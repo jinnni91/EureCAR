@@ -39,11 +39,11 @@
 					</td>
 				-->
 				<th class="detail-title" th:text="${ notice.noticeTitle }"></th>
-				<th class="dcount" th:text="|조회수 ${ notice.noticeCount } / ${ notice.noticeDate }|"></th>
+				<th class="dcount" th:text="|조회수 ${ notice.noticeCount } / ${ notice.noticeDate }|" style="font-size: 17px;"></th>
 				</tr>
 				
 			</table>
-			    <p id="detailcontent" th:text="${ notice.noticeContent }"></p>
+			    <pre align="left" id="detailcontent" style="font-size: 20px;" th:text="${ notice.noticeContent }"></pre>
 
 		
 			
@@ -237,6 +237,8 @@
 				
 				$replyContentTd.style.width = "870px";
 				$memberIdTd.style.width = "100px"; 
+				$memberIdTd.style.color = "#77CFD1"; 
+				$memberIdTd.style.fontWeight = "bold";
 				$replyDateTd.style.width = "125px"; 
 				
 				

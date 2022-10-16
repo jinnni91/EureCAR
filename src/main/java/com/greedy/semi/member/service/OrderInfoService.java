@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.greedy.semi.member.dto.OrderInfoDTO;
 import com.greedy.semi.member.entity.OrderInfo;
-import com.greedy.semi.member.entity.Pay;
 import com.greedy.semi.member.repository.OrderInfoRepository;
 
 

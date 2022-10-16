@@ -6,7 +6,6 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.stereotype.Service;
 
 // mail 서비스 interface
 public interface MailServiceInter {

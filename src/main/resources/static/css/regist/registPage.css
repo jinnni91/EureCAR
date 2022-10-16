@@ -110,6 +110,22 @@ td {
   cursor: not-allowed;
 }
 
+.phone {
+	width: 250px;
+	height: 40px;
+	font-size: 0.9em;
+}
+
+.phone:focus {
+	background: #80ffff;
+	color: black;
+}
+
+.phone:hover {
+	width: 250px;
+}
+
+
 .authentication {
 	width: 130px;
 	height: 30px;
