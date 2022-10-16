@@ -64,6 +64,7 @@
 	color : white;
 	font-size : 20px;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 .cancel {
@@ -71,6 +72,7 @@
 	line-height : 30px;
 	font-size : 20px;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 .title {
@@ -102,8 +104,11 @@
 	margin: 0 5px;
 }
 
-#paging{
-	margin-top : 50px;
+#paging button{
+	font-size: 18px;
+	border: none;
+	background: none;
+	cursor: pointer;
 	
 	
 }
@@ -182,6 +187,7 @@
 	color : white;
 	background-color: #77CFD1;
 	border : 0;
+	cursor: pointer;
 }
 
 
