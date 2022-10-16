@@ -28,7 +28,12 @@
 					<br><br><br>
 			</div>
                <form>
-               		<p style="font-weight: bold; font-size:1.25em ">결제 방식 : 카카오페이</p>
+               		<p style="font-weight: bold; font-size:1.25em ">결제 방식:
+               		   &emsp;<select id="pay" name="pay" required>
+                                <option value="kakaopay.TC0ONETIME" >카카오페이</option>
+                                <option value="tosspay">토스페이</option>
+                            </select></p>
+                            
 	      			<br><br>&nbsp;
 	      			<label style="font-size: 1.25em">7일권</label>&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
 	      			<label style="font-size: 1.25em">15일권</label>&emsp;&emsp;&emsp;&emsp;&nbsp;
@@ -40,7 +45,7 @@
 			</form>
 				<br>
    				 <p  style="color: #ac2925; margin-top: 30px">※프리미엄 상품의 유효기간은 결제 날짜 기준입니다.</p><br><br>
-                <button type="button" class="btn1" id="charge_kakao">결제하기</button>&emsp;
+                <button type="button" class="btn1" id="charge">결제하기</button>&emsp;
                  <button type="button" class="btn2" onclick="location.href='/'">결제취소</button>
            </div>     
 		 </div>
@@ -49,11 +54,11 @@
 
 /** 결제 **/
 
-    $('#charge_kakao').click(function () {
+    $('#charge').click(function () {
         // getter
 	 
        
-
+	   var pg = $('#pay').val();
        const IMP = window.IMP;
         IMP.init('imp83723126');
         var money = $('input[name="cp_item"]:checked').val();
@@ -61,7 +66,7 @@
         var sellNo = $('#sellNo').val();
         
         IMP.request_pay({
-            pg: "kakaopay.TC0ONETIME",
+            pg: pg,
             pay_method: "card",
             merchant_uid: 'cart_' + new Date().getTime(),
             name: '유레카 : 광고',
@@ -82,7 +87,7 @@
                     },
                 });
             } else {
-                var msg = '결제에 실패하였습니다.';
+                var msg = '결제에 실패하였습니다.\n';
                 msg += '에러내용 : ' + rsp.error_msg;
             }
             alert(msg);

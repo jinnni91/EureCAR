@@ -13,7 +13,7 @@ window.onload = function() {
             location.href = "/member/login";
         }
     }
-
+ 	
     if(document.getElementById("logout")) {
         const $logout = document.getElementById("logout");
         $logout.onclick = function() {
@@ -36,7 +36,6 @@ window.onload = function() {
     }
     
 /* 공지사항 게시판 */
-window.onload = function() {
 
 
 	if(document.getElementById("writeNotice")) {
@@ -55,5 +54,4 @@ window.onload = function() {
 	    
 	    
 	    
-};
 };
