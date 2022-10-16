@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" th:href="@{/css/notice.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<!-- <div class="outer outer-notice-detail" style="margin-top: 100px;">
+		<h1 align="center">공지사항 게시판 내용</h1> -->
+		
+		<div class="table-area">
+			<table id="detail">
+				<tr>
+				<!-- 
+					<td>번호</td>
+					<td colspan="3"><p th:text="${ notice.noticeNo }"></p></td>
+				</tr>
+				<tr>
+					<td>작성자</td>
+					<td colspan="3"><p th:text="${ notice.writer.name }"></p></td>
+				</tr>
+				<tr>
+					<td>제목</td>
+					<td colspan="3"><p th:text="${ notice.noticeTitle }"></p></td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					<td colspan="3">
+						<textarea name="content" cols="60" rows="15"
+								  style="resize: none;" readonly th:text="${ notice.noticeContent }">
+						</textarea>
+					</td>
+				-->
+				<th class="detail-title" th:text="${ notice.noticeTitle }"></th>
+				<th class="dcount" th:text="|조회수 ${ notice.noticeCount } / ${ notice.noticeDate }|"></th>
+				</tr>
+				
+			</table>
+			    <p id="detailcontent" th:text="${ notice.noticeContent }"></p>
+
+		
+			
+			
+		
+		
+		
+		<!-- 공지사항 삭제 및 수정 --> 
+		
+		 <div class="update-delete">
+    		 <th:block th:if="${ notice.writer.memberId == #authentication.principal.memberId }">
+     			<a th:onclick="|location.href='/notice/update?noticeNo=${notice.noticeNo}'|"
+     				 style="cursor:pointer;">수정</a> &#124; 
+     		</th:block>
+     		<th:block th:if="${ notice.writer.memberId == #authentication.principal.memberId or notice.memberId.getMemberRole().toString().equals('ROLEADMIN') }">
+		     	<a th:onclick="|location.href='/notice/delete?noticeNo=${notice.noticeNo}'|"
+		     	 style="cursor:pointer;">삭제</a>
+		     </th:block>
+   		 </div>
+		
+	
+		
+		
+		
+			
+		
+		<!-- 댓글 작성용 table -->
+			<table id="replyWrite" style="margin:auto;">
+				<input type="hidden" id="noticeNo" th:value="${notice.noticeNo}"/>
+				<tr>
+					<td class="reply-content">댓글</td> 
+					<td><textarea cols="152" rows="5" id="replyContent" style="resize:none;"></textarea></td>
+					<td><button type="button" id="registReply">등록</button></td>
+				</tr>
+			</table>
+			
+			<!-- 댓글 내용 출력용 table -->
+			<table id="replyResult"></table>
+			
+		</div>
+	
+	<div th:replace="common/footer.html"></div>
+	
+	<th:block sec:authorize="isAuthenticated()">
+
+	<script>	
+		const loginUser ="[[${#authentication.principal.memberId}]]";
+	</script>
+	</th:block>
+	
+	<script>
+		/* 댓글 관련 로직 - 비동기 요청 */
+		loadReply();
+		
+		/* 2. 댓글 로드 */
+		function loadReply() {
+			
+			if(document.getElementById("noticeNo")) {
+				
+				fetch("/notice/loadReply?noticeNo=" + document.getElementById("noticeNo").value)
+				.then(result => result.json())
+				.then(data => {
+					makeReplyTable(data);
+				})
+				.catch(error => console.log(error));
+				
+			}
+			
+		}
+		/* 1. 댓글 작성 이벤트 */
+		if(document.getElementById("registReply")) {
+			
+			const $registReply = document.getElementById("registReply");
+			const $replyContent = document.getElementById("replyContent");
+			
+			$registReply.onclick = function() {
+				
+				if(!$replyContent.value.trim()) {
+					alert("댓글을 입력해주세요");
+					return;
+				}
+				
+				const noticeNo = document.getElementById("noticeNo").value;
+				const replyContent = $replyContent.value;
+				
+				fetch("/notice/registReply", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8'
+					},
+					body: JSON.stringify({
+						noticeNo: noticeNo,
+						replyContent : replyContent
+					})
+				})
+				.then(data => {
+					console.log(data);
+					
+					$replyContent.value = "";
+					
+					loadReply();
+				})
+				.catch(error => console.log(error));
+			}
+		}
+		
+		/* 3. 댓글 삭제 */
+		function removeReply(replyNo) {			
+			
+			
+			
+			fetch("/notice/removeReply", {
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json; charset=UTF-8'
+				},
+				body: JSON.stringify({
+					replyNo: replyNo
+				})
+			})
+			.then(result => {
+				console.log(result);
+				loadReply();
+			})
+			.catch(error => console.log(error));
+			
+		}
+		
+		/* 4. 댓글 수정 */
+		
+			
+	/*		
+		function modifyReply(replyNo) {
+			const $modifyReply = document.getElementById("modifyReply");
+			const $replyContent = document.getElementById("replyContent");
+			
+			const noticeNo = document.getElementById("noticeNo").value;
+			const replyContent = $replyContent.value;
+			
+			fetch("/notice/modifyReply", {
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json; cahrset=UTF-8'
+				},
+				body: JSON.stringify({
+					replyNo: replyNo,
+					replyContent : replyContent
+				})
+			})
+			.then(data => {
+				console.log(data);
+			
+				$replyContent.value = "";
+				
+				loadReply();
+			
+			})
+			.catch(error => console.log(error));
+		
+			
+			
+		}
+		
+		*/
+		
+		/* 댓글 데이터 테이블화 하는 함수 */
+		function makeReplyTable(replyList) {
+			
+			const $table = document.querySelector("#replyResult");
+			$table.innerHTML = '';
+			
+			console.log(replyList);
+			
+			replyList.forEach(reply => {
+				const $tr = document.createElement('tr');
+				const $replyContentTd = document.createElement('td');
+				const $memberIdTd = document.createElement('td');
+				const $replyDateTd = document.createElement('td');
+				const $buttonTd = document.createElement('td');
+				
+				$replyContentTd.textContent = reply.replyContent;
+				$memberIdTd.textContent = reply.memberId.memberId;
+				$replyDateTd .textContent = reply.replyDate;
+				
+				if('[[${#authentication.principal.memberId}]]' == reply.memberId.memberId) {
+					//$buttonTd.innerHTML = `<button type='button' onclick='modifyReply(${reply.replyNo})'>댓글수정</button>`; 
+					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+				}
+				
+				$tr.append($replyContentTd, $memberIdTd, $replyDateTd, $buttonTd);
+				$table.append($tr);
+			});
+			
+		}
+		
+		
+		
+		
+	</script>
+		
+			
+			
+			
+			
+			
+			
+	
+	
+		
+		
+		
+		
+	
+	
+	
+</body>
+</html>

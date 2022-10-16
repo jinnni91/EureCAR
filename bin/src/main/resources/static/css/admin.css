@@ -1,0 +1,250 @@
+@charset "UTF-8";
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+aside{
+    display: inline;
+    float: left;
+    position: relative;
+    min-width:160px;
+    min-height: 750px;
+    height: 100vh;
+    margin-top:0;
+    margin-bottom: 0;
+    padding: 10px 0;
+    text-align: center;
+    gap: 10px;
+    border-right: 1px solid gray ;
+    transition: all 0.5x ease;
+}
+nav a{
+    text-decoration: none;
+    color:black;
+    margin:2em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+nav a:hover{
+    color: #77CFD1;
+}
+nav{
+    display: flex;
+    flex-direction: column;
+}
+.part1{
+   position: relative;
+   display: flex;
+}
+.searchTitle{
+	/*margin-top: 50px;
+    margin-left: 150px;*/
+    margin: 50px auto 0 auto;
+    width: 700px;
+    border-bottom: 1px solid #77CFD1;
+}
+.menu-area{
+	border-bottom: 2px solid #77CFD1;
+}
+li a{text-decoration: none;
+	 color:black;
+}
+li a:hover{
+	  color: #77CFD1;
+}
+.material-icons{
+	
+    position: absolute;
+    margin-top: 0px;
+    margin-left: -28px;
+}
+#updateMember{
+	background-color:transparent;
+	border:0;
+	outline:0;
+}
+#updateMember:hover{
+	  color: #77CFD1;
+}
+#logout{
+	background-color:transparent;
+	border:0;
+	outline:0;
+}
+#logout:hover{
+	  color: #77CFD1;
+}
+#logo{
+	margin-left:60px;
+}
+table{
+    border-collapse: collapse;
+    width:700px;
+}
+.member tr {
+    border-bottom: 1px solid #77CFD1;;
+}
+.member tr:last-child {
+    border-bottom: none;
+}
+th,td {
+    text-align: center;
+    padding: 8px;
+}
+/*페이징바*/
+.paging button{
+	background-color:transparent;
+	border:0;
+	outline:0;
+}
+
+
+input[type="checkbox"]{
+    accent-color:  #319e9f;
+    color:rgba(rgb(54, 0, 0), rgb(0, 191, 0), rgb(0, 0, 255), alpha)
+    rgb(14, 179, 165)
+}
+
+/*수익금*/
+img{
+    margin-left: 200px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+}
+
+.part3{
+    position: relative;
+    display: flex;
+    gap: 40px;
+}
+
+strong{
+    color: #319e9f;
+}
+
+.profit-contents{
+    color:#319e9f;
+    font-size: large;
+    
+}
+
+.part4{
+    position: relative;
+    display:flex;
+    margin-top: 30px;
+   
+}
+
+.chartTilte{
+    margin-left:200px;
+    width: 100%;
+    border-bottom: 2px solid #77cfd1;
+}
+
+h3{
+    margin-left:50px;
+}
+
+.part5{
+    display: flex;
+    
+}
+
+#myChart{
+	
+    margin-left: 200px;
+    margin-top: 40px;
+    
+}
+
+.part6{
+   position: relative;
+   display: flex;
+   margin-top: 50px;
+   width:910px
+}
+.tableTitle{
+    margin-left: 200px;
+    width: 100%;
+    border-bottom: 2px solid #77cfd1;
+} 
+
+
+
+
+/*테이블*/
+.part7{
+    position:relative;
+    display: flex;
+   
+}
+
+.content-box1{
+    margin-left: 200px;
+    margin-top: 40px; 
+} 
+
+table{
+   
+    /* margin-left: 400px;
+    margin-bottom: 100px; */
+
+    border-collapse: collapse;
+    width:700px;
+  
+}
+
+.member tr {
+    border-bottom: 1px solid #77cfd1;;
+} 
+
+.member tr:last-child {
+    border-bottom: none;
+}
+
+
+
+th,td {
+    text-align: center;
+    padding: 10px;
+}
+
+button{
+    font-size:medium;
+    border-radius: 15px;
+    border: 3px solid rgb(233, 233, 233); 
+    font-style:normal;
+    background-color: rgba(125, 125, 125, 0.153);
+} 
+
+button:hover{
+   
+    transform: scale(1.05);
+    cursor: pointer;
+
+} 
+
+
+
+
+/*폼형식*/
+.form_wrapper{
+	position:relative;
+	
+	
+}
+
+form{
+	position:absolute;
+	margin-top:80px;
+    left:45%;
+    padding:20px;
+    gap:10px;   
+   
+  }
+
+label{
+	
+    padding-top: 3px;
+   }

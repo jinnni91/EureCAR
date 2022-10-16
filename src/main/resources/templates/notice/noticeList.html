@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/notice.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
+
+
+
+
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<div class="table-area" style="text-align: center;">
+	<table id="notice">
+				<tr>
+					<th style="width: 100px">번호</th>
+					<th style="width: 300px">제목</th>
+					<th style="width: 100px">아이디</th>
+					<th style="width: 100px">조회수</th>
+					<th style="width: 150px">등록일</th>
+				</tr>
+				</table>
+				<table id="notice2">
+				<tr th:each="notice : ${ noticeList }"
+				    th:onclick="|location.href='/notice/detail?noticeNo=${notice.noticeNo}'|"
+				    style="cursor:pointer;">
+					<td style="width: 50px" th:text="${ notice.noticeNo }"></td>
+					<td style="width: 450px" th:text="${ notice.noticeTitle }"></td>
+					<td style="width: 100px" th:text="${ notice.writer.name }"></td>
+					<td style="width: 100px" th:text="${ notice.noticeCount }"></td>
+					<td style="width: 100px" th:text="${ notice.noticeDate }"></td>
+				</tr>
+			</table>	
+		</div>
+		
+		<div id="paging" align="center" >
+
+			<th:block th:if="${ searchValue != null }">
+				
+				<button
+					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
+				
+				<button
+					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ noticeList.first }">&lt;</button>
+				
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/notice/noticeList?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+				
+				<button
+					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ noticeList.last }">></button>
+				
+				<button
+					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+
+			</th:block>
+			
+			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
+				
+				<button
+					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+
+				<button
+					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.currentPage - 1}} + '\''"
+					th:disabled="${ noticeList.first }">&lt;</button>
+
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/notice/noticeList?page=' + @{${page}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<button
+					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.currentPage + 1}} + '\''"
+					th:disabled="${ noticeList.last }">></button>
+
+				<button
+					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.endPage}} + '\''">>></button>
+			</th:block>
+			
+		</div>
+
+		<div class="search-area" align="center" style="margin-top:20px;">
+
+			<form id="searchForm" th:action="@{/notice/noticeList}" method="get"
+				style="display: inline-block">
+				<th:block th:if="${ searchValue != null }">
+					<input type="search" id="searchValue" name="searchValue"
+						th:value="${ searchValue }">
+				</th:block>
+				<th:block th:if="${ searchValue == null }">
+					<input type="search" id="search-txt" name="searchValue">
+				</th:block>
+				<button class="search-btn" type="submit">검색</button>
+			</form>
+		
+		
+		<th:block sec:authorize="isAuthenticated()">
+	
+		<button class="btn btn-or" id="writeNotice" >글쓰기</button>
+		</th:block>
+		</div>
+			<div th:replace="common/footer.html"></div>
+
+	</div>
+	
+</body>
+</html>

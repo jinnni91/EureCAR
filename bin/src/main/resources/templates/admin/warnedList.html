@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<div class="outer outer-board-list;">
+		
+		 <aside>
+                <nav class="layout_left">
+                    <a href ="#" onclick="location.href='/admin/search'"> 회원정보조회</a> 
+                    <a href ="#" onclick="location.href='/admin/warnedmember'"> 신고누적회원조회</a>
+                    <a href ="#" onclick="location.href='/admin/warnedlist'"> 신고목록조회</a>
+                </nav>
+        </aside>
+        
+	<!--체크박스+누적횟수 구역-->
+            <section class="part_top">
+
+                 <!--전체 체크박스-->
+                <div class="part1">
+                    <input type=checkbox id="check">
+                    <label>전체체크</label>
+                    <button>삭제</button>
+                </div>
+                
+               
+
+                <!--누적횟수 조회-->
+                <div class="part2">
+                    누적횟수: <select>
+                        <option> 1회 </option>
+                        <option> 2회 </option>
+                        <option> 3회 이상</option>
+                        </select>
+                        <button>확인</button>
+                </div>
+              
+                
+            </section>
+	
+	
+	
+		
+		<div class="table-area" style="text-align: center;">
+			<table class="member" style="margin: auto;">
+				<tr>
+					<th >No.</th>
+					<th >성명</th>
+					<th >아이디</th>
+					<th >생년월일</th>
+					<th >휴대전화</th>
+					<th >회원삭제</th>
+				 </tr>
+				   <tr>
+                        <th>1</th>
+                        <td>송다인</td>
+                        <td>greedy123</td>
+                        <td>1988.07.15</td>
+                        <td>01012345678</td>
+                        <td><button submit="delete">삭제</button></td>    
+                   </tr>
+                   
+                    <tr>
+                        <th>2</th>
+                        <td>박지영</td>
+                        <td>jiyoung258</td>
+                        <td>1991.10.26</td>
+                        <td>01029684567</td>
+                        <td><button submit="delete">삭제</button></td> 
+                    </tr>
+
+                    <tr>
+                        <th>3</th>
+                        <td>김동훈</td>
+                        <td>dong036</td>
+                        <td>1976.12.05</td>
+                        <td>01067891206</td>
+                       <td><button submit="delete">삭제</button></td>
+                    </tr>
+
+                    <tr>
+                        <th>4</th>
+                        <td>홍길동</td>
+                        <td>gildong</td>
+                        <td>1993.10.10</td>
+                        <td>01045607777</td>
+                        <td><button submit="delete">삭제</button></td>
+                    </tr>
+
+                    <tr>
+                        <th>5</th>
+                        <td>홍길동</td>
+                        <td>gildong</td>
+                        <td>1993.10.10</td>
+                        <td>01045607777</td>
+                        <td><button submit="delete">삭제</button></td>
+                    </tr>
+
+                    <tr>
+                        <th>6</th>
+                        <td>홍길동</td>
+                        <td>gildong</td>
+                        <td>1993.10.10</td>
+                        <td>01045607777</td>
+                        <td><button submit="delete">삭제</button></td>
+                    </tr> 
+                    </table>
+                    </div>
+                   
+                   <!-- <tr th:each="member : ${ memberList }"
+				   
+				    style="cursor:pointer;" >
+					<td></td>
+					<td th:text="${ member.name }"></td>
+					<td th:text="${ member.memberId }"></td>
+					<td th:text="${ member.birthday }"></td>
+					<td th:text="${ member.phone }"></td>
+					<td><button submit="delete">삭제</button></td>
+				</tr>-->
+			
+			
+
+			
+			 
+			
+
+	<div th:replace="common/footer.html"></div>
+</body>
+</html>

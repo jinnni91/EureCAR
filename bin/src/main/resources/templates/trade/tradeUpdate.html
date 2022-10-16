@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/trade/tradeRegist.css}">
+<script type="text/javascript" th:src="@{/js/trade.js}"></script>
+<script type="text/javascript" th:src="@{/js/trade.js}"></script>
+<title>차량 판매</title>
+</head>
+<body>
+	<div th:replace="common/header.html"></div>
+	<div class="outer outer-trade-insert" style="margin: 100px 350px;">
+		<h2>차량 판매</h2>
+		<div class="table-area">
+			<form id="tradeUpdateForm" th:action="@{/trade/update}"
+            method="post" enctype="multipart/form-data">
+            	<input type="hidden" name="sellNo" th:value="${ trade.sellNo }"/>
+				<h3>차량 정보</h3>
+                <hr style="border: solid 2px #77CFD1;">
+                <div class="info">
+                    <table>
+                        <tr>
+                            <td>차량 모델</td>
+                            <td><input type="text" id="carName" name="sellCarName" th:value="${ trade.sellCarName }" requried></td>
+                            
+                            <td>가격</td>
+                            <td><input type="number" id="price" name="sellPrice" placeholder="만원" th:value="${ trade.sellPrice }" requried></td>
+                        </tr>
+                        <tr>
+                            <td>연식</td>
+                            <td><select id="year" name="sellCarYear" th:value="${ trade.sellCarYear }" requried>
+                                <option value="2023" th:selected="${ trade.sellCarYear }=='2023'">2023년</option>
+                                <option value="2022" th:selected="${ trade.sellCarYear }=='2022'">2022년</option>
+                                <option value="2021" th:selected="${ trade.sellCarYear }=='2021'">2021년</option>
+                                <option value="2020" th:selected="${ trade.sellCarYear }=='2020'">2020년</option>
+                                <option value="2019" th:selected="${ trade.sellCarYear }=='2019'">2019년</option>
+                                <option value="2018" th:selected="${ trade.sellCarYear }=='2018'">2018년</option>
+                                <option value="2017" th:selected="${ trade.sellCarYear }=='2017'">2017년</option>
+                                <option value="2016" th:selected="${ trade.sellCarYear }=='2016'">2016년</option>
+                                <option value="2015" th:selected="${ trade.sellCarYear }=='2015'">2015년</option>
+                                <option value="2014" th:selected="${ trade.sellCarYear }=='2014'">2014년</option>
+                                <option value="2013" th:selected="${ trade.sellCarYear }=='2013'">2013년</option>
+                                <option value="2012" th:selected="${ trade.sellCarYear }=='2012'">2012년</option>
+                                <option value="2011" th:selected="${ trade.sellCarYear }=='2011'">2011년</option>
+                                <option value="2010" th:selected="${ trade.sellCarYear }=='2010'">2010년</option>
+                                <option value="2009" th:selected="${ trade.sellCarYear }=='2009'">2009년</option>
+                                <option value="2008" th:selected="${ trade.sellCarYear }=='2008'">2008년</option>
+                                <option value="2007" th:selected="${ trade.sellCarYear }=='2007'">2007년</option>
+                                <option value="2006" th:selected="${ trade.sellCarYear }=='2006'">2006년</option>
+                                <option value="2005" th:selected="${ trade.sellCarYear }=='2005'">2005년</option>
+                                <option value="2004" th:selected="${ trade.sellCarYear }=='2004'">2004년</option>
+                                <option value="2003" th:selected="${ trade.sellCarYear }=='2003'">2003년</option>
+                                <option value="2002" th:selected="${ trade.sellCarYear }=='2002'">2002년</option>
+                                <option value="2001" th:selected="${ trade.sellCarYear }=='2001'">2001년</option>
+                                <option value="2000" th:selected="${ trade.sellCarYear }=='2000'">2000년</option>
+                            </select></td>
+                            
+                            <td>연료</td>
+                            <td><select id="fuel" name="sellFuel" th:value="${ trade.sellFuel }" requried>
+                                <option value="가솔린" th:selected="${ trade.sellFuel }=='가솔린'">가솔린</option>
+                                <option value="디젤" th:selected="${ trade.sellFuel }=='디젤'">디젤</option>
+                                <option value="LPG" th:selected="${ trade.sellFuel }=='LPG'">LPG</option>
+                                <option value="하이브리드" th:selected="${ trade.sellFuel }=='하이브리드'">하이브리드</option>
+                                <option value="전기" th:selected="${ trade.sellFuel }=='전기'">전기</option>
+                                <option value="기타" th:selected="${ trade.sellFuel }=='기타'">기타</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>주행 거리</td>
+                            <td><input type="number" id="mileage" name="sellMileage" placeholder="km" th:value="${ trade.sellMileage }" requried></td>
+                            
+                            <td>지역</td>
+                            <td><select id="region" name="region.regionCode" th:value="${ trade.region.regionCode }" requried>
+                                <option value="1" th:selected="${ trade.region.regionCode }=='1'">서울</option>
+                                <option value="2" th:selected="${ trade.region.regionCode }=='2'">인천</option>
+                                <option value="3" th:selected="${ trade.region.regionCode }=='3'">대전</option>
+                                <option value="4" th:selected="${ trade.region.regionCode }=='4'">대구</option>
+                                <option value="5" th:selected="${ trade.region.regionCode }=='5'">광주</option>
+                                <option value="6" th:selected="${ trade.region.regionCode }=='6'">울산</option>
+                                <option value="7" th:selected="${ trade.region.regionCode }=='7'">부산</option>
+                                <option value="8" th:selected="${ trade.region.regionCode }=='8'">경기</option>
+                                <option value="9" th:selected="${ trade.region.regionCode }=='9'">강원</option>
+                                <option value="10" th:selected="${ trade.region.regionCode }=='10'">경남</option>
+                                <option value="11" th:selected="${ trade.region.regionCode }=='11'">경북</option>
+                                <option value="12" th:selected="${ trade.region.regionCode }=='12'">전남</option>
+                                <option value="13" th:selected="${ trade.region.regionCode }=='13'">전북</option>
+                                <option value="14" th:selected="${ trade.region.regionCode }=='14'">충남</option>
+                                <option value="15" th:selected="${ trade.region.regionCode }=='15'">충북</option>
+                                <option value="16" th:selected="${ trade.region.regionCode }=='16'">세종</option>
+                                <option value="16" th:selected="${ trade.region.regionCode }=='17'">제주</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>변속기</td>
+                            <td class="select" th:value="${ trade.sellTransmission }">
+                                <input type="radio" id="auto" name="sellTransmission" value="오토" th:checked="${ trade.sellTransmission }=='오토'" requried/><label for="auto">오토</label>		
+                                <input type="radio" id="manual" name="sellTransmission" value="수동" th:checked="${ trade.sellTransmission }=='수동'"/><label for="manual">수동</label>			
+                            </td>
+                            <td>배기량</td>
+                            <td><input type="number" id="displacement" name="sellDisplacement" placeholder="cc" th:value="${ trade.sellDisplacement }" requried></td>
+
+                        </tr>
+                        <tr>
+                            <td>차종</td>
+                            <td><select id="model" name="model.modelCode" th:value="${ trade.model.modelCode }" requried>
+                                <option value="1" th:selected="${ trade.model.modelCode }=='1'">경차</option>
+                                <option value="2" th:selected="${ trade.model.modelCode }=='2'">소형</option>
+                                <option value="3" th:selected="${ trade.model.modelCode }=='3'">준중형</option>
+                                <option value="4" th:selected="${ trade.model.modelCode }=='4'">중형</option>
+                                <option value="5" th:selected="${ trade.model.modelCode }=='5'">대형</option>
+                                <option value="6" th:selected="${ trade.model.modelCode }=='6'">스포츠카</option>
+                                <option value="7" th:selected="${ trade.model.modelCode }=='7'">SUV</option>
+                                <option value="8" th:selected="${ trade.model.modelCode }=='8'">트럭</option>
+                                <option value="9" th:selected="${ trade.model.modelCode }=='9'">기타</option>
+                            </select></td>
+                            
+                            <td>색상</td>
+                            <td><select id="color" name="color.colorCode" th:value="${ trade.color.colorCode }" requried>
+                                <option value="1" th:selected="${ trade.color.colorCode }=='1'">검정색</option>
+                                <option value="2" th:selected="${ trade.color.colorCode }=='2'">흰색</option>
+                                <option value="3" th:selected="${ trade.color.colorCode }=='3'">은색</option>
+                                <option value="4" th:selected="${ trade.color.colorCode }=='4'">회색</option>
+                                <option value="5" th:selected="${ trade.color.colorCode }=='5'">빨간색</option>
+                                <option value="6" th:selected="${ trade.color.colorCode }=='6'">파란색</option>
+                                <option value="7" th:selected="${ trade.color.colorCode }=='7'">초록색</option>
+                                <option value="8" th:selected="${ trade.color.colorCode }=='8'">노란색</option>
+                                <option value="9" th:selected="${ trade.color.colorCode }=='9'">기타</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>사고 이력</td>
+                            <td><div class="accident">
+                                <input type="file" id="accident" name="attachImage" accept="image/jpeg, image/png" requried>
+                            </div></td>
+                            <td>국산/수입</td>
+                            <td class="select" th:value="${ trade.sellCountry }">
+                                <input type="radio" id="domestic" name="sellCountry" value="국산" th:checked="${ trade.sellCountry }=='국산'" requried/><label for="domestic">국산</label>		
+                                <input type="radio" id="imported" name="sellCountry" value="수입" th:checked="${ trade.sellCountry }=='수입'"/><label for="imported">수입</label>			
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="photo">
+                    <table>
+                        <tr>
+                            <td>사진 첨부</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="image-area">
+                                    <img style="width: 380px; height: 200px" th:src="${ trade.attachFileList[1].filePath + trade.attachFileList[1].fileSaveName }">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="image-area">
+                                    <img style="width: 200px; height: 150px" th:src="${ trade.attachFileList[2].filePath + trade.attachFileList[2].fileSaveName }">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="image-area">
+                                    <img style="width: 200px; height: 150px" th:src="${ trade.attachFileList[3].filePath + trade.attachFileList[3].fileSaveName }">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="image-area">
+                                    <img style="width: 200px; height: 150px" th:src="${ trade.attachFileList[4].filePath + trade.attachFileList[4].fileSaveName }">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="thumbnail-file-area" style="display: none;">
+                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" requried>
+                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" requried>
+                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" requried>
+                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" requried>
+                    </div>
+                </div>
+				<h3>차량 옵션</h3>
+                <hr style="border: solid 2px #77CFD1;">
+                <div class="opt" th:value="${ trade.sellCarOpt }">
+                    <table>
+                        <tr>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="ABS" th:checked="${ #strings.contains(trade.sellCarOpt, 'ABS') }"/> ABS</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="전동트렁크" th:checked="${ #strings.contains(trade.sellCarOpt, '전동트렁크') }"/> 전동트렁크</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="네비게이션" th:checked="${ #strings.contains(trade.sellCarOpt, '네비게이션') }"/> 네비게이션</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="블랙박스" th:checked="${ #strings.contains(trade.sellCarOpt, '블랙박스') }"/> 블랙박스</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="후방카메라" th:checked="${ #strings.contains(trade.sellCarOpt, '후방카메라') }"/> 후방카메라</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="하이패스" th:checked="${ #strings.contains(trade.sellCarOpt, '하이패스') }"/> 하이패스</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="썬루프" th:checked="${ #strings.contains(trade.sellCarOpt, '썬루프') }"/> 썬루프</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="스마트키" th:checked="${ #strings.contains(trade.sellCarOpt, '스마트키') }"/> 스마트키</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="핸들열선" th:checked="${ #strings.contains(trade.sellCarOpt, '핸들열선') }"/> 핸들열선</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="가죽시트" th:checked="${ #strings.contains(trade.sellCarOpt, '가죽시트') }"/> 가죽시트</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="열선시트" th:checked="${ #strings.contains(trade.sellCarOpt, '열선시트') }"/> 열선시트</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="전동시트" th:checked="${ #strings.contains(trade.sellCarOpt, '전동시트') }"/> 전동시트</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="HID" th:checked="${ #strings.contains(trade.sellCarOpt, 'HID') }"/> HID</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="레인센서와이퍼" th:checked="${ #strings.contains(trade.sellCarOpt, '레인센서와이퍼') }"/> 레인센서와이퍼</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="블루투스(통화)" th:checked="${ #strings.contains(trade.sellCarOpt, '블루투스(통화)') }"/> 블루투스(통화)</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="블루투스(스트리밍)" th:checked="${ #strings.contains(trade.sellCarOpt, '블루투스(스트리밍)') }"/> 블루투스(스트리밍)</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="자동도어잠금" th:checked="${ #strings.contains(trade.sellCarOpt, '자동도어잠금') }"/> 자동도어잠금</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="자동주차시스템" th:checked="${ #strings.contains(trade.sellCarOpt, '자동주차시스템') }"/> 자동주차시스템</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="자동주행시스템" th:checked="${ #strings.contains(trade.sellCarOpt, '자동주행시스템') }"/> 자동주행시스템</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="LDWS" th:checked="${ #strings.contains(trade.sellCarOpt, 'LDWS') }"/> LDWS</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="TPMS" th:checked="${ #strings.contains(trade.sellCarOpt, 'TPMS') }"/> TPMS</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="도난경보기" th:checked="${ #strings.contains(trade.sellCarOpt, '도난경보기') }"/> 도난경보기</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="전방감지센서" th:checked="${ #strings.contains(trade.sellCarOpt, '전방감지센서') }"/> 전방감지센서</td>
+                            <td><input type="checkbox" id="carOpt" name="sellCarOpt" value="후방감지센서" th:checked="${ #strings.contains(trade.sellCarOpt, '후방감지센서') }"/> 후방감지센서</td>
+                        </tr>
+                    </table>
+                </div>
+				<h3>차량 설명</h3>
+                <hr style="border: solid 2px #77CFD1;">
+				<textarea id="carDes" name="sellCarDes" th:value="${ trade.sellCarDes }" th:text="${ trade.sellCarDes }" requried></textarea>
+				
+				<div class="btn">
+		            <button type="submit" class="btn1" onclick="tradeUpdate();">수정</button>
+		            <button type="button"class="btn2" onclick="location.href='/trade/list'">취소</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="common/footer.html"></div>
+	
+    <script>
+        (function(){
+            const fileElements = document.querySelectorAll("#photo");
+            const imageArea = document.querySelectorAll(".image-area");
+            imageArea.forEach(item => item.addEventListener('click', open));
+            fileElements.forEach(item => item.addEventListener('change', preview));
+
+            function open() {
+                const index = Array.from(imageArea).indexOf(this);
+                fileElements[index].click();
+            }
+
+            function preview() {
+                const index = Array.from(fileElements).indexOf(this);
+                console.log(this);
+                console.log(this.files, this.files[0]);
+                if(this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(this.files[0]);
+                    reader.onload = function() {
+                        if(index === 0) {
+                            imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 380px; height: 200px'>`;
+                        } else {
+                            imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 200px; height: 150px'>`;
+                        }
+                    }
+                }
+
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/css/trade/reportRegist.css}">
+	<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<title>신고하기</title>
+</head>
+<body>
+
+	<div th:replace="common/header.html"></div>
+	<div class="report-body">
+		<h2>신고하기</h2>
+		<hr>
+		<div class="report-form">
+			<h2>🚨 신고 내용</h2>
+			<form id="reportRegistForm" th:action="@{/report/regist}" method="post">
+				<input type="hidden" name="sell.sellNo" th:value="${sellNo}">
+				<textarea name="reportContent"></textarea>
+				<div class="reportbtn">
+					<button type="submit" class="btn-ok" onclick="">확인</button>
+					<button type="button" class="btn-no" onclick="location.href='/trade/list'">취소</button>
+				</div>		
+			
+			</form>
+		</div>
+	</div>
+	
+	<div th:replace="common/footer.html"></div>
+
+</body>
+</html>
