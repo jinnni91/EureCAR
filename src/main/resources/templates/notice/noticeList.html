@@ -31,11 +31,11 @@
 				<tr th:each="notice : ${ noticeList }"
 				    th:onclick="|location.href='/notice/detail?noticeNo=${notice.noticeNo}'|"
 				    style="cursor:pointer;">
-					<td style="width: 50px" th:text="${ notice.noticeNo }"></td>
-					<td style="width: 280px" th:text="${ notice.noticeTitle }"></td>
-					<td style="width: 100px" th:text="${ notice.writer.name }"></td>
-					<td style="width: 100px" th:text="${ notice.noticeCount }"></td>
-					<td style="width: 100px" th:text="${ notice.noticeDate }"></td>
+					<td style="width: 50px; font-size: 18px;" th:text="${ notice.noticeNo }"></td>
+					<td style="width: 280px; font-size: 15px;" th:text="${ notice.noticeTitle }"></td>
+					<td style="width: 100px; font-size: 18px;" th:text="${ notice.writer.name }"></td>
+					<td style="width: 100px; font-size: 18px;" th:text="${ notice.noticeCount }"></td>
+					<td style="width: 100px; font-size: 18px;" th:text="${ notice.noticeDate }"></td>
 				</tr>
 			</table>	
 		</div>
