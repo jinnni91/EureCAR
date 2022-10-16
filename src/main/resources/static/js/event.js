@@ -36,7 +36,6 @@ window.onload = function() {
     }
     
 /* 공지사항 게시판 */
-window.onload = function() {
 
 
 	if(document.getElementById("writeNotice")) {
@@ -56,4 +55,4 @@ window.onload = function() {
 	    
 	    
 };
-};
+
