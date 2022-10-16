@@ -21,8 +21,8 @@
 	<table id="notice">
 				<tr>
 					<th style="width: 100px">번호</th>
-					<th style="width: 300px">제목</th>
-					<th style="width: 100px">아이디</th>
+					<th style="width: 320px">제목</th>
+					<th style="width: 180px">아이디</th>
 					<th style="width: 100px">조회수</th>
 					<th style="width: 150px">등록일</th>
 				</tr>
@@ -32,7 +32,7 @@
 				    th:onclick="|location.href='/notice/detail?noticeNo=${notice.noticeNo}'|"
 				    style="cursor:pointer;">
 					<td style="width: 50px" th:text="${ notice.noticeNo }"></td>
-					<td style="width: 450px" th:text="${ notice.noticeTitle }"></td>
+					<td style="width: 280px" th:text="${ notice.noticeTitle }"></td>
 					<td style="width: 100px" th:text="${ notice.writer.name }"></td>
 					<td style="width: 100px" th:text="${ notice.noticeCount }"></td>
 					<td style="width: 100px" th:text="${ notice.noticeDate }"></td>
@@ -40,18 +40,27 @@
 			</table>	
 		</div>
 		
+		<div id="write-button">
+		<th:block sec:authorize="isAuthenticated()">
+		<th:block sec:authorize= "hasRole('ADMIN')">
+		
+		<button id="writeNotice">👉 글쓰기</button>
+		</th:block>
+		</th:block>
+		</div>
+		
 		<div id="paging" align="center" >
 
 			<th:block th:if="${ searchValue != null }">
 				
-				<button
+				<button 
 					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''">&lt;&lt;</button>
 				
-				<button
+				<button 
 					th:onclick="'location.href=\'/notice/noticeList?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
 					th:disabled="${ noticeList.first }">&lt;</button>
 				
-				<th:block
+				<th:block 
 					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
 					<button
 						th:onclick="'location.href=\'/notice/noticeList?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
@@ -109,12 +118,10 @@
 				<button class="search-btn" type="submit">검색</button>
 			</form>
 		
-		
-		<th:block sec:authorize="isAuthenticated()">
-		<button class="btn btn-or" id="writeNotice" >글쓰기</button>
-		</th:block>
+
 		</div>
 			<div th:replace="common/footer.html"></div>
+	</div>
 
 	
 </body>

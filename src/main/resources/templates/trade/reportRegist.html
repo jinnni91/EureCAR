@@ -17,7 +17,7 @@
 			<h2>🚨 신고 내용</h2>
 			<form id="reportRegistForm" th:action="@{/report/regist}" method="post">
 				<input type="hidden" name="sell.sellNo" th:value="${sellNo}">
-				<textarea name="reportContent"></textarea>
+				<textarea name="reportContent" required></textarea>
 				<div class="reportbtn">
 					<button type="submit" class="btn-ok" onclick="">확인</button>
 					<button type="button" class="btn-no" onclick="location.href='/trade/list'">취소</button>

@@ -54,6 +54,8 @@
 		<!-- 공지사항 삭제 및 수정 --> 
 		
 		 <div class="update-delete">
+		 
+		     <th:block sec:authorize="isAuthenticated()">
     		 <th:block th:if="${ notice.writer.memberId == #authentication.principal.memberId }">
      			<a th:onclick="|location.href='/notice/update?noticeNo=${notice.noticeNo}'|"
      				 style="cursor:pointer;">수정</a> &#124; 
@@ -62,6 +64,11 @@
 		     	<a th:onclick="|location.href='/notice/delete?noticeNo=${notice.noticeNo}'|"
 		     	 style="cursor:pointer;">삭제</a>
 		     </th:block>
+		     
+		        </th:block>
+		        <br>
+		        <br>
+		       
    		 </div>
 		
 	
@@ -219,21 +226,31 @@
 			
 			replyList.forEach(reply => {
 				const $tr = document.createElement('tr');
-				const $replyContentTd = document.createElement('td');
 				const $memberIdTd = document.createElement('td');
+				const $replyContentTd = document.createElement('td');				
 				const $replyDateTd = document.createElement('td');
 				const $buttonTd = document.createElement('td');
 				
 				$replyContentTd.textContent = reply.replyContent;
 				$memberIdTd.textContent = reply.memberId.memberId;
-				$replyDateTd .textContent = reply.replyDate;
+				$replyDateTd.textContent = reply.replyDate;
 				
-				if('[[${#authentication.principal.memberId}]]' == reply.memberId.memberId) {
+				$replyContentTd.style.width = "870px";
+				$memberIdTd.style.width = "100px"; 
+				$replyDateTd.style.width = "125px"; 
+				
+				
+				
+		
+				
+				if(loginUser== reply.memberId.memberId) {
 					//$buttonTd.innerHTML = `<button type='button' onclick='modifyReply(${reply.replyNo})'>댓글수정</button>`; 
-					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+					//$buttonTd.innerHTML = `<button style="background-color : white" type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+					$buttonTd.innerHTML = `<button type='button' id=reply-delete-button onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+
 				}
 				
-				$tr.append($replyContentTd, $memberIdTd, $replyDateTd, $buttonTd);
+				$tr.append($memberIdTd, $replyContentTd, $replyDateTd, $buttonTd);
 				$table.append($tr);
 			});
 			

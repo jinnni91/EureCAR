@@ -42,6 +42,11 @@
 	position:absolute;
 }
 
+#write-button{
+	padding-left: 73%;
+
+	
+}
 
 
 /* noticeRegist */
@@ -79,35 +84,55 @@
 	padding : 5px 0 400px 15px;
 }
 
-.btn btn-or {
-	width : 65px;
-	line-height : 25px;
-	top : 61%;
-	right : 20%;
-	position:absolute;
+#writeNotice{
+	
+	box-shadow: 1px 4px 0px 0px #BBBABA;
+	background-color: rgb(255, 255, 255);
+	border-radius: 15px;
+	border: 1px solid #707070;
+	
+	display: inline-block;
+	cursor: pointer;
+	color: black;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 10px 17px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #C2C1C1;
+	margin: 0 5px;
 }
 
 
-
-
 #paging{
-	margin-top : 40px;
+	margin-top : 50px;
+	
+	
 }
 
 #search-txt{
 
 	width : 350px;
 	line-height : 30px;
+	
 }
 
-.btn btn-or{
-	width : 60px;
-	line-height : 30px;
-}
+
 
 .search-btn{
-	width : 60px;
-	line-height : 30px;
+	box-shadow: 1px 4px 0px 0px #BBBABA;
+	background-color: rgb(255, 255, 255);
+	border-radius: 15px;
+	border: 1px solid #707070;
+	
+	display: inline-block;
+	cursor: pointer;
+	color: black;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 10px 17px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #C2C1C1;
+	margin: 0 5px;
 }
 
 
@@ -143,7 +168,8 @@
 
 .update-delete {
 	margin-left : 1000px;
-	padding-top : 300px;
+	padding-top : 350px;
+	font-size : 20px;
 }
 
 
@@ -152,7 +178,7 @@
 /* 댓글 */
 #registReply{
 	font-size : 20px;
-	padding: 30px 10px;
+	padding: 26px 10px;
 	border-radius: 5px;
 	color : white;
 	background-color: #77CFD1;
@@ -164,6 +190,33 @@
 	font-size : 25px;
 	padding-left : 10px;
 }
+
+
+#reply-delete-button{
+	box-shadow: 1px 4px 0px 0px #BBBABA;
+	background-color: #FFFFFF;
+	border-radius: 15px;
+	border: 1px solid #707070;
+	display: inline-block;
+	cursor: pointer;
+	color: black;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 7px 9px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #C2C1C1;
+	margin: 0 5px;
+}
+
+
+
+#replyResult{
+	
+	margin-left:14%;
+	font-size : 20px;
+	text-align: left;
+}
+
 
 
 /*수정*/
