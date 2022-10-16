@@ -95,4 +95,11 @@ a {text-decoration: none; color: #999; cursor: pointer;}
 #replyResult td button {width: 40px; padding: 2px 0; cursor: pointer;}
 #replyResult td button:hover {background-color: #7dd1d1;}
 
+pre {
+	line-height: 2em;
+	margin-bottom: 50px;
+}
 
+.car-photo img {
+	margin: 30px;
+}
