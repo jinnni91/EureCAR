@@ -49,7 +49,7 @@ public class ReportController {
 		
 		log.info("[ReportController] ========================================= ");
 		
-		return "redirect:/";
+		return "redirect:/trade/list";
 		
 	}
 }
