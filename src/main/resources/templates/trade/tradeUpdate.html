@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/trade/tradeRegist.css}">
 <script type="text/javascript" th:src="@{/js/trade.js}"></script>
-<script type="text/javascript" th:src="@{/js/trade.js}"></script>
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
 <title>차량 판매</title>
 </head>
 <body>
@@ -22,14 +22,14 @@
                     <table>
                         <tr>
                             <td>차량 모델</td>
-                            <td><input type="text" id="carName" name="sellCarName" th:value="${ trade.sellCarName }" requried></td>
+                            <td><input type="text" id="carName" name="sellCarName" th:value="${ trade.sellCarName }" required></td>
                             
                             <td>가격</td>
-                            <td><input type="number" id="price" name="sellPrice" placeholder="만원" th:value="${ trade.sellPrice }" requried></td>
+                            <td><input type="number" id="price" name="sellPrice" placeholder="만원" th:value="${ trade.sellPrice }" required></td>
                         </tr>
                         <tr>
                             <td>연식</td>
-                            <td><select id="year" name="sellCarYear" th:value="${ trade.sellCarYear }" requried>
+                            <td><select id="year" name="sellCarYear" th:value="${ trade.sellCarYear }" required>
                                 <option value="2023" th:selected="${ trade.sellCarYear }=='2023'">2023년</option>
                                 <option value="2022" th:selected="${ trade.sellCarYear }=='2022'">2022년</option>
                                 <option value="2021" th:selected="${ trade.sellCarYear }=='2021'">2021년</option>
@@ -57,7 +57,7 @@
                             </select></td>
                             
                             <td>연료</td>
-                            <td><select id="fuel" name="sellFuel" th:value="${ trade.sellFuel }" requried>
+                            <td><select id="fuel" name="sellFuel" th:value="${ trade.sellFuel }" required>
                                 <option value="가솔린" th:selected="${ trade.sellFuel }=='가솔린'">가솔린</option>
                                 <option value="디젤" th:selected="${ trade.sellFuel }=='디젤'">디젤</option>
                                 <option value="LPG" th:selected="${ trade.sellFuel }=='LPG'">LPG</option>
@@ -68,10 +68,10 @@
                         </tr>
                         <tr>
                             <td>주행 거리</td>
-                            <td><input type="number" id="mileage" name="sellMileage" placeholder="km" th:value="${ trade.sellMileage }" requried></td>
+                            <td><input type="number" id="mileage" name="sellMileage" placeholder="km" th:value="${ trade.sellMileage }" required></td>
                             
                             <td>지역</td>
-                            <td><select id="region" name="region.regionCode" th:value="${ trade.region.regionCode }" requried>
+                            <td><select id="region" name="region.regionCode" th:value="${ trade.region.regionCode }" required>
                                 <option value="1" th:selected="${ trade.region.regionCode }=='1'">서울</option>
                                 <option value="2" th:selected="${ trade.region.regionCode }=='2'">인천</option>
                                 <option value="3" th:selected="${ trade.region.regionCode }=='3'">대전</option>
@@ -88,22 +88,22 @@
                                 <option value="14" th:selected="${ trade.region.regionCode }=='14'">충남</option>
                                 <option value="15" th:selected="${ trade.region.regionCode }=='15'">충북</option>
                                 <option value="16" th:selected="${ trade.region.regionCode }=='16'">세종</option>
-                                <option value="16" th:selected="${ trade.region.regionCode }=='17'">제주</option>
+                                <option value="17" th:selected="${ trade.region.regionCode }=='17'">제주</option>
                             </select></td>
                         </tr>
                         <tr>
                             <td>변속기</td>
                             <td class="select" th:value="${ trade.sellTransmission }">
-                                <input type="radio" id="auto" name="sellTransmission" value="오토" th:checked="${ trade.sellTransmission }=='오토'" requried/><label for="auto">오토</label>		
+                                <input type="radio" id="auto" name="sellTransmission" value="오토" th:checked="${ trade.sellTransmission }=='오토'" required/><label for="auto">오토</label>		
                                 <input type="radio" id="manual" name="sellTransmission" value="수동" th:checked="${ trade.sellTransmission }=='수동'"/><label for="manual">수동</label>			
                             </td>
                             <td>배기량</td>
-                            <td><input type="number" id="displacement" name="sellDisplacement" placeholder="cc" th:value="${ trade.sellDisplacement }" requried></td>
+                            <td><input type="number" id="displacement" name="sellDisplacement" placeholder="cc" th:value="${ trade.sellDisplacement }" required></td>
 
                         </tr>
                         <tr>
                             <td>차종</td>
-                            <td><select id="model" name="model.modelCode" th:value="${ trade.model.modelCode }" requried>
+                            <td><select id="model" name="model.modelCode" th:value="${ trade.model.modelCode }" required>
                                 <option value="1" th:selected="${ trade.model.modelCode }=='1'">경차</option>
                                 <option value="2" th:selected="${ trade.model.modelCode }=='2'">소형</option>
                                 <option value="3" th:selected="${ trade.model.modelCode }=='3'">준중형</option>
@@ -116,7 +116,7 @@
                             </select></td>
                             
                             <td>색상</td>
-                            <td><select id="color" name="color.colorCode" th:value="${ trade.color.colorCode }" requried>
+                            <td><select id="color" name="color.colorCode" th:value="${ trade.color.colorCode }" required>
                                 <option value="1" th:selected="${ trade.color.colorCode }=='1'">검정색</option>
                                 <option value="2" th:selected="${ trade.color.colorCode }=='2'">흰색</option>
                                 <option value="3" th:selected="${ trade.color.colorCode }=='3'">은색</option>
@@ -131,11 +131,11 @@
                         <tr>
                             <td>사고 이력</td>
                             <td><div class="accident">
-                                <input type="file" id="accident" name="attachImage" accept="image/jpeg, image/png" requried>
+                                <input type="file" id="accident" name="attachImage" accept="image/jpeg, image/png" required>
                             </div></td>
                             <td>국산/수입</td>
                             <td class="select" th:value="${ trade.sellCountry }">
-                                <input type="radio" id="domestic" name="sellCountry" value="국산" th:checked="${ trade.sellCountry }=='국산'" requried/><label for="domestic">국산</label>		
+                                <input type="radio" id="domestic" name="sellCountry" value="국산" th:checked="${ trade.sellCountry }=='국산'" required/><label for="domestic">국산</label>		
                                 <input type="radio" id="imported" name="sellCountry" value="수입" th:checked="${ trade.sellCountry }=='수입'"/><label for="imported">수입</label>			
                             </td>
                         </tr>
@@ -170,10 +170,10 @@
                         </tr>
                     </table>
                     <div class="thumbnail-file-area" style="display: none;">
-                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" requried>
-                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" requried>
-                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" requried>
-                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" requried>
+                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" required>
+                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" required>
+                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" required>
+                        <input type="file" id="photo" name="attachImage" accept="image/jpeg, image/png" required>
                     </div>
                 </div>
 				<h3>차량 옵션</h3>
@@ -220,8 +220,7 @@
                 </div>
 				<h3>차량 설명</h3>
                 <hr style="border: solid 2px #77CFD1;">
-				<textarea id="carDes" name="sellCarDes" th:value="${ trade.sellCarDes }" th:text="${ trade.sellCarDes }" requried></textarea>
-				
+				<textarea id="carDes" name="sellCarDes" th:value="${ trade.sellCarDes }" th:text="${ trade.sellCarDes }" required></textarea>
 				<div class="btn">
 		            <button type="submit" class="btn1" onclick="tradeUpdate();">수정</button>
 		            <button type="button"class="btn2" onclick="location.href='/trade/list'">취소</button>

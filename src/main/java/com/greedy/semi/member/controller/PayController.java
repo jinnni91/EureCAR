@@ -16,9 +16,7 @@ import com.greedy.semi.member.dto.MemberDTO;
 import com.greedy.semi.member.dto.OrderInfoDTO;
 import com.greedy.semi.member.dto.PayDTO;
 import com.greedy.semi.member.dto.ProductDTO;
-import com.greedy.semi.member.service.OrderInfoService;
 import com.greedy.semi.member.service.PayService;
-import com.greedy.semi.member.service.ProductService;
 import com.greedy.semi.trade.dto.TradeDTO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,128 +24,91 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class PayController {
-	
-    private final PayService payService;
-    private final OrderInfoService orderInfoService;
-    private final ProductService productService;
+
+	private final PayService payService;
 	private final MessageSourceAccessor messageSourceAccessor;
 
-	private PayController(MessageSourceAccessor messageSourceAccessor, ProductService productService, PayService payService, OrderInfoService orderInfoService)
-    {
-    	this.payService = payService;
-    	this.orderInfoService=orderInfoService;
-    	this.productService = productService;
+	private PayController(MessageSourceAccessor messageSourceAccessor, PayService payService) {
+		this.payService = payService;
 		this.messageSourceAccessor = messageSourceAccessor;
 
-    }
-    
-    @ResponseBody
+	}
+
+	@ResponseBody
 	@PostMapping("/user/mypage")
-	public String chargetPoint(RedirectAttributes rttr, @RequestParam("amount") int payAmt, @AuthenticationPrincipal MemberDTO member,@RequestParam("sellNo") Long sellNo)
- {
-    	
-    	PayDTO pay = new PayDTO();
-    	OrderInfoDTO order = new OrderInfoDTO();
-    	TradeDTO trade = new TradeDTO();
+	public String chargetPoint(RedirectAttributes rttr, @RequestParam("amount") int payAmt,
+			@AuthenticationPrincipal MemberDTO member, @RequestParam("sellNo") Long sellNo) {
+
+		PayDTO pay = new PayDTO();
+		OrderInfoDTO order = new OrderInfoDTO();
+		TradeDTO trade = new TradeDTO();
 		ProductDTO product = new ProductDTO();
-		
-		 	Date date = new Date();
-	        long timeInMilliSeconds = date.getTime();
-	        java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
-	        System.out.println("SQL Date: " + sqlDate);
-	        log.info(sqlDate.toString());
-	        
-	        String today = null;              
-	        Date time = new Date();     
-	        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
-	         
-	       
-	        Calendar cal = Calendar.getInstance();
-	         
-	        	
-	      
 
+		Date date = new Date();
+		long timeInMilliSeconds = date.getTime();
+		java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
+		System.out.println("SQL Date: " + sqlDate);
+		log.info(sqlDate.toString());
 
-    	/* OrderInfo 저장*/
-    	/* 넘겨받은 sellNo 저장 */	
-    	trade.setSellNo(sellNo);
-    	
-    	/* MemberId저장 */
-    	order.setMember(member);
-    	
-        /* 금액 별로 상품 DTO 가져와서 productCode저장 */
-       /* ProductDTO product = productService.findCodeByPayAmt(payAmt);*/
-        /*product.setProductCode(code);
-        log.info("productDTO",product);*/
-        
+		String today = null;
+		Date time = new Date();
+		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
 
-    	if(payAmt < 10000)
-    	{
-    		trade.setPayStatus("N");
-    	}
-    	else 
-    	{
-    		trade.setPayStatus("Y");
-    		if(payAmt == 10000)
-    		{
-    			product.setProductCode(1);
-    		}
-    		else if(payAmt == 20000)
-    		{
-    			product.setProductCode(2);
-    		}
-    		else 
-    		{
-    			product.setProductCode(3);
-    		}
-    	}
-    	
-    	log.info("tradeDTO",trade);
-    	payService.updatePayStatus(trade);
-		
-    	
+		Calendar cal = Calendar.getInstance();
 
-        cal.setTime(time);
-     
-        
-    	
-    	if(product.getProductCode() == 1)
-    	{
-    		cal.add(Calendar.DATE, 7);	//날짜 더하기
-			
-    	}
-    	else if(product.getProductCode() == 2)
-    	{
-    		cal.add(Calendar.DATE, 15);	//날짜 더하기
-    	}
-    	else if(product.getProductCode() == 3)
-    	{
-    		cal.add(Calendar.DATE, 30);	//날짜 더하기
-    	}
+		/* OrderInfo 저장 */
+		/* 넘겨받은 sellNo 저장 */
+		trade.setSellNo(sellNo);
 
-    	today = sdformat.format(cal.getTime());  
-          System.out.println("1일 후 : " + today); //2021-12-12
-          java.sql.Date expirationDate = java.sql.Date.valueOf(today);
-    	
+		/* MemberId저장 */
+		order.setMember(member);
+
+		/* 금액 별로 상품 DTO 가져와서 productCode저장 */
+
+		if (payAmt < 10000) {
+			trade.setPayStatus("N");
+		} else {
+			trade.setPayStatus("Y");
+			if (payAmt == 10000) {
+				product.setProductCode(1);
+			} else if (payAmt == 20000) {
+				product.setProductCode(2);
+			} else {
+				product.setProductCode(3);
+			}
+		}
+
+		payService.updatePayStatus(trade);
+
+		cal.setTime(time);
+
+		if (product.getProductCode() == 1) {
+			cal.add(Calendar.DATE, 7); 
+
+		} else if (product.getProductCode() == 2) {
+			cal.add(Calendar.DATE, 15); 
+		} else if (product.getProductCode() == 3) {
+			cal.add(Calendar.DATE, 30);
+		}
+
+		today = sdformat.format(cal.getTime());
+		java.sql.Date expirationDate = java.sql.Date.valueOf(today);
+
 		order.setProduct(product);
-    	order.setTrade(trade);
-    	order.setExpirationDate(expirationDate);
-		//orderInfoService.order(order);
-		
-		 /* pay OrderInfoDTO 저장 */
+		order.setTrade(trade);
+		order.setExpirationDate(expirationDate);
+
+		/* pay OrderInfoDTO 저장 */
 		pay.setOrderInfo(order);
-		String str2 = "" + pay.getOrderInfo();
-    	/* pay Amount 저장 */
+		/* pay Amount 저장 */
 		pay.setPayAmt(payAmt);
-		String str = "" + pay.getPayAmt();
-		log.info("결제금액 : "+str + str2);
-		/* pay date 저장*/
-       
-        pay.setPayDate(sqlDate);
-        
-        payService.payAmount(pay);
+		/* pay date 저장 */
+
+		pay.setPayDate(sqlDate);
+
+		payService.payAmount(pay);
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("trade.regist"));
 
-        return "redirect:/";	
-        }
+		return "redirect:/";
+	}
 }

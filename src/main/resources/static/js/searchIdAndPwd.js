@@ -41,7 +41,7 @@ function findPwd() {
 
 			
 		if (name == '' || name == '' || phone == '') {
-			alert('빈칸을 입력해주세요.');
+			alert('빈칸을 빠짐없이 입력해주세요.');
 			return false;
 		}
 

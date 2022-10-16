@@ -14,7 +14,7 @@ function tradeRegist() {
 	let photo = document.getElementById('photo').value;
 	let carDes = document.getElementById('carDes').value;
 	
-	if(con_check == true && carName == '' || price == '' || year == '' || fuel == '' || mileage == '' || region == ''
+	if(carName == '' || price == '' || year == '' || fuel == '' || mileage == '' || region == ''
 	|| displacement == '' || model == '' || color == '' || accident == '' || photo == '' || carDes == '') {
 		alert('차량의 데이터를 모두 입력해주세요.');
 		return false;
@@ -38,7 +38,7 @@ function tradeUpdate() {
 	let photo = document.getElementById('photo').value;
 	let carDes = document.getElementById('carDes').value;
 	
-	if(con_check == true && carName == '' || price == '' || year == '' || fuel == '' || mileage == '' || region == ''
+	if(carName == '' || price == '' || year == '' || fuel == '' || mileage == '' || region == ''
 	|| displacement == '' || model == '' || color == '' || accident == '' || photo == '' || carDes == '') {
 		alert('차량의 데이터를 모두 입력해주세요.');
 		return false;

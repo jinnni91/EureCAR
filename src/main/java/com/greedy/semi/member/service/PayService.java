@@ -5,9 +5,7 @@ import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.greedy.semi.member.dto.MemberDTO;
 import com.greedy.semi.member.dto.PayDTO;
-import com.greedy.semi.member.entity.Member;
 import com.greedy.semi.member.entity.Pay;
 import com.greedy.semi.member.repository.PayRepository;
 import com.greedy.semi.trade.dto.TradeDTO;

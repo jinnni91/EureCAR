@@ -5,11 +5,8 @@ import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.greedy.semi.member.dto.OrderInfoDTO;
 import com.greedy.semi.member.dto.ProductDTO;
-import com.greedy.semi.member.entity.OrderInfo;
 import com.greedy.semi.member.entity.Product;
-import com.greedy.semi.member.repository.OrderInfoRepository;
 import com.greedy.semi.member.repository.ProductRepository;
 
 

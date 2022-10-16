@@ -163,19 +163,6 @@ public class NoticeController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@PostMapping("/registReply")
 	public ResponseEntity<String> registReply(@RequestBody ReplyDTO registReply,
 			@AuthenticationPrincipal MemberDTO member) {
