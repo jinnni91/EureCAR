@@ -12,8 +12,9 @@
 </script>
 </head>
 <body>
+<section id="all-wrapper">
 	<div th:replace="common/header.html"></div>
-	<div class="outer outer-board-list;">
+	
 		
 		 <aside>
                 <nav class="layout_left">
@@ -111,8 +112,20 @@
 
 			
 			 
-			
+</section>			
 
-	<div th:replace="common/footer.html"></div>
+	<div th:fragment="footerFragment" class="adminfooter">
+	<div>
+	    <h3>유레카</h3>
+	    <ul class="footer-info">
+	        <li>사업자등록번호: 123-88-45679</li>
+	        <li style="display: flex; justify-content: space-between;"><p>대표자 : 박상연</p><p>대표 메일 : EureCar@greedy.com</p></li>
+	        <li>주소 : 서울특별시 종로구 인사동길12 대일빌딩 15층</li>
+	        <li>개인정보관리책임자 : 김동영</li>
+	        <li>COPYRIGHTⓒ 유레카 ALL RIGHTS RESERVED</li>
+	    </ul>
+	</div>
+	</div>
+	
 </body>
 </html>
