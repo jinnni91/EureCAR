@@ -108,9 +108,7 @@ window.onload = function() {
 		var phoneNum = $("#phone").val();
 		var patternPhone = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
 
-		// var patternPhone = new RegExp("01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}");  
-
-		//둘중에 하나골라 쓰면 된다.
+	
 		if (!patternPhone.test(phoneNum)) {
 			$("#CheckPhone").html("다시 입력해주세요.");
 			$("#CheckPhone").attr('color', 'red');

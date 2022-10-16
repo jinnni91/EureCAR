@@ -56,13 +56,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 
-	/* 회원 가입 페이지 이동 */
-	@GetMapping("/regist")
-	public String goRegister() {
-
-		return "member/regist";
-	}
-
+	
 	/* 아이디 중복 체크 - 비동기 통신 */
 	@PostMapping("/idDupCheck")
 	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member) {
@@ -81,6 +75,13 @@ public class MemberController {
 		log.info("[MemberController] checkDuplication ========================== ");
 
 		return ResponseEntity.ok(result);
+	}
+	
+	/* 회원 가입 페이지 이동 */
+	@GetMapping("/regist")
+	public String goRegister() {
+
+		return "member/regist";
 	}
 
 	/* 회원 가입 */
