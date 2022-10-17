@@ -4,15 +4,21 @@
     margin: 0;
     box-sizing: border-box;
 }
+html,body{
+	padding:0;
+	margin:0;
+	width:100%;
+    height:100%;
+}
 aside{
     display: inline;
     float: left;
     position: relative;
     min-width:160px;
-    min-height: 750px;
+    min-height: 700px;
     height: 100vh;
     margin-top:0;
-    margin-bottom: 0;
+    margin-bottom:0;
     padding: 10px 0;
     text-align: center;
     gap: 10px;
@@ -232,6 +238,7 @@ button:hover{
 /*폼형식*/
 .form_wrapper{
 	position:relative;
+	width:100%;
 	
 	
 }
@@ -257,15 +264,23 @@ button:hover{
 }
 
 form{
-	position: absolute;
-	margin-top:60px;
-	magin-bottom:30px;
-    left:45%;
+	display:flex;
+	margin-top:30px;
+    margin:auto;
     padding:20px;
+    padding-left:35%;
     gap:10px;   
    
   }
-  
+
+.searchform{
+	display:flex;
+	margin-top:30px;
+    margin:auto;
+    padding:20px;
+    padding-left:25%;
+    gap:10px;   
+}  
 .profitsection{
 	position:relative;
 	margin-top:0px;
@@ -282,3 +297,22 @@ label{
 	
     padding-top: 3px;
    }
+   
+#all-wrapper{
+	height:auto;
+	min-height:100%;
+	padding-bottom:300px;
+}
+
+.adminfooter{
+	background-color: #F9F7F7;
+	height:250px;
+	position:relative;
+	transform:translateY(-100%);
+}
+
+.adminfooter { padding: 25px 0;}
+.adminfooter > div {width: 500px; margin: 0 auto 0 20px; }
+.adminfooter > div > h3 {font-size: 25px; margin-bottom: 10px;}
+.adminfooter > div > ul {width: 400px;}
+.adminfooter > div > ul > li {padding: 3px 0; font-size: 14px;}
