@@ -60,7 +60,7 @@
      			<a th:onclick="|location.href='/notice/update?noticeNo=${notice.noticeNo}'|"
      				 style="cursor:pointer;">수정</a> &#124; 
      		</th:block>
-     		<th:block th:if="${ notice.writer.memberId == #authentication.principal.memberId or notice.memberId.getMemberRole().toString().equals('ROLEADMIN') }">
+     		<th:block th:if="${ notice.writer.memberId == #authentication.principal.memberId or notice.writer.getMemberRole().toString().equals('ROLEADMIN') }">
 		     	<a th:onclick="|location.href='/notice/delete?noticeNo=${notice.noticeNo}'|"
 		     	 style="cursor:pointer;">삭제</a>
 		     </th:block>
