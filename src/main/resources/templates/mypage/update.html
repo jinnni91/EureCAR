@@ -17,11 +17,13 @@
 
 	<div>
 		<div>
-			<ul class="sideul" align="left">
-				<button class="hereiam" onclick="location.href='/mypage/update'" style="cursor: pointer;">회원 정보 변경</button><br><br><br>
-				<button class="sidebutton" onclick="location.href='/mypage/mylist'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
-				<button class="sidebutton" onclick="location.href='/mypage/delete'" style="cursor: pointer;">회원 탈퇴</button>
-			</ul>
+			<ul class="sideul">
+            <button class="hereiam" onclick="location.href='/mypage/update'" style="cursor: pointer;">회원 정보 변경</button><br><br><br>
+            <button class="sidebutton" onclick="location.href='/mypage/mylist'" style="cursor: pointer;">작성한 게시 글</button><br><br><br>
+        <form th:action="@{/mypage/delete}" method="get">
+            <input type="button" id="deleteMember" class="sidebutton" value="회원 탈퇴">
+                </ul>
+        </form>
 		</div>
 		<div>
 		 	<br><br><h3 class="mypagebar" align="center">회원 정보 변경</h3>
