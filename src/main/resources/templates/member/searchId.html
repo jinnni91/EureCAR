@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
-	th:href="@{/css/regist/loginPage.css}">
+	th:href="@{/css/regist/searchId.css}">
 <script type="text/javascript" th:src="@{/js/searchIdAndPwd.js}"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -12,28 +12,27 @@
 <body>
 	<div th:replace="common/header.html"></div>
 	<br>
-	<br>&ensp;<h2 style="margin: 50px 200px;">아이디 찾기</h2>
+	<br>&ensp;
+	<h2 style="margin: 50px 200px;">아이디 찾기</h2>
 	<div class="login_container" style="margin: 50px 350px;">
 		<br>
-	
 		<div class="searchId_container">
 			<form action="/member/searchId" method="post">
 				<table>
 					<tr>
-						<th style="width: 200px;font-size:1.3em;" >이름</th>
+						<th style="width: 200px; font-size: 1.3em;">이름</th>
 						<td height="70px"><input type="text" class="search_name"
 							id="name" name="name" placeholder="이름을 입력하세요." required>
 						</td>
 					</tr>
 					<tr>
-						<th style="width: 200px; font-size:1.3em; " >이메일</th>
-						<td height="70px"><input type="email" class="search_email" id="email"
-							name="email" placeholder="이메일을 입력하세요." required>
+						<th style="width: 200px; font-size: 1.3em;">이메일</th>
+						<td height="70px"><input type="email" class="search_email"
+							id="email" name="email" placeholder="이메일을 입력하세요." required>
 						</td>
 					</tr>
 				</table>
-				<br>
-				<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="button" class="search_Id" onclick="findId();">아이디
 					찾기</button>
 			</form>

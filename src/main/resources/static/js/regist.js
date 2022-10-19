@@ -1,6 +1,7 @@
 window.onload = function() {
 	checkEvent();
-
+	selectBirth();
+	checkZipCode();
 	/* 아이디 유효성 검사 */
 	$('.memberId').keyup(function() {
 		let memberId = $("#memberId").val();
@@ -120,12 +121,64 @@ window.onload = function() {
 			return true;
 		}
 	})
-
-
-
 }
+function selectBirth() {
+							var now = new Date();
+							var year = now.getFullYear();
+							var mon = (now.getMonth() + 1) > 9 ? ''
+									+ (now.getMonth() + 1) : '0'
+									+ (now.getMonth() + 1);
+							var day = (now.getDate()) > 9 ? ''
+									+ (now.getDate()) : '0' + (now.getDate());
 
+							//년도 selectbox만들기               
+							for (var i = 1900; i <= year; i++) {
+								$('#year').append(
+										'<option value="' + i + '">' + i
+												+ '</option>');
+							}
 
+							// 월별 selectbox 만들기            
+							for (var i = 1; i <= 12; i++) {
+								var mm = i > 9 ? i : "0" + i;
+								$('#month').append(
+										'<option value="' + mm + '">' + mm
+												+ '</option>');
+							}
+
+							// 일별 selectbox 만들기
+							for (var i = 1; i <= 31; i++) {
+								var dd = i > 9 ? i : "0" + i;
+								$('#day').append(
+										'<option value="' + dd + '">' + dd
+												+ '</option>');
+							}
+
+							const $year = document.getElementById("year").value
+							const $month = document.getElementById("month").value
+							const $day = document.getElementById("day").value
+
+	}
+
+function checkZipCode() {
+	
+	
+	const $searchZipCode = document.getElementById("searchZipCode");
+
+		$searchZipCode.onclick = function() {
+
+			/* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+			new daum.Postcode({
+				oncomplete : function(data) {
+					/* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+					document.getElementById("zipCode").value = data.zonecode;
+					document.getElementById("address1").value = data.address;
+					document.getElementById("address2").focus();
+				}
+			}).open();
+		}
+
+	}
 /* 약관 동의 시 회원가입 가능 */
 function checkEvent() {
 

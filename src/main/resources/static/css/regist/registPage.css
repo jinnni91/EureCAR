@@ -14,10 +14,8 @@ td {
 	line-height: 30px;
 }
 
-.send {
-	cursor: pointer;
-}
 
+/* 이름, 이메일, 주소 input  */
 .regist {
 	width: 250px;
 	height: 40px;
@@ -29,25 +27,8 @@ td {
 	color: black;
 }
 
-.regist:hover {
-	width: 250px;
-}
 
-.pwcheck {
-	width: 250px;
-	height: 40px;
-	font-size: 0.9em;
-}
-
-.pwcheck:focus {
-	background: #80ffff;
-	color: black;
-}
-
-.pwcheck:hover {
-	width: 250px;
-}
-
+/* ID */
 .memberId {
 	width: 250px;
 	height: 40px;
@@ -59,26 +40,32 @@ td {
 	color: black;
 }
 
-.memberId:hover {
-	width: 250px;
-}
-
-.form-control {
+/* 비밀번호 입력, 재입력 */
+.pwcheck {
 	width: 250px;
 	height: 40px;
 	font-size: 0.9em;
 }
 
-.form-control:focus {
+.pwcheck:focus {
 	background: #80ffff;
 	color: black;
 }
 
-.form-control:hover {
+
+/* Email */
+.email {
 	width: 250px;
+	height: 40px;
+	font-size: 0.9em;
 }
 
+.email:focus {
+	background: #80ffff;
+	color: black;
+}
 
+/* 약간 동의 */
 [type="radio"] {
   vertical-align: middle;
   appearance: none;
@@ -93,23 +80,14 @@ td {
   border: 1em solid #7dd1d1;
 }
 
-[type="radio"]:focus-visible {
-  outline-offset: max(2px, 0.1em);
-  outline: max(2px, 0.1em) dotted tomato;
-}
 
 [type="radio"]:hover {
   box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
   cursor: pointer;
 }
 
-[type="radio"]:disabled {
-  background-color: lightgray;
-  box-shadow: none;
-  opacity: 0.7;
-  cursor: not-allowed;
-}
 
+/* 휴대전화*/
 .phone {
 	width: 250px;
 	height: 40px;
@@ -121,99 +99,13 @@ td {
 	color: black;
 }
 
-.phone:hover {
-	width: 250px;
-}
-
-
-.authentication {
-	width: 130px;
-	height: 30px;
-}
+/* 약관 동의 */
 
 .agree {
 	text-align: center;
 }
 
-.btn_duplicationCheck {
-	width: 130px;
-	height: 35px;
-	cursor: pointer;
-}
-
-.btn_btn-yg {
-	width: 80px;
-	height: 40px;
-	cursor: pointer;
-}
-
-.btn_checkEmail {
-	width: 120px;
-	height: 40px;
-	cursor: pointer;
-}
-
-.btn_btn-yg {
-	box-shadow: 1px 4px 0px 0px #64b8b9;
-	background-color: #77cfd1;
-	border-radius: 15px;
-	border: 1px solid #6fb6b8;
-	display: inline-block;
-	cursor: pointer;
-	color: #ffffff;
-	font-size: 13px;
-	font-weight: bold;
-	padding: 10px 17px;
-	text-decoration: none;
-	text-shadow: 0px 1px 0px #c2c1c1;
-	margin: 0 5px;
-}
-
-.btn_btn-yg {
-	background-color: #7dd1d1;
-}
-
-.btn_duplicationCheck {
-	box-shadow: 1px 4px 0px 0px #64b8b9;
-	background-color: #77cfd1;
-	border-radius: 15px;
-	border: 1px solid #6fb6b8;
-	display: inline-block;
-	cursor: pointer;
-	color: #ffffff;
-	font-size: 13px;
-	font-weight: bold;
-	padding: 10px 17px;
-	text-decoration: none;
-	text-shadow: 0px 1px 0px #c2c1c1;
-	margin: 0 5px;
-}
-
-.btn_duplicationCheck:hover {
-	background-color: #7dd1d1;
-}
-
-.btn_checkEmail {
-	box-shadow: 1px 4px 0px 0px #64b8b9;
-	background-color: #77cfd1;
-	border-radius: 15px;
-	border: 1px solid #6fb6b8;
-	display: inline-block;
-	cursor: pointer;
-	color: #ffffff;
-	font-size: 13px;
-	font-weight: bold;
-	padding: 10px 17px;
-	text-decoration: none;
-	text-shadow: 0px 1px 0px #c2c1c1;
-	margin: 0 5px;
-}
-
-.btn_checkEmail:hover {
-	background-color: #7dd1d1;
-}
-
-input[type="checkbox"] {
+#agree {
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 50%;
@@ -221,22 +113,82 @@ input[type="checkbox"] {
     appearance: none;
     cursor: pointer;
     transition: background 0.2s;
-  }
+ }
 
-  input[type="checkbox"]:checked {
+#agree:checked {
     background: #32e732;
     border: none;
-  }
+}
 
 
 
+/* ID 중복 체크 */
+.btn_duplicationCheck {
+	width: 130px;
+	height: 35px;
+	box-shadow: 1px 4px 0px 0px #64b8b9;
+	background-color: #77cfd1;
+	border-radius: 15px;
+	border: 1px solid #6fb6b8;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 10px 17px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #c2c1c1;
+	margin: 0 5px;
+}
 
-.send {
+
+/* 우편번호 */
+
+.btn_zipCode {
+	box-shadow: 1px 4px 0px 0px #64b8b9;
+	background-color: #77cfd1;
+	border-radius: 15px;
+	border: 1px solid #6fb6b8;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 10px 17px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #c2c1c1;
+	margin: 0 5px;
+	width: 80px;
+	height: 40px;
+}
+
+/* 이메일 인증 */
+
+.btn_checkEmail {
 	box-shadow: 1px 4px 0px 0px #64b8b9;
 	background-color: #77cfd1;
 	border-radius: 15px;
 	border: 1px solid #6fb6b8;
 	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 10px 17px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #c2c1c1;
+	margin: 0 5px;
+	width: 120px;
+	height: 40px;
+}
+
+
+
+
+/* 가입 */
+.send {
+	box-shadow: 1px 4px 0px 0px #64b8b9;
+	background-color: #77cfd1;
+	border-radius: 15px;
+	border: 1px solid #6fb6b8;
 	cursor: pointer;
 	color: #ffffff;
 	font-size: 13px;
@@ -247,24 +199,19 @@ input[type="checkbox"] {
 	margin: 0 15px;
 }
 
-.send:hover {
-	background-color: #7dd1d1;
-}
-
-input[type="submit"]:disabled {
+.send:disabled {
   background: #ccc;
   border: 1px solid white;
   	box-shadow: 1px 4px 0px 0px ;
   
 }
 
-
+/* 취소*/
 .send_cancel {
 	box-shadow: 1px 4px 0px 0px #bbbaba;
 	background-color: #ffffff;
 	border-radius: 15px;
 	border: 1px solid #707070;
-	display: inline-block;
 	cursor: pointer;
 	color: black;
 	font-size: 13px;
@@ -273,8 +220,4 @@ input[type="submit"]:disabled {
 	text-decoration: none;
 	text-shadow: 0px 1px 0px #c2c1c1;
 	margin: 0 5px;
-}
-
-.send_cancel:hover {
-	background-color: white;
 }

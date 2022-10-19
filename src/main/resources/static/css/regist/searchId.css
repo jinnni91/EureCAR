@@ -1,0 +1,60 @@
+
+/* 아이디 찾기 */
+table {
+	border-collapse: separate;
+	border-spacing: 0 20px;
+}
+
+.searchId_container {
+	width: 600px;
+	height: 600px;
+	text-align: center;
+}
+/* ID */
+.search_name {
+	width: 350px;
+	height: 50px;
+	font-size: 1em;
+}
+
+.search_name:hover {
+	background: #77CFD1;
+	cursor: pointer;
+	color: white;
+}
+
+.search_name:focus {
+	cursor: auto;
+}
+/* email */
+.search_email {
+	width: 350px;
+	height: 50px;
+	font-size: 1em;
+}
+
+.search_email:hover {
+	background: #77CFD1;
+	cursor: pointer;
+	color: white;
+}
+
+.search_email:focus {
+	cursor: auto;
+}
+
+/* 아이디 찾기 버튼 */
+.search_Id {
+	width: 360px;
+	height: 50px;
+	background: #77CFD1;
+	border: 1px solid #000000;
+	margin: 0px 0px 5px 110px;
+	font-size: 1em;
+}
+
+.search_Id:hover {
+	background: #77CFD1;
+	cursor: pointer;
+	color: white;
+}
